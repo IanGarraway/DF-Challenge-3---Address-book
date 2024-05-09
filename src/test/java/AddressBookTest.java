@@ -123,5 +123,20 @@ public class AddressBookTest {
             //Assert
             assertEquals(2, testBook.searchByName(testName).size());
         }
+
+        @Test
+        @DisplayName("remove contact feature removes the contact ")
+        public void testOfRemoveContact(){
+            //Arrange
+            testBook.addContact(testContact1);
+            testBook.addContact(testContact2);
+            testBook.addContact(testContact3);
+
+            //Act
+            testBook.removeContact(testContact2);
+
+            //Assert
+            assertEquals(2, testBook.getContacts().size());
+        }
     }
 }

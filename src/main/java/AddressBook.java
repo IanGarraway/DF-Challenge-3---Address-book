@@ -28,4 +28,8 @@ public class AddressBook {
         return returnList;
 
     }
+
+    public void removeContact(Contact contact) {
+        contacts.remove(contact);
+    }
 }
