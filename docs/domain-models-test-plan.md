@@ -9,10 +9,10 @@ as a user I want to be able to add a contact, which consists of at least a name,
 
 ## Test plan 1
 ### Contact class
-- [ ] you can instantiate an object of class Contact and return the name, telephone number and email address
-- [ ] you can change the telephone number
-- [ ] you can change the email address
-- [ ] you can change the name of the contact
+- [x] you can instantiate an object of class Contact and return the name, telephone number and email address
+- [x] you can change the telephone number
+- [x] you can change the email address
+- [x] you can change the name of the contact
 
 ### Interface class
 - [ ] correctly handles null strings
