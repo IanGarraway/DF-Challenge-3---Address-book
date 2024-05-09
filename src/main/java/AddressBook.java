@@ -15,4 +15,14 @@ public class AddressBook {
     public void addContact(Contact newContact){
         contacts.add(newContact);
     }
+
+    public ArrayList<Contact> searchByName(String searchName){
+        ArrayList<Contact> returnList = new ArrayList<>();
+
+        for(int i = 0; i<contacts.size(); i++){
+            if(contacts.get(i).getName().equals(searchName)){ returnList.add(contacts.get(i)); }
+        }
+        return returnList;
+
+    }
 }

@@ -30,7 +30,7 @@ As a user, I want to see all of the contacts in the address book, so I can revie
 
 - [x] you instantiate an AddressBook and it returns and empty array list
 - [x] you can add a contact to the AddressBook and it returns a list with one item in it
-- [ ] if multiple contacts have been added to the addressbook, it returns all of them as a list
+- [x] if multiple contacts have been added to the addressbook, it returns all of them as a list
 
 ### Interface Class
 - [ ] The interface will display all of the contacts in the addressbook to the screen
