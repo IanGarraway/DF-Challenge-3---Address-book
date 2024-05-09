@@ -50,5 +50,19 @@ public class AddressBookTest {
             //Assert
             assertEquals(1, testBook.getContacts().size());
         }
+
+        @Test
+        @DisplayName("Multiple contacts can be added to the addressBook")
+        public void testOfAddingMultipleContactsToAddressBook(){
+            //Arrange
+            Contact testContact2 = mock(Contact.class);
+
+            //Act
+            testBook.addContact(testContact);
+            testBook.addContact(testContact2);
+
+            //Assert
+            assertEquals(2, testBook.getContacts().size());
+        }
     }
 }
