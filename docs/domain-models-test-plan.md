@@ -41,7 +41,9 @@ As a user I want to be able to search for a contact by name and have the results
 
 ### AddressBook Class
 
-- [ ] entering a name will find all contacts which start with that name
+- [x] entering a name will find all contacts which match that name
+- [x] entering a name will find all contacts which start with that name
+- [ ] searchByName is not case-sensitive
 
 ### Interface Class
 

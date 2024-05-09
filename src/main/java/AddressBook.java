@@ -20,7 +20,7 @@ public class AddressBook {
         ArrayList<Contact> returnList = new ArrayList<>();
 
         for(int i = 0; i<contacts.size(); i++){
-            if(contacts.get(i).getName().equals(searchName)){ returnList.add(contacts.get(i)); }
+            if(contacts.get(i).getName().toLowerCase().startsWith(searchName.toLowerCase())){ returnList.add(contacts.get(i)); }
         }
         return returnList;
 
