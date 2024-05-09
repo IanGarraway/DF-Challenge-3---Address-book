@@ -11,4 +11,8 @@ public class AddressBook {
     public AddressBook(){}
 
     public ArrayList<Contact> getContacts(){return contacts;}
+
+    public void addContact(Contact newContact){
+        contacts.add(newContact);
+    }
 }
