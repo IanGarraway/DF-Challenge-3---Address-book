@@ -1,7 +1,4 @@
 import org.junit.jupiter.api.*;
-import org.junit.platform.commons.util.StringUtils;
-import org.mockito.MockedStatic;
-import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -13,19 +10,23 @@ public class AddressBookTest {
     public class addressBookClassTests {
 
         private AddressBook testBook;
-        private Contact testContact;
+        private Contact testContact1, testContact2, testContact3;
 
         @BeforeEach
         public void setUp(){
             //try(MockedStatic<StringUtils> mockedStringUtils = Mockito.mockStatic(StringUtils.class)){}
             testBook = new AddressBook();
-            testContact = mock(Contact.class);
+            testContact1 = mock(Contact.class);
+            testContact2 = mock(Contact.class);
+            testContact3 = mock(Contact.class);
         }
 
         @AfterEach
         public void tearDown(){
             testBook = null;
-            testContact = null;
+            testContact1 = null;
+            testContact2 = null;
+            testContact3 = null;
         }
 
         @Test
@@ -46,7 +47,7 @@ public class AddressBookTest {
             //Arrange
 
             //Act
-            testBook.addContact(testContact);
+            testBook.addContact(testContact1);
 
             //Assert
             assertEquals(1, testBook.getContacts().size());
@@ -56,10 +57,10 @@ public class AddressBookTest {
         @DisplayName("Multiple contacts can be added to the addressBook")
         public void testOfAddingMultipleContactsToAddressBook(){
             //Arrange
-            Contact testContact2 = mock(Contact.class);
+
 
             //Act
-            testBook.addContact(testContact);
+            testBook.addContact(testContact1);
             testBook.addContact(testContact2);
 
             //Assert
@@ -70,16 +71,14 @@ public class AddressBookTest {
         @DisplayName("searchByName feature returns list of contacts whose name matches ")
         public void testOfSearchByName(){
             //Arrange
-            Contact testContact2 = mock(Contact.class);
-            Contact testContact3 = mock(Contact.class);
             String testName = "Dave Smith";
 
-            when(testContact.getName()).thenReturn("Barry White");
+            when(testContact1.getName()).thenReturn("Barry White");
             when(testContact2.getName()).thenReturn(testName);
             when(testContact3.getName()).thenReturn("Barry King");
 
             //Act
-            testBook.addContact(testContact);
+            testBook.addContact(testContact1);
             testBook.addContact(testContact2);
             testBook.addContact(testContact3);
 
@@ -91,16 +90,14 @@ public class AddressBookTest {
         @DisplayName("searchByName feature returns list of contacts whose name starts with the request ")
         public void testOfSearchByNameStartingWith(){
             //Arrange
-            Contact testContact2 = mock(Contact.class);
-            Contact testContact3 = mock(Contact.class);
             String testName = "Barry";
 
-            when(testContact.getName()).thenReturn("Barry White");
+            when(testContact1.getName()).thenReturn("Barry White");
             when(testContact2.getName()).thenReturn("Dave Smith");
             when(testContact3.getName()).thenReturn("Barry King");
 
             //Act
-            testBook.addContact(testContact);
+            testBook.addContact(testContact1);
             testBook.addContact(testContact2);
             testBook.addContact(testContact3);
 
@@ -112,16 +109,14 @@ public class AddressBookTest {
         @DisplayName("searchByName feature returns list of contacts whose name starts with the request and isn't case-sensitive ")
         public void testOfSearchByNameStartingWithCaseSensitive(){
             //Arrange
-            Contact testContact2 = mock(Contact.class);
-            Contact testContact3 = mock(Contact.class);
             String testName = "Barry";
 
-            when(testContact.getName()).thenReturn("barry White");
+            when(testContact1.getName()).thenReturn("barry White");
             when(testContact2.getName()).thenReturn("Dave Smith");
             when(testContact3.getName()).thenReturn("Barry King");
 
             //Act
-            testBook.addContact(testContact);
+            testBook.addContact(testContact1);
             testBook.addContact(testContact2);
             testBook.addContact(testContact3);
 
