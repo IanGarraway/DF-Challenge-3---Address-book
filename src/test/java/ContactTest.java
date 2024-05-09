@@ -29,6 +29,63 @@ public class ContactTest {
                     ()->assertEquals(testContact.getNumber(), testNumber));
         }
 
+        @Test
+        @DisplayName("Confirmation test of setName functioning as intended")
+        public void testOfContactClassSetName(){
+            //Arrange
+            String testName = "John Smith";
+            String testNumber = "0113 266 1345";
+            String testEmail = "John@Smith.com";
+            Contact testContact = new Contact(testName, testNumber, testEmail);
+
+            String newName = "Dave Smith";
+
+            //Act
+            testContact.setName(newName);
+
+
+            //Assert
+            assertEquals(testContact.getName(), newName);
+        }
+
+        @Test
+        @DisplayName("Confirmation test of setNumber functioning as intended")
+        public void testOfContactClassSetNumber(){
+            //Arrange
+            String testName = "John Smith";
+            String testNumber = "0113 266 1345";
+            String testEmail = "John@Smith.com";
+            Contact testContact = new Contact(testName, testNumber, testEmail);
+
+            String newNumber = "0113 267 1345";
+
+            //Act
+            testContact.setNumber(newNumber);
+
+
+            //Assert
+            assertEquals(testContact.getNumber(), newNumber);
+        }
+
+        @Test
+        @DisplayName("Confirmation test of setEmail functioning as intended")
+        public void testOfContactClassSetEmail(){
+            //Arrange
+            String testName = "Dave Smith";
+            String testNumber = "0113 266 1345";
+            String testEmail = "John@Smith.com";
+            Contact testContact = new Contact(testName, testNumber, testEmail);
+
+            String newEmail = "Dave@Smith.com";
+
+            //Act
+            testContact.setEmail(newEmail);
+
+
+            //Assert
+            assertEquals(testContact.getEmail(), newEmail);
+        }
+
 
     }
 }
