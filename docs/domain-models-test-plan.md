@@ -55,7 +55,7 @@ As a user I want to be able to remove a contact from the address book, for when 
 
 ### AddressBook Class
 
-- [ ] removes the supplied contact from the arraylist
+- [x] removes the supplied contact from the arraylist
 
 ### Interface Class
 

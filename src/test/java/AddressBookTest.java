@@ -138,5 +138,22 @@ public class AddressBookTest {
             //Assert
             assertEquals(2, testBook.getContacts().size());
         }
+
+        @Test
+        @DisplayName("replaceContact will replace an existing contact with a new one")
+        public void testOfReplaceContact(){
+            //Arrange
+            String testName = "Emma";
+            when(testContact1.getName()).thenReturn("Dave");
+            when(testContact2.getName()).thenReturn(testName);
+            testBook.addContact(testContact1);
+
+            //Act
+            testBook.replaceContact(testContact1, testContact2);
+
+            //Assert
+            assertEquals(testBook.getContacts().get(0).getName(), testName);
+
+        }
     }
 }
