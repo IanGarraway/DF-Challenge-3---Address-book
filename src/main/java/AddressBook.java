@@ -46,4 +46,15 @@ public class AddressBook {
         }
         return numberExists;
     }
+
+    public boolean emailExists(String email){
+        boolean emailExists = false;
+        for (Contact contact : contacts) {
+            if(contact.getEmail().equals(email)){
+                emailExists = true;
+                break;
+            }
+        }
+        return emailExists;
+    }
 }
