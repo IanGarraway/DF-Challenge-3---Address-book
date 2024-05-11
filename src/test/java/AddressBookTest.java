@@ -155,5 +155,21 @@ public class AddressBookTest {
             assertEquals(testBook.getContacts().get(0).getName(), testName);
 
         }
+
+        @Test
+        @DisplayName("determines if a number exists in the addressbook")
+        public void numberExistsTest(){
+            //Arrange
+            String testNum = "01234";
+            when(testContact1.getNumber()).thenReturn(testNum);
+            when(testContact2.getNumber()).thenReturn("01235");
+            testBook.addContact(testContact1);
+            testBook.addContact(testContact2);
+
+            //Act
+
+            //Assert
+            assertTrue(testBook.numberExists(testNum));
+        }
     }
 }

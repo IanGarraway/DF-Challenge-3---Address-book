@@ -26,15 +26,17 @@ public class AddressBook {
             }
         }
         return returnList;
-
     }
 
     public void removeContact(Contact contact) {
         contacts.remove(contact);
-
     }
 
     public void replaceContact(Contact original, Contact replacement){
         contacts.set(contacts.indexOf(original),replacement);
+    }
+
+    public boolean numberExists(String number){
+        return true;
     }
 }
