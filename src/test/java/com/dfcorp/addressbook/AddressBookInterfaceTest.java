@@ -34,10 +34,22 @@ public class AddressBookInterfaceTest {
         }
 
         @Test
-        @DisplayName("Test of string validation method")
+        @DisplayName("Test of string validation method - empty")
         public void stringEmptyValidationTest(){
             //Arrange
             String testWord = "";
+
+            //Act
+
+            //Assert
+            assertThrows(IllegalArgumentException.class, ()->testInterface.stringVerify(testWord));
+        }
+
+        @Test
+        @DisplayName("Test of string validation method-just spaces")
+        public void stringSpacesValidationTest(){
+            //Arrange
+            String testWord = "   ";
 
             //Act
 
