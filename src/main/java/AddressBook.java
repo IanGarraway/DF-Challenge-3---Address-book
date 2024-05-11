@@ -37,6 +37,13 @@ public class AddressBook {
     }
 
     public boolean numberExists(String number){
-        return true;
+        boolean exists = false;
+        for (Contact contact : contacts) {
+            if(contact.getNumber().equals(number)){
+                exists = true;
+                break;
+            }
+        }
+        return exists;
     }
 }
