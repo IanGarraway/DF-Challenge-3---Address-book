@@ -1,3 +1,6 @@
+package com.dfcorp.addressbook;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -8,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ContactTest {
 
     @Nested
-    @DisplayName("Contact Class Tests:")
+    @DisplayName("com.dfcorp.addressbook.Contact Class Tests:")
     public class contactClassTests {
 
         @Test
@@ -24,9 +27,9 @@ public class ContactTest {
 
             //Assert
             assertAll("Constructor sets values when valid: ",
-                    ()->assertEquals(testContact.getName(), testName),
-                    ()->assertEquals(testContact.getEmail(), testEmail),
-                    ()->assertEquals(testContact.getNumber(), testNumber));
+                    ()-> Assertions.assertEquals(testContact.getName(), testName),
+                    ()-> Assertions.assertEquals(testContact.getEmail(), testEmail),
+                    ()-> Assertions.assertEquals(testContact.getNumber(), testNumber));
         }
 
         @Test
@@ -45,7 +48,7 @@ public class ContactTest {
 
 
             //Assert
-            assertEquals(testContact.getName(), newName);
+            Assertions.assertEquals(testContact.getName(), newName);
         }
 
         @Test
@@ -64,7 +67,7 @@ public class ContactTest {
 
 
             //Assert
-            assertEquals(testContact.getNumber(), newNumber);
+            Assertions.assertEquals(testContact.getNumber(), newNumber);
         }
 
         @Test
@@ -83,7 +86,7 @@ public class ContactTest {
 
 
             //Assert
-            assertEquals(testContact.getEmail(), newEmail);
+            Assertions.assertEquals(testContact.getEmail(), newEmail);
         }
 
 

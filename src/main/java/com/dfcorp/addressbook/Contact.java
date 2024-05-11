@@ -1,3 +1,5 @@
+package com.dfcorp.addressbook;
+
 public class Contact {
     private String name;
     private String email;

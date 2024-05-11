@@ -1,12 +1,13 @@
+package com.dfcorp.addressbook;
+
 import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class AddressBookTest {
     @Nested
-    @DisplayName("AddressBook Class Tests:")
+    @DisplayName("com.dfcorp.addressbook.AddressBook Class Tests:")
     public class addressBookClassTests {
 
         private AddressBook testBook;
@@ -30,15 +31,15 @@ public class AddressBookTest {
         }
 
         @Test
-        @DisplayName("AddressBook can be instantiated and return an empty list")
+        @DisplayName("com.dfcorp.addressbook.AddressBook can be instantiated and return an empty list")
         public void testOfAddressBookInstantiationAndAllContactReturn(){
             //Arrange
 
             //Act
-            //AddressBook testBook = new AddressBook();
+            //com.dfcorp.addressbook.AddressBook testBook = new com.dfcorp.addressbook.AddressBook();
 
             //Assert
-            assertEquals(testBook.getContacts().size(), 0);
+            Assertions.assertEquals(testBook.getContacts().size(), 0);
         }
 
         @Test
@@ -50,7 +51,7 @@ public class AddressBookTest {
             testBook.addContact(testContact1);
 
             //Assert
-            assertEquals(1, testBook.getContacts().size());
+            Assertions.assertEquals(1, testBook.getContacts().size());
         }
 
         @Test
@@ -64,7 +65,7 @@ public class AddressBookTest {
             testBook.addContact(testContact2);
 
             //Assert
-            assertEquals(2, testBook.getContacts().size());
+            Assertions.assertEquals(2, testBook.getContacts().size());
         }
 
         @Test
@@ -83,7 +84,7 @@ public class AddressBookTest {
             testBook.addContact(testContact3);
 
             //Assert
-            assertEquals(1, testBook.searchByName(testName).size());
+            Assertions.assertEquals(1, testBook.searchByName(testName).size());
         }
 
         @Test
@@ -102,7 +103,7 @@ public class AddressBookTest {
             testBook.addContact(testContact3);
 
             //Assert
-            assertEquals(2, testBook.searchByName(testName).size());
+            Assertions.assertEquals(2, testBook.searchByName(testName).size());
         }
 
         @Test
@@ -121,7 +122,7 @@ public class AddressBookTest {
             testBook.addContact(testContact3);
 
             //Assert
-            assertEquals(2, testBook.searchByName(testName).size());
+            Assertions.assertEquals(2, testBook.searchByName(testName).size());
         }
 
         @Test
@@ -136,7 +137,7 @@ public class AddressBookTest {
             testBook.removeContact(testContact2);
 
             //Assert
-            assertEquals(2, testBook.getContacts().size());
+            Assertions.assertEquals(2, testBook.getContacts().size());
         }
 
         @Test
@@ -152,7 +153,7 @@ public class AddressBookTest {
             testBook.replaceContact(testContact1, testContact2);
 
             //Assert
-            assertEquals(testBook.getContacts().get(0).getName(), testName);
+            Assertions.assertEquals(testBook.getContacts().get(0).getName(), testName);
 
         }
 
@@ -169,7 +170,7 @@ public class AddressBookTest {
             //Act
 
             //Assert
-            assertTrue(testBook.numberExists(testNum));
+            Assertions.assertTrue(testBook.numberExists(testNum));
         }
 
         @Test
@@ -185,7 +186,7 @@ public class AddressBookTest {
             //Act
 
             //Assert
-            assertFalse(testBook.numberExists(testNum));
+            Assertions.assertFalse(testBook.numberExists(testNum));
         }
         @Test
         @DisplayName("determines if a email address exists in the addressbook")
@@ -200,7 +201,7 @@ public class AddressBookTest {
             //Act
 
             //Assert
-            assertTrue(testBook.emailExists(testEmail));
+            Assertions.assertTrue(testBook.emailExists(testEmail));
         }
         @Test
         @DisplayName("determines if a email address doesnt exist in the addressbook")
@@ -215,7 +216,7 @@ public class AddressBookTest {
             //Act
 
             //Assert
-            assertFalse(testBook.emailExists(testEmail));
+            Assertions.assertFalse(testBook.emailExists(testEmail));
         }
 
     }

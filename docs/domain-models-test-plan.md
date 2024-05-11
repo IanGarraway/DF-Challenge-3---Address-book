@@ -8,8 +8,8 @@
 as a user I want to be able to add a contact, which consists of at least a name, a phone number and an email address to my address book, so I can look them up later
 
 ## Test plan 1
-### Contact class
-- [x] you can instantiate an object of class Contact and return the name, telephone number and email address
+### com.dfcorp.addressbook.Contact class
+- [x] you can instantiate an object of class com.dfcorp.addressbook.Contact and return the name, telephone number and email address
 - [x] you can change the telephone number
 - [x] you can change the email address
 - [x] you can change the name of the contact
@@ -26,10 +26,10 @@ as a user I want to be able to add a contact, which consists of at least a name,
 
 As a user, I want to see all of the contacts in the address book, so I can review the details in my address book easily
 
-### AddressBook Class
+### com.dfcorp.addressbook.AddressBook Class
 
-- [x] you instantiate an AddressBook and it returns and empty array list
-- [x] you can add a contact to the AddressBook and it returns a list with one item in it
+- [x] you instantiate an com.dfcorp.addressbook.AddressBook and it returns and empty array list
+- [x] you can add a contact to the com.dfcorp.addressbook.AddressBook and it returns a list with one item in it
 - [x] if multiple contacts have been added to the addressbook, it returns all of them as a list
 
 ### Interface Class
@@ -39,7 +39,7 @@ As a user, I want to see all of the contacts in the address book, so I can revie
 
 As a user I want to be able to search for a contact by name and have the results displayed, so I can find out the details I stored
 
-### AddressBook Class
+### com.dfcorp.addressbook.AddressBook Class
 
 - [x] entering a name will find all contacts which match that name
 - [x] entering a name will find all contacts which start with that name
@@ -47,13 +47,13 @@ As a user I want to be able to search for a contact by name and have the results
 
 ### Interface Class
 
-- [ ] will display all contacts AddressBook returns
+- [ ] will display all contacts com.dfcorp.addressbook.AddressBook returns
  
 ## User Story 4
 
 As a user I want to be able to remove a contact from the address book, for when I no longer need to keep their details
 
-### AddressBook Class
+### com.dfcorp.addressbook.AddressBook Class
 
 - [x] removes the supplied contact from the arraylist
 
@@ -67,7 +67,7 @@ As a user I want to be able to edit a contact, so that I can keep the details co
 
 ### Addressbook Class
 
-- [ ] passing in a Contact and a location will replace the contact in that location with the class
+- [ ] passing in a com.dfcorp.addressbook.Contact and a location will replace the contact in that location with the class
 
 ### Interface Class
 
