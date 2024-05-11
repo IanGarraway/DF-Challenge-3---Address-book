@@ -33,7 +33,35 @@ public class AddressBookInterface {
         return stringVerify(in.nextLine());
     }
 
+    public void menuChoice(String userChoice){
+        switch (userChoice.toLowerCase()){
+            case "a":
+            case "1":
+                System.out.println("Add user");
+                break;
+            case "b":
+            case "2":
+                System.out.println("Display all contacts");
+                break;
+            case "c":
+            case "3":
+                System.out.println("Search by Name");
+                break;
+            case "d":
+            case "4":
+                System.out.println("edit contacts");
+                break;
+
+            default:
+                System.out.println("default");
+
+                Scanner in = new Scanner(System.in);
+                in.nextLine();
+        }
+    }
+
     public void start(){
+        mainLoop:
         do{
             String userChoice;
 
@@ -42,12 +70,17 @@ public class AddressBookInterface {
                 userChoice = stringInput(":-");
             }
             catch (Exception e){
+                userChoice = "bad";
                 System.out.println(e.toString());
                 System.out.println("press enter to continue");
                 Scanner in = new Scanner(System.in);
                 in.nextLine();
-
             }
+
+            if (userChoice.equalsIgnoreCase("e")){ break mainLoop;}
+
+            menuChoice(userChoice);
+
         }while(true);
 
     }
