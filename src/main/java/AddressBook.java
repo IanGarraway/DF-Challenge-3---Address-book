@@ -37,13 +37,13 @@ public class AddressBook {
     }
 
     public boolean numberExists(String number){
-        boolean exists = false;
+        boolean numberExists = false;
         for (Contact contact : contacts) {
             if(contact.getNumber().equals(number)){
-                exists = true;
+                numberExists = true;
                 break;
             }
         }
-        return exists;
+        return numberExists;
     }
 }
