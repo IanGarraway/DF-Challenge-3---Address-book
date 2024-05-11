@@ -202,6 +202,21 @@ public class AddressBookTest {
             //Assert
             assertTrue(testBook.emailExists(testEmail));
         }
+        @Test
+        @DisplayName("determines if a email address doesnt exist in the addressbook")
+        public void emaildoesntExistTest(){
+            //Arrange
+            String testEmail = "a@b.com";
+            when(testContact1.getEmail()).thenReturn("c@b.com");
+            when(testContact2.getEmail()).thenReturn("b@b.com");
+            testBook.addContact(testContact1);
+            testBook.addContact(testContact2);
+
+            //Act
+
+            //Assert
+            assertFalse(testBook.emailExists(testEmail));
+        }
 
     }
 }
