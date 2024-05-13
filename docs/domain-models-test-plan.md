@@ -15,11 +15,11 @@ as a user I want to be able to add a contact, which consists of at least a name,
 - [x] you can change the name of the contact
 
 ### Interface class
-- [ ] correctly handles null strings
-- [ ] correctly hands empty strings
-- [ ] only allows the user to continue if a valid input has been entered
-- [ ] correctly handles invalid email address
-- [ ] correctly creates a contact and adds to the address book
+- [x] correctly handles null strings
+- [x] correctly hands empty strings
+- [x] only allows the user to continue if a valid input has been entered
+- [x] correctly handles invalid email address
+- [x] correctly creates a contact and adds to the address book
 
 
 ## User story 2
@@ -33,7 +33,7 @@ As a user, I want to see all of the contacts in the address book, so I can revie
 - [x] if multiple contacts have been added to the addressbook, it returns all of them as a list
 
 ### Interface Class
-- [ ] The interface will display all of the contacts in the addressbook to the screen
+- [x] The interface will display all of the contacts in the addressbook to the screen
 
 ## User story 3
 
