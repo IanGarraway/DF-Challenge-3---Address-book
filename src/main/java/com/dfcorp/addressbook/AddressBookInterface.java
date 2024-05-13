@@ -28,6 +28,8 @@ public class AddressBookInterface {
     }
 
     public StringBuilder displayContactStringBuilder(Contact contact){
+        //decided this method should be on the interface class and not on the contact class because
+        //a different implementation of the interface might not need it.
         return (new StringBuilder()
                 .append("Name: "+contact.getName()+"\n")
                 .append("Phone: "+contact.getNumber()+"\n")
