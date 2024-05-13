@@ -44,7 +44,10 @@ public class AddressBookInterfaceTest {
                      1. (A)dd a contact
                      2. (D)isplay all contacts
                      3. (S)earch for a contact by name
-                     4. (E)dit or delete contacts""", testInterface.displayMenu());
+                     4. (M)odify or delete contacts
+                     
+                     or e to exit.
+                :-""", testInterface.displayMenu());
 
 
         }

@@ -24,7 +24,10 @@ public class AddressBookInterface {
                      1. (A)dd a contact
                      2. (D)isplay all contacts
                      3. (S)earch for a contact by name
-                     4. (E)dit or delete contacts""");
+                     4. (M)odify or delete contacts
+                     
+                     or e to exit.
+                :-""");
     }
 
     public StringBuilder displayContactStringBuilder(Contact contact){
@@ -40,9 +43,9 @@ public class AddressBookInterface {
 
     public String stringInput(String requestMessage){
         Scanner in = new Scanner(System.in);
-        System.out.println(requestMessage);
+        System.out.print(requestMessage);
 
-        return Verifyer.string(in.nextLine());
+        return in.nextLine();
     }
 
     public void menuChoice(String userChoice){
@@ -51,17 +54,19 @@ public class AddressBookInterface {
             case "1":
                 System.out.println("Add user");
                 break;
-            case "b":
+            case "d":
             case "2":
                 System.out.println("Display all contacts");
                 break;
-            case "c":
+            case "s":
             case "3":
                 System.out.println("Search by Name");
                 break;
-            case "d":
+            case "m":
             case "4":
                 System.out.println("edit contacts");
+                break;
+            case "bad":
                 break;
 
             default:
@@ -76,9 +81,9 @@ public class AddressBookInterface {
         do{
             String userChoice;
 
-            System.out.println(displayMenu());
+
             try{
-                userChoice = stringInput(":-");
+                userChoice = Verifyer.string(stringInput(displayMenu()));
             }
             catch (Exception e){
                 userChoice = "bad";
