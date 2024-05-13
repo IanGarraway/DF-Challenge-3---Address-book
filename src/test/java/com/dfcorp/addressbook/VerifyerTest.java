@@ -85,6 +85,7 @@ public class VerifyerTest {
 
             }
 
+            @Test
             @DisplayName("Valid email format check different format")
             public void validEmail2FormatingCheck(){
                 //Arrange
@@ -94,6 +95,18 @@ public class VerifyerTest {
 
                 //Assert
                 assertEquals(testEmail, Verifyer.email(testEmail));
+
+            }
+            @Test
+            @DisplayName("Blank string input email format check")
+            public void blankStringInvalidFormatingCheck(){
+                //Arrange
+                String testEmail = "";
+
+                //Act
+
+                //Assert
+                assertThrows(IllegalArgumentException.class, ()->Verifyer.email(testEmail));
 
             }
         }
