@@ -1,12 +1,13 @@
 package com.dfcorp.addressbook;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AddressBookInterface {
 
     AddressBook theBook = new AddressBook();
 
-    public AddressBookInterface(AddressBook newBook){
+    public AddressBookInterface(AddressBook newBook) {
         theBook = newBook;
     }
     /* doesn't seem to do anything
@@ -16,7 +17,7 @@ public class AddressBookInterface {
     }
      */
 
-    public String displayMenu(){
+    public String displayMenu() {
 
         return ("""
                 Welcome to the DF Corp AddressBook
@@ -30,101 +31,109 @@ public class AddressBookInterface {
                 :-""");
     }
 
-    public StringBuilder displayContactStringBuilder(Contact contact){
+    public StringBuilder displayContactStringBuilder(Contact contact) {
         //decided this method should be on the interface class and not on the contact class because
         //a different implementation of the interface might not need it.
         return (new StringBuilder()
-                .append("Name: "+contact.getName()+"\n")
-                .append("Phone: "+contact.getNumber()+"\n")
-                .append("Email: "+contact.getEmail()+"\n"));
+                .append("Name: " + contact.getName() + "\n")
+                .append("Phone: " + contact.getNumber() + "\n")
+                .append("Email: " + contact.getEmail() + "\n"));
     }
 
 
-
-    public String stringInput(String requestMessage){
+    public String stringInput(String requestMessage) {
         Scanner in = new Scanner(System.in);
         System.out.print(requestMessage);
 
         return in.nextLine();
     }
 
-    public String newName(){
+    public String newName() {
 
         do {
-            try{
+            try {
                 return Verifyer.string(stringInput("Contacts name: "));
-            }
-            catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
-        }while (true);
+        } while (true);
     }
 
-    public String newNumber(){
+    public String newNumber() {
         do {
-            try{
+            try {
                 return Verifyer.string(stringInput("Contacts number: "));
-            }
-            catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
-        }while (true);
+        } while (true);
     }
 
-    public String newEmail(){
+    public String newEmail() {
         do {
-            try{
+            try {
                 return Verifyer.email(stringInput("Contacts Email address:"));
-            }
-            catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
-        }while (true);
+        } while (true);
     }
 
-    public boolean verifyContact(Contact contactToVerify){
-        do{
-            String userChoice;
-            try{
-                userChoice = Verifyer.string(stringInput(displayContactStringBuilder(contactToVerify)+"\n is this correct? [y/n] :"));
-            }
-            catch (IllegalArgumentException e){
+    public boolean verifyContact(Contact contactToVerify) {
+        do {
+            String userChoice = null;
+            try {
+                userChoice = Verifyer.string(stringInput(displayContactStringBuilder(contactToVerify) + "\n is this correct? [y/n] :"));
+            } catch (IllegalArgumentException e) {
                 System.out.println("Please enter either y or n");
                 userChoice = "bad";
             }
 
-            switch (userChoice.toLowerCase()){
-                case "y": return true;
-                case "n": return false;
+            switch (userChoice.toLowerCase()) {
+                case "y":
+                    return true;
+                case "n":
+                    return false;
 
             }
-        }while(true);
+        } while (true);
     }
 
 
-    public Contact newContactBuilder(){
-        do{
-            Contact newContact = new Contact(newName(), newNumber(),newEmail());
-            if(verifyContact(newContact)){
+    public Contact newContactBuilder() {
+        do {
+            Contact newContact = new Contact(newName(), newNumber(), newEmail());
+            if (verifyContact(newContact)) {
                 return newContact;
             }
 
-        }while(true);
+        } while (true);
 
     }
-    public void addContact(){
+
+    public void addContact() {
         theBook.addContact(newContactBuilder());
     }
 
-    public void menuChoice(String userChoice){
-        switch (userChoice.toLowerCase()){
+    public void displayContacts(ArrayList<Contact> contacts) {
+        for (Contact contact : contacts) {
+            System.out.println(displayContactStringBuilder(contact));
+        }
+    }
+
+    public void displayAll() {
+        displayContacts(theBook.getContacts());
+    }
+
+    public void menuChoice(String userChoice) {
+        switch (userChoice.toLowerCase()) {
             case "a":
             case "1":
                 addContact();
                 break;
             case "d":
             case "2":
-                System.out.println("Display all contacts");
+                displayAll();
                 break;
             case "s":
             case "3":
@@ -145,15 +154,14 @@ public class AddressBookInterface {
         }
     }
 
-    public void start(){
-        do{
+    public void start() {
+        do {
             String userChoice;
 
 
-            try{
+            try {
                 userChoice = Verifyer.string(stringInput(displayMenu()));
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 userChoice = "bad";
                 System.out.println(e.getMessage());
                 System.out.println("press enter to continue");
@@ -161,12 +169,14 @@ public class AddressBookInterface {
                 in.nextLine();
             }
 
-            if (userChoice.equalsIgnoreCase("e")){ break;}
+            if (userChoice.equalsIgnoreCase("e")) {
+                break;
+            }
 
             menuChoice(userChoice);
 
-        }while(true);
+        } while (true);
 
     }
-
 }
+
