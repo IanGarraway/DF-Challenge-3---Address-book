@@ -58,10 +58,12 @@ public class VerifyerTest {
         @DisplayName("Email verification tests")
         public class emailVerificationTests{
 
+
+            @Test
             @DisplayName("Invalid email format check")
             public void invalidEmailFormatingCheck(){
                 //Arrange
-                String testEmail = "Bob@";
+                String testEmail = "bob@";
 
                 //Act
 
@@ -70,6 +72,7 @@ public class VerifyerTest {
 
             }
 
+            @Test
             @DisplayName("Valid email format check")
             public void validEmailFormatingCheck(){
                 //Arrange

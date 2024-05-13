@@ -48,11 +48,79 @@ public class AddressBookInterface {
         return in.nextLine();
     }
 
+    public String newName(){
+
+        do {
+            try{
+                return Verifyer.string(stringInput("Contacts name: "));
+            }
+            catch (IllegalArgumentException e){
+                System.out.println(e.getMessage());
+            }
+        }while (true);
+    }
+
+    public String newNumber(){
+        do {
+            try{
+                return Verifyer.string(stringInput("Contacts number: "));
+            }
+            catch (IllegalArgumentException e){
+                System.out.println(e.getMessage());
+            }
+        }while (true);
+    }
+
+    public String newEmail(){
+        do {
+            try{
+                return Verifyer.email(stringInput("Contacts Email address:"));
+            }
+            catch (IllegalArgumentException e){
+                System.out.println(e.getMessage());
+            }
+        }while (true);
+    }
+
+    public boolean verifyContact(Contact contactToVerify){
+        do{
+            String userChoice;
+            try{
+                userChoice = Verifyer.string(stringInput(displayContactStringBuilder(contactToVerify)+"\n is this correct? [y/n] :"));
+            }
+            catch (IllegalArgumentException e){
+                System.out.println("Please enter either y or n");
+                userChoice = "bad";
+            }
+
+            switch (userChoice.toLowerCase()){
+                case "y": return true;
+                case "n": return false;
+
+            }
+        }while(true);
+    }
+
+
+    public Contact newContactBuilder(){
+        do{
+            Contact newContact = new Contact(newName(), newNumber(),newEmail());
+            if(verifyContact(newContact)){
+                return newContact;
+            }
+
+        }while(true);
+
+    }
+    public void addContact(){
+        theBook.addContact(newContactBuilder());
+    }
+
     public void menuChoice(String userChoice){
         switch (userChoice.toLowerCase()){
             case "a":
             case "1":
-                System.out.println("Add user");
+                addContact();
                 break;
             case "d":
             case "2":

@@ -12,15 +12,15 @@ public class Verifyer {
 
     public static boolean isEmail(final String input) {
         // Compile regular expression
-        final Pattern pattern = Pattern.compile("[-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+(?:\\.[-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+)*@(?:[A-Za-z0-9](?:[-A-Za-z0-9]*[A-Za-z0-9])?\\.)+[A-Za-z0-9](?:[-A-Za-z0-9]*[A-Za-z0-9])?", Pattern.CASE_INSENSITIVE);
+        final Pattern pattern = Pattern.compile("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
         // Match regex against input
-        final Matcher matcher = pattern.matcher(input);
         // Use results...
-        return matcher.matches();
+        return pattern.matcher(input).matches();
     }
 
     public static String email(String toVerify){
-        if(isEmail(string(toVerify))) {throw new IllegalArgumentException("Invalid Email address");}
+        if(!isEmail(string(toVerify))) {throw new IllegalArgumentException("Invalid Email address");}
         return toVerify;
     }
 }
