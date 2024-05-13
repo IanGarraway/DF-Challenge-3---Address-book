@@ -11,14 +11,26 @@ public class AddressBookInterface {
         System.out.flush();
     }
 
-    private void displayMenu(){
+    public String displayMenu(){
+        /*
         clearScreen();
-        System.out.println("Welcome to the DF Corp AddressBook");
-        System.out.println("Please select from the following options: ");
-        System.out.println("     1. (A)dd a contact");
-        System.out.println("     2. (D)isplay all contacts");
-        System.out.println("     3. (S)earch for a contact by name");
-        System.out.println("     4. (E)dit or delete contacts");
+        System.out.println("""
+                Welcome to the DF Corp AddressBook
+                Please select from the following options:
+                     1. (A)dd a contact
+                     2. (D)isplay all contacts
+                     3. (S)earch for a contact by name
+                     4. (E)dit or delete contacts""");
+        */
+
+
+        return ("""
+                Welcome to the DF Corp AddressBook
+                Please select from the following options:
+                     1. (A)dd a contact
+                     2. (D)isplay all contacts
+                     3. (S)earch for a contact by name
+                     4. (E)dit or delete contacts""");
     }
 
     public String stringVerify(String toVerify){
@@ -65,13 +77,13 @@ public class AddressBookInterface {
         do{
             String userChoice;
 
-            displayMenu();
+            System.out.println(displayMenu());
             try{
                 userChoice = stringInput(":-");
             }
             catch (Exception e){
                 userChoice = "bad";
-                System.out.println(e.toString());
+                System.out.println(e.getMessage());
                 System.out.println("press enter to continue");
                 Scanner in = new Scanner(System.in);
                 in.nextLine();

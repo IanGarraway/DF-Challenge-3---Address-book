@@ -56,5 +56,24 @@ public class AddressBookInterfaceTest {
             //Assert
             assertThrows(IllegalArgumentException.class, ()->testInterface.stringVerify(testWord));
         }
+
+        @Test
+        @DisplayName("Test to see if DisplayMenu returns the right list")
+        public void displayMenuFunctionTest(){
+            //Arrange
+
+            //Act
+
+            //Assert
+            assertEquals("""
+                Welcome to the DF Corp AddressBook
+                Please select from the following options:
+                     1. (A)dd a contact
+                     2. (D)isplay all contacts
+                     3. (S)earch for a contact by name
+                     4. (E)dit or delete contacts""", testInterface.displayMenu());
+
+
+        }
     }
 }
