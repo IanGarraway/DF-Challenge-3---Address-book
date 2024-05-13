@@ -69,6 +69,18 @@ public class VerifyerTest {
                 assertThrows(IllegalArgumentException.class, ()->Verifyer.email(testEmail));
 
             }
+
+            @DisplayName("Invalid email format check")
+            public void validEmailFormatingCheck(){
+                //Arrange
+                String testEmail = "Bob@company.com";
+
+                //Act
+
+                //Assert
+                assertEquals(testEmail, Verifyer.email(testEmail));
+
+            }
         }
 
     }
