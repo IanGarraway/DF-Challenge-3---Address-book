@@ -27,6 +27,13 @@ public class AddressBookInterface {
                      4. (E)dit or delete contacts""");
     }
 
+    public StringBuilder displayContactStringBuilder(Contact contact){
+        return (new StringBuilder()
+                .append("Name: "+contact.getName()+"\n")
+                .append("Phone: "+contact.getNumber()+"\n")
+                .append("Email: "+contact.getEmail()+"\n"));
+    }
+
 
 
     public String stringInput(String requestMessage){
