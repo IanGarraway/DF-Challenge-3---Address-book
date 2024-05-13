@@ -6,12 +6,14 @@ public class AddressBookInterface {
 
     AddressBook theBook = new AddressBook();
 
+    public AddressBookInterface(AddressBook newBook){
+        theBook = newBook;
+    }
     /* doesn't seem to do anything
     private void clearScreen(){
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
-
      */
 
     public String displayMenu(){

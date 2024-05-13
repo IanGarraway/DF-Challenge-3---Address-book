@@ -3,9 +3,11 @@ package com.dfcorp.addressbook;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 public class AddressBookInterfaceTest {
-    AddressBookInterface testInterface;
+    private AddressBookInterface testInterface;
+    private AddressBook testBook;
 
     @Nested
     @DisplayName("AddressBook Interface Tests")
@@ -13,7 +15,8 @@ public class AddressBookInterfaceTest {
 
         @BeforeEach
         public void setUp(){
-            testInterface = new AddressBookInterface();
+            testBook = mock(AddressBook.class);
+            testInterface = new AddressBookInterface(testBook);
         }
 
         @AfterEach

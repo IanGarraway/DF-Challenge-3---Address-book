@@ -3,7 +3,8 @@ package com.dfcorp.addressbook;
 public class App {
 
     public static void main(String[] args){
-        AddressBookInterface app = new AddressBookInterface();
+        AddressBook theBook = new AddressBook();
+        AddressBookInterface app = new AddressBookInterface(theBook);
 
         app.start();
 
