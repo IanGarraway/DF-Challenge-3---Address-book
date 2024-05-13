@@ -70,10 +70,22 @@ public class VerifyerTest {
 
             }
 
-            @DisplayName("Invalid email format check")
+            @DisplayName("Valid email format check")
             public void validEmailFormatingCheck(){
                 //Arrange
                 String testEmail = "Bob@company.com";
+
+                //Act
+
+                //Assert
+                assertEquals(testEmail, Verifyer.email(testEmail));
+
+            }
+
+            @DisplayName("Valid email format check different format")
+            public void validEmail2FormatingCheck(){
+                //Arrange
+                String testEmail = "Bob.Smith@company.co.uk";
 
                 //Act
 
