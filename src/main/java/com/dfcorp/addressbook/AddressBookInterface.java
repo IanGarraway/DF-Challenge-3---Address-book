@@ -6,23 +6,15 @@ public class AddressBookInterface {
 
     AddressBook theBook = new AddressBook();
 
+    /* doesn't seem to do anything
     private void clearScreen(){
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
-    public String displayMenu(){
-        /*
-        clearScreen();
-        System.out.println("""
-                Welcome to the DF Corp AddressBook
-                Please select from the following options:
-                     1. (A)dd a contact
-                     2. (D)isplay all contacts
-                     3. (S)earch for a contact by name
-                     4. (E)dit or delete contacts""");
-        */
+     */
 
+    public String displayMenu(){
 
         return ("""
                 Welcome to the DF Corp AddressBook
@@ -33,16 +25,13 @@ public class AddressBookInterface {
                      4. (E)dit or delete contacts""");
     }
 
-    public String stringVerify(String toVerify){
-        if(toVerify.trim().isEmpty()) throw new IllegalArgumentException("Input can't be empty");
-        return toVerify;
-    }
+
 
     public String stringInput(String requestMessage){
         Scanner in = new Scanner(System.in);
         System.out.println(requestMessage);
 
-        return stringVerify(in.nextLine());
+        return Verifyer.string(in.nextLine());
     }
 
     public void menuChoice(String userChoice){
@@ -73,7 +62,6 @@ public class AddressBookInterface {
     }
 
     public void start(){
-        mainLoop:
         do{
             String userChoice;
 
@@ -89,7 +77,7 @@ public class AddressBookInterface {
                 in.nextLine();
             }
 
-            if (userChoice.equalsIgnoreCase("e")){ break mainLoop;}
+            if (userChoice.equalsIgnoreCase("e")){ break;}
 
             menuChoice(userChoice);
 

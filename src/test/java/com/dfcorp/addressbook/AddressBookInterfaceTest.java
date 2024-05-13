@@ -21,41 +21,7 @@ public class AddressBookInterfaceTest {
             testInterface = null;
         }
 
-        @Test
-        @DisplayName("Test of string validation method")
-        public void stringValidationTest(){
-            //Arrange
-            String testWord = "word";
 
-            //Act
-
-            //Assert
-            assertEquals(testWord, testInterface.stringVerify(testWord));
-        }
-
-        @Test
-        @DisplayName("Test of string validation method - empty")
-        public void stringEmptyValidationTest(){
-            //Arrange
-            String testWord = "";
-
-            //Act
-
-            //Assert
-            assertThrows(IllegalArgumentException.class, ()->testInterface.stringVerify(testWord));
-        }
-
-        @Test
-        @DisplayName("Test of string validation method-just spaces")
-        public void stringSpacesValidationTest(){
-            //Arrange
-            String testWord = "   ";
-
-            //Act
-
-            //Assert
-            assertThrows(IllegalArgumentException.class, ()->testInterface.stringVerify(testWord));
-        }
 
         @Test
         @DisplayName("Test to see if DisplayMenu returns the right list")
