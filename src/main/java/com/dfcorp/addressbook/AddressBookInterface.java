@@ -1,12 +1,11 @@
 package com.dfcorp.addressbook;
 
-import javax.xml.validation.Validator;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AddressBookInterface {
 
-    AddressBook theBook = new AddressBook();
+    AddressBook theBook;
 
     public AddressBookInterface(AddressBook newBook) {
         theBook = newBook;
@@ -43,25 +42,25 @@ public class AddressBookInterface {
                     """;
     }
 
-    public boolean confirmation(Contact contact){
-        do{
-            String userChoice;
-            try{
-                userChoice = Verifyer.string(stringInput(displayContactStringBuilder(contact)+"\n are you sure you wish to remove this contact? [y/n]"));
-
-            }catch (IllegalArgumentException e){
-                userChoice = "bad";
-            }
-
-            switch (userChoice.toLowerCase()){
-                case "y": return true;
-                case "n": return false;
-                default:
-                    System.out.println("Invalid input, please enter y or n");
-            }
-
-        }while (true);
-    }
+//    public boolean deleteConfirmation(Contact contact){
+//        do{
+//            String userChoice;
+//            try{
+//                userChoice = Verifyer.string(stringInput(displayContactStringBuilder(contact)+"\n are you sure you wish to remove this contact? [y/n]"));
+//
+//            }catch (IllegalArgumentException e){
+//                userChoice = "bad";
+//            }
+//
+//            switch (userChoice.toLowerCase()){
+//                case "y": return true;
+//                case "n": return false;
+//                default:
+//                    System.out.println("Invalid input, please enter y or n");
+//            }
+//
+//        }while (true);
+//    }
 
     public StringBuilder displayContactStringBuilder(Contact contact) {
         //decided this method should be on the interface class and not on the contact class because
@@ -111,11 +110,11 @@ public class AddressBookInterface {
         } while (true);
     }
 
-    public boolean verifyContact(Contact contactToVerify) {
+    public boolean verifyContact(Contact contactToVerify, String message) {
         do {
             String userChoice = null;
             try {
-                userChoice = Verifyer.string(stringInput(displayContactStringBuilder(contactToVerify) + "\n is this correct? [y/n] :"));
+                userChoice = Verifyer.string(stringInput(displayContactStringBuilder(contactToVerify) + "\n "+message));
             } catch (IllegalArgumentException e) {
                 System.out.println("Please enter either y or n");
                 userChoice = "bad";
@@ -135,7 +134,7 @@ public class AddressBookInterface {
     public Contact newContactBuilder() {
         do {
             Contact newContact = new Contact(newName(), newNumber(), newEmail());
-            if (verifyContact(newContact)) {
+            if (verifyContact(newContact, "is this correct? [y/n] :")) {
                 return newContact;
             }
 
@@ -199,9 +198,9 @@ public class AddressBookInterface {
                 case "e":
                     break modLoop;
                 case "d":
-                    if(confirmation(contacts.get(position))){
+                    if(verifyContact(contacts.get(position),"are you sure you wish to remove this contact? [y/n]")){
                         theBook.removeContact(contacts.get(position));
-                        //contacts.remove(position);
+                        contacts.remove(position);
                         if(position == contacts.size()) position--;
                     }
                     break;
