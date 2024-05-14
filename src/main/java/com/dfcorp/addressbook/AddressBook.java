@@ -3,7 +3,7 @@ package com.dfcorp.addressbook;
 import java.util.ArrayList;
 
 public class AddressBook {
-    ArrayList<Contact> contacts = new ArrayList<>();
+    private ArrayList<Contact> contacts = new ArrayList<>();
 
     // in case of a load mechanic
     public AddressBook(ArrayList<Contact> contacts) {
@@ -12,7 +12,7 @@ public class AddressBook {
 
     public AddressBook(){}
 
-    public ArrayList<Contact> getContacts(){return contacts;}
+    public ArrayList<Contact> getContacts(){return new ArrayList<Contact>(contacts);}
 
     public void addContact(Contact newContact){
         contacts.add(newContact);

@@ -43,6 +43,26 @@ public class AddressBookInterface {
                     """;
     }
 
+    public boolean confirmation(Contact contact){
+        do{
+            String userChoice;
+            try{
+                userChoice = Verifyer.string(stringInput(displayContactStringBuilder(contact)+"\n are you sure you wish to remove this contact? [y/n]"));
+
+            }catch (IllegalArgumentException e){
+                userChoice = "bad";
+            }
+
+            switch (userChoice.toLowerCase()){
+                case "y": return true;
+                case "n": return false;
+                default:
+                    System.out.println("Invalid input, please enter y or n");
+            }
+
+        }while (true);
+    }
+
     public StringBuilder displayContactStringBuilder(Contact contact) {
         //decided this method should be on the interface class and not on the contact class because
         //a different implementation of the interface might not need it.
@@ -158,8 +178,42 @@ public class AddressBookInterface {
     }
 
     public void contactIterator(ArrayList<Contact> contacts){
+        int position = 0;
 
+        modLoop:
+        while (!contacts.isEmpty()){
+            String userChoice;
+            System.out.println(displayContactStringBuilder(contacts.get(position)));
+            try{
+                userChoice = Verifyer.string(stringInput(modChoices(position,contacts.size())));
 
+            }catch (IllegalArgumentException e){
+                System.out.println(e.getMessage());
+                userChoice ="bad";
+            }
+
+            switch (userChoice.toLowerCase()){
+                case "p":
+                    if(position>0) position--;
+                    break;
+                case "e":
+                    break modLoop;
+                case "d":
+                    if(confirmation(contacts.get(position))){
+                        theBook.removeContact(contacts.get(position));
+                        //contacts.remove(position);
+                        if(position == contacts.size()) position--;
+                    }
+                    break;
+                case "m":
+                    System.out.println("modify");
+                    break;
+                case "n":
+                    if(position<contacts.size()-1) position++;
+                    break;
+
+            }
+        }
     }
 
     public void modMenu(){
@@ -209,7 +263,7 @@ public class AddressBookInterface {
                 break;
             case "m":
             case "4":
-                System.out.println("edit contacts");
+                modMenu();
                 break;
             case "bad":
                 break;
