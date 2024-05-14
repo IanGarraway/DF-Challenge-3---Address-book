@@ -151,8 +151,10 @@ public class AddressBookInterface {
         displayContacts(theBook.searchByName(getSearchName()));
     }
 
-    public String modChoices(int postion, int size){
-        return "<(e)xit, (d)elete, (m)odify>";
+    public String modChoices(int position, int size){
+
+
+        return ((position == 0)? "<":"<(p)revious,")+"(e)xit, (d)elete, (m)odify"+((position<(size-1)) ? ", (n)ext>":">");
     }
 
     public void contactIterator(ArrayList<Contact> contacts){

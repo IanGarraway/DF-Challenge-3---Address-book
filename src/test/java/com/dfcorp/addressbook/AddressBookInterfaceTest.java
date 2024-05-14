@@ -91,5 +91,14 @@ public class AddressBookInterfaceTest {
             //Assert
             assertEquals("<(e)xit, (d)elete, (m)odify>", testInterface.modChoices(0,1));
         }
+
+        @Test
+        @DisplayName("Edit choices are displayed correctly, one contact")
+        public void editChoicesDisplayTestStartOfMultipleList(){
+            //Arrange
+            //Act
+            //Assert
+            assertEquals("<(e)xit, (d)elete, (m)odify, (n)ext>", testInterface.modChoices(0,5));
+        }
     }
 }
