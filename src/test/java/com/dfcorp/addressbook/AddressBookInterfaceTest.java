@@ -102,12 +102,21 @@ public class AddressBookInterfaceTest {
         }
 
         @Test
-        @DisplayName("Edit choices are displayed correctly, one contact")
+        @DisplayName("Edit choices are displayed correctly, mid contact")
         public void editChoicesDisplayTestMidOfMultipleList(){
             //Arrange
             //Act
             //Assert
             assertEquals("<(p)revious,(e)xit, (d)elete, (m)odify, (n)ext>", testInterface.modChoices(2,5));
+        }
+
+        @Test
+        @DisplayName("Edit choices are displayed correctly, end contact")
+        public void editChoicesDisplayTestEndOfMultipleList(){
+            //Arrange
+            //Act
+            //Assert
+            assertEquals("<(p)revious,(e)xit, (d)elete, (m)odify>", testInterface.modChoices(4,5));
         }
     }
 }
