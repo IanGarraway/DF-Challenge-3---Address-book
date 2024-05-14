@@ -32,6 +32,16 @@ public class AddressBookInterface {
                 :-""");
     }
 
+    public String displayModMenu(){
+        return """
+                    AddressBook Contact Review
+                    Do you wish to see :
+                        1. (A)ll contacts
+                        2. (S)earch by name
+                        3. (E)xit to the main menu
+                    """;
+    }
+
     public StringBuilder displayContactStringBuilder(Contact contact) {
         //decided this method should be on the interface class and not on the contact class because
         //a different implementation of the interface might not need it.

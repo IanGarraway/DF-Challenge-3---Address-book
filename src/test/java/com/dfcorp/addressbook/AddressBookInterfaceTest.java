@@ -53,6 +53,21 @@ public class AddressBookInterfaceTest {
         }
 
         @Test
+        @DisplayName("Test to see if modify choices returns correctly")
+        public void modifyContactsChoiceOptionsDisplayCorrectlyTest(){
+            //Arraange
+            //Act
+            //Assert
+            assertEquals("""
+                    AddressBook Contact Review
+                    Do you wish to see :
+                        1. (A)ll contacts
+                        2. (S)earch by name
+                        3. (E)xit to the main menu
+                    """,testInterface.displayModMenu());
+        }
+
+        @Test
         @DisplayName("Test to see if the contact string display builder, outputs the right string")
         public void contactStringBuilderFunctionTest(){
             //Arrange
