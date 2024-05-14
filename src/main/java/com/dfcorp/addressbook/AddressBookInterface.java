@@ -1,5 +1,6 @@
 package com.dfcorp.addressbook;
 
+import javax.xml.validation.Validator;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -148,6 +149,46 @@ public class AddressBookInterface {
 
     public void displayByName(){
         displayContacts(theBook.searchByName(getSearchName()));
+    }
+
+    public String modChoices(int postion, int size){
+        return "<(e)xit, (d)elete, (m)odify>";
+    }
+
+    public void contactIterator(ArrayList<Contact> contacts){
+
+
+    }
+
+    public void modMenu(){
+        modMenuLoop:
+        do{
+            String userChoice;
+            try {
+                userChoice = Verifyer.string(stringInput(displayModMenu()));
+            }catch (IllegalArgumentException e){
+                userChoice = "bad";
+                System.out.println(e.getMessage());
+            }
+            switch (userChoice.toLowerCase()){
+                case "1":
+                case "a":
+                    contactIterator(theBook.getContacts());
+                    break;
+                case "2":
+                case "s":
+                    contactIterator(theBook.searchByName(getSearchName()));
+                    break;
+                case "3":
+                case "e":
+                    break modMenuLoop;
+                case "bad":
+                    break;
+                default:
+                    System.out.println("Invalid option, please try again");
+            }
+
+        }while(true);
     }
 
     public void menuChoice(String userChoice) {

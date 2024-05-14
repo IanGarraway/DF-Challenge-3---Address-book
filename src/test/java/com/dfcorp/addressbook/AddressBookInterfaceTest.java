@@ -48,8 +48,6 @@ public class AddressBookInterfaceTest {
                      
                      or e to exit.
                 :-""", testInterface.displayMenu());
-
-
         }
 
         @Test
@@ -83,6 +81,15 @@ public class AddressBookInterfaceTest {
                     """, testInterface.displayContactStringBuilder(testContact1).toString());
 
 
+        }
+
+        @Test
+        @DisplayName("Edit choices are displayed correctly, one contact")
+        public void editChoicesDisplayTest(){
+            //Arrange
+            //Act
+            //Assert
+            assertEquals("<(e)xit, (d)elete, (m)odify>", testInterface.modChoices(0,1));
         }
     }
 }
