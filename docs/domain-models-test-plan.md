@@ -47,7 +47,7 @@ As a user I want to be able to search for a contact by name and have the results
 
 ### Interface Class
 
-- [ ] will display all contacts com.dfcorp.addressbook.AddressBook returns
+- [x] will display all contacts com.dfcorp.addressbook.AddressBook returns
  
 ## User Story 4
 

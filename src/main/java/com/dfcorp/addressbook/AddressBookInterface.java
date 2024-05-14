@@ -10,6 +10,7 @@ public class AddressBookInterface {
     public AddressBookInterface(AddressBook newBook) {
         theBook = newBook;
     }
+
     /* doesn't seem to do anything
     private void clearScreen(){
         System.out.print("\033[H\033[2J");
@@ -125,6 +126,20 @@ public class AddressBookInterface {
         displayContacts(theBook.getContacts());
     }
 
+    public String getSearchName(){
+        do {
+            try {
+                return Verifyer.string(stringInput("Name to find: "));
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (true);
+    }
+
+    public void displayByName(){
+        displayContacts(theBook.searchByName(getSearchName()));
+    }
+
     public void menuChoice(String userChoice) {
         switch (userChoice.toLowerCase()) {
             case "a":
@@ -137,7 +152,7 @@ public class AddressBookInterface {
                 break;
             case "s":
             case "3":
-                System.out.println("Search by Name");
+                displayByName();
                 break;
             case "m":
             case "4":
