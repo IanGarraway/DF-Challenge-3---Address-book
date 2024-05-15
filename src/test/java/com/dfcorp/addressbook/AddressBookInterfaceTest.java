@@ -118,5 +118,24 @@ public class AddressBookInterfaceTest {
             //Assert
             assertEquals("<(p)revious,(e)xit, (d)elete, (m)odify>", testInterface.modChoices(4,5));
         }
+
+        @Nested
+        @DisplayName("Tests of the Modification's string input method")
+        public class modificationsInputString{
+
+
+            @Test
+            @DisplayName("Modify Contact String with option to use previous string method")
+            public void stringBlankReturnsOriginalStringTest(){
+                //Arrange
+
+                //Act
+                //Assert
+                assertEquals("Test", testInterface.modString("","Test"));
+
+
+            }
+
+        }
     }
 }

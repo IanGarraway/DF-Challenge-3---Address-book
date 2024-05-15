@@ -42,25 +42,6 @@ public class AddressBookInterface {
                     """;
     }
 
-//    public boolean deleteConfirmation(Contact contact){
-//        do{
-//            String userChoice;
-//            try{
-//                userChoice = Verifyer.string(stringInput(displayContactStringBuilder(contact)+"\n are you sure you wish to remove this contact? [y/n]"));
-//
-//            }catch (IllegalArgumentException e){
-//                userChoice = "bad";
-//            }
-//
-//            switch (userChoice.toLowerCase()){
-//                case "y": return true;
-//                case "n": return false;
-//                default:
-//                    System.out.println("Invalid input, please enter y or n");
-//            }
-//
-//        }while (true);
-//    }
 
     public StringBuilder displayContactStringBuilder(Contact contact) {
         //decided this method should be on the interface class and not on the contact class because
@@ -176,6 +157,14 @@ public class AddressBookInterface {
         return ((position == 0)? "<":"<(p)revious,")+"(e)xit, (d)elete, (m)odify"+((position<(size-1)) ? ", (n)ext>":">");
     }
 
+    public String modString(String userInput, String originalString){
+        return originalString;
+    }
+
+    public Contact modifyContact(Contact originalContact){
+        return originalContact;
+    }
+
     public void contactIterator(ArrayList<Contact> contacts){
         int position = 0;
 
@@ -205,7 +194,7 @@ public class AddressBookInterface {
                     }
                     break;
                 case "m":
-                    System.out.println("modify");
+                    theBook.replaceContact(contacts.get(position), modifyContact(contacts.get(position)));
                     break;
                 case "n":
                     if(position<contacts.size()-1) position++;
