@@ -74,7 +74,9 @@ public class AddressBookInterface {
     public String newNumber() {
         do {
             try {
-                return Verifyer.string(stringInput("Contacts number: "));
+                String number = Verifyer.string(stringInput("Contacts number: "));
+                if(theBook.numberExists(number)) throw new IllegalArgumentException("Number already exists");
+                return number;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
