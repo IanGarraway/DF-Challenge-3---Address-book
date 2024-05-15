@@ -59,7 +59,7 @@ As a user I want to be able to remove a contact from the address book, for when 
 
 ### Interface Class
 
-- [ ] selecting remove contact will delete the contact from the addressbook
+- [x] selecting remove contact will delete the contact from the addressbook
 
 ## User Story 5
 
@@ -67,11 +67,11 @@ As a user I want to be able to edit a contact, so that I can keep the details co
 
 ### Addressbook Class
 
-- [ ] passing in a com.dfcorp.addressbook.Contact and a location will replace the contact in that location with the class
+- [x] passing in a com.dfcorp.addressbook.Contact and a location will replace the contact in that location with the class
 
 ### Interface Class
 
-- [ ] choosing to edit a contact will give you the opportunity to change it's details
+- [x] choosing to edit a contact will give you the opportunity to change it's details
 
 ## User Story 6
 

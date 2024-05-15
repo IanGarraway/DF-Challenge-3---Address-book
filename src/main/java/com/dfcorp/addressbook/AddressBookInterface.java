@@ -84,7 +84,10 @@ public class AddressBookInterface {
     public String newEmail() {
         do {
             try {
-                return Verifyer.email(stringInput("Contacts Email address:"));
+                String email = Verifyer.email(stringInput("Contacts Email address:"));
+                if(theBook.emailExists(email)) throw new IllegalArgumentException("Email already exists");
+                return email;
+
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
