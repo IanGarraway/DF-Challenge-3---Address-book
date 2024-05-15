@@ -53,7 +53,7 @@ public class AddressBookInterface {
     }
 
 
-    public String stringInput(String requestMessage) {
+    private String stringInput(String requestMessage) {
         Scanner in = new Scanner(System.in);
         System.out.print(requestMessage);
 
@@ -158,11 +158,25 @@ public class AddressBookInterface {
     }
 
     public String modString(String userInput, String originalString){
-        return originalString;
+        if (userInput.trim().isEmpty())return originalString;
+        return userInput;
+    }
+
+    public Contact buildModContact(Contact originalContact){
+        String modName = modString(stringInput("Original name: "+originalContact.getName()+" <enter new name or press enter to keep>"),originalContact.getName());
+        String modNumber = modString(stringInput("Original number: "+originalContact.getNumber()+" <enter new number or press enter to keep>"),originalContact.getNumber());
+        String modEmail = modString(stringInput("Original name: "+originalContact.getEmail()+" <enter new email or press enter to keep>"),originalContact.getEmail());
+        return new Contact(modName,modNumber, modEmail);
+
     }
 
     public Contact modifyContact(Contact originalContact){
-        return originalContact;
+        do{
+            Contact modContact = buildModContact(originalContact);
+            if(verifyContact(modContact,"is this correct? [y/n]")) return modContact;
+
+        }while(true);
+
     }
 
     public void contactIterator(ArrayList<Contact> contacts){
@@ -194,7 +208,9 @@ public class AddressBookInterface {
                     }
                     break;
                 case "m":
-                    theBook.replaceContact(contacts.get(position), modifyContact(contacts.get(position)));
+                    Contact replacementContact = modifyContact(contacts.get(position));
+                    theBook.replaceContact(contacts.get(position),replacementContact);
+                    contacts.set(position, replacementContact);
                     break;
                 case "n":
                     if(position<contacts.size()-1) position++;

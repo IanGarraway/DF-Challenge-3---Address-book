@@ -1,6 +1,9 @@
 package com.dfcorp.addressbook;
 
 import org.junit.jupiter.api.*;
+import org.mockito.Mockito;
+
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -125,7 +128,7 @@ public class AddressBookInterfaceTest {
 
 
             @Test
-            @DisplayName("Modify Contact String with option to use previous string method")
+            @DisplayName("Modify Contact String with option to use previous string method - empty user input")
             public void stringBlankReturnsOriginalStringTest(){
                 //Arrange
 
@@ -135,7 +138,42 @@ public class AddressBookInterfaceTest {
 
 
             }
+            @Test
+            @DisplayName("Modify Contact String with option to use previous string method - different user input")
+            public void stringUserChangeStringTest(){
+                //Arrange
+                String testString = "Test";
+                String originalString = "Dave";
+
+                //Act
+                //Assert
+                assertEquals(testString, testInterface.modString(testString,originalString));
+
+
+            }
 
         }
+
+        /*
+        @Nested
+        @DisplayName("Input tests")
+        public class InputTests{
+
+            @Test
+            @DisplayName("Test of newName method")
+            public void testNewNameMethod(){
+                //PowerMockito.mockStatic(System.class);
+                //Arrange
+                String testWord = "Test";
+                Scanner asker = Mockito.mock(Scanner.class);
+                Mockito.when(asker.nextLine()).thenReturn(testWord);
+
+                //Act
+
+                //Assert
+                assertEquals(testWord, testInterface.newName());
+
+            }
+        }*/
     }
 }
