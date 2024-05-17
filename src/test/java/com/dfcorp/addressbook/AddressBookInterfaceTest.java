@@ -286,7 +286,7 @@ public class AddressBookInterfaceTest {
             }
 
             @Test
-            @DisplayName("Test newEmail method, will loop until a valid email is entered")
+            @DisplayName("Test newEmail method, will loop until an email testbook says is unique is entered")
             public void testNewEmailExistsVerificationFunctions(){
                 //Arrange
                 String testEmail = "Test@Test.com";
@@ -301,6 +301,45 @@ public class AddressBookInterfaceTest {
                 //Assert
                 assertEquals(testEmail, testInterface.newEmail(mockScanner));
             }
+
+            @Test
+            @DisplayName("uniqueModNumber doesn't accept an already existing number")
+            public void testUniqueModNumberCorrectlyHandlesAlreadyExistingNumbers(){
+                //Arrange
+                String testNumber = "1234";
+                String badNumber = "1235";
+                String testOriginalNumber = "1233";
+
+                when(mockScanner.nextLine()).thenReturn(badNumber, testNumber);
+                when(testBook.numberExists(badNumber)).thenReturn(true);
+                when(testBook.numberExists(testNumber)).thenReturn(false);
+
+                //Act
+
+                //Assert
+                assertEquals(testNumber, testInterface.uniqueModNumber(testOriginalNumber, mockScanner));
+
+            }
+
+            @Test
+            @DisplayName("uniqueModNumber doesn't accept an already existing number, unless it is the original")
+            public void testUniqueModNumberAcceptsTheOriginalNumber(){
+                //Arrange
+                String testNumber = "1234";
+                String badNumber = "1235";
+
+
+                when(mockScanner.nextLine()).thenReturn(badNumber, testNumber);
+                when(testBook.numberExists(badNumber)).thenReturn(true);
+                when(testBook.numberExists(testNumber)).thenReturn(false);
+
+                //Act
+
+                //Assert
+                assertEquals(testNumber, testInterface.uniqueModNumber(testNumber, mockScanner));
+
+            }
+
 
 
         }
