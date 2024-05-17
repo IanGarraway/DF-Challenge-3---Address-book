@@ -8,8 +8,7 @@ import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class AddressBookInterfaceTest {
     private AddressBookInterface testInterface;
@@ -372,6 +371,53 @@ public class AddressBookInterfaceTest {
                 //Act
                 //Assert
                 assertEquals(testEmail, testInterface.uniqueModEmail(testEmail, mockScanner));
+            }
+
+            @Test
+            @DisplayName("Test add contact builds a contact and adds it to the addressbook")
+            public void testAddContactFunctionsCorrectly(){
+                //Arrange
+                String testName = "Daisy";
+                String testNumber = "1234";
+                String testEmail = "Daisy@df.com";
+                String testVerify = "y";
+
+                testBook = new AddressBook();
+                AddressBook spyBook = spy(testBook);
+
+                testInterface = new AddressBookInterface(spyBook);
+
+                when(mockScanner.nextLine()).thenReturn(testName,testNumber,testEmail,testVerify);
+
+
+                //Act
+                testInterface.addContact(mockScanner);
+
+                //Verify
+
+                assertEquals(1, spyBook.getContacts().size());
+
+            }
+
+            @Test
+            @DisplayName("Test verify contact's input handles bad input's correctly before outputting false on a negative")
+            public void testOfVerifyContactBadInputHandlingAndNegativeInputResponse(){
+                //Arrange
+                String testString1 = "";
+                String testString2 = "  ";
+                String testString3 = "nah";
+                String testString4 = "n";
+
+                when(testContact1.getEmail()).thenReturn("test@test.com");
+                when(testContact1.getNumber()).thenReturn("1234");
+                when(testContact1.getName()).thenReturn("test");
+
+                when(mockScanner.nextLine()).thenReturn(testString1,testString2,testString3,testString4);
+
+                //Act
+
+                //Assert
+                assertFalse(testInterface.verifyContact(testContact1,"is this correct?",mockScanner));
             }
 
 
