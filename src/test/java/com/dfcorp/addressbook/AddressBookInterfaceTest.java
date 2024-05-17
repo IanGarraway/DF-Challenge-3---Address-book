@@ -398,6 +398,32 @@ public class AddressBookInterfaceTest {
                 assertEquals(1, spyBook.getContacts().size());
 
             }
+            @Test
+            @DisplayName("Test add contact builds a contact and adds it to the addressbook, with n answered to the first verify question")
+            public void testAddContactFunctionsCorrectlyWithANegativeToFirstVerify(){
+                //Arrange
+                String testName = "Daisy";
+                String testNumber = "1234";
+                String testEmail = "Daisy@df.com";
+                String testVerify1 = "n";
+                String testVerify2 = "y";
+
+                testBook = new AddressBook();
+                AddressBook spyBook = spy(testBook);
+
+                testInterface = new AddressBookInterface(spyBook);
+
+                when(mockScanner.nextLine()).thenReturn(testName,testNumber,testEmail,testVerify1, testName,testNumber,testEmail,testVerify2);
+
+
+                //Act
+                testInterface.addContact(mockScanner);
+
+                //Verify
+
+                assertEquals(1, spyBook.getContacts().size());
+
+            }
 
             @Test
             @DisplayName("Test verify contact's input handles bad input's correctly before outputting false on a negative")
