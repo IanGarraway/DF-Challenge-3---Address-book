@@ -285,6 +285,23 @@ public class AddressBookInterfaceTest {
                 assertEquals(testEmail, testInterface.newEmail(mockScanner));
             }
 
+            @Test
+            @DisplayName("Test newEmail method, will loop until a valid email is entered")
+            public void testNewEmailExistsVerificationFunctions(){
+                //Arrange
+                String testEmail = "Test@Test.com";
+                String badEmail = "Testing@Test.com";
+
+                when(mockScanner.nextLine()).thenReturn(badEmail, testEmail);
+                when(testBook.emailExists(badEmail)).thenReturn(true);
+                when(testBook.emailExists(testEmail)).thenReturn(false);
+
+                //Act
+
+                //Assert
+                assertEquals(testEmail, testInterface.newEmail(mockScanner));
+            }
+
 
         }
 
