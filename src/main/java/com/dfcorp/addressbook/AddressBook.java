@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public class AddressBook {
     private ArrayList<Contact> contacts = new ArrayList<>();
 
-    // in case of a load mechanic
+    /*// in case of a load mechanic
     public AddressBook(ArrayList<Contact> contacts) {
         this.contacts = contacts;
-    }
+    }*/
 
     public AddressBook(){}
 

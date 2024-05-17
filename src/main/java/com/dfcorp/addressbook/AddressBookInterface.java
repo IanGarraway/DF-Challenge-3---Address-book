@@ -303,8 +303,8 @@ public class AddressBookInterface {
         }
     }
 
-    public void start() {
-        Scanner in = new Scanner(System.in); //this to me feels wrong, but I can see no other way to mock the input for testing
+    public void start(Scanner in) {
+         //this to me feels wrong, but I can see no other way to mock the input for testing
 
         do {
             String userChoice;

@@ -658,6 +658,41 @@ public class AddressBookInterfaceTest {
 
             }
 
+            @Test
+            @DisplayName("Start() and Main Menu Test")
+            //This test is there to just run through the main loops code and check it handles exceptions correctly.
+            public void testofProgramLoopAndMainMenu(){
+                //Arrange
+                String testName = "Ginny";
+                String testEmail ="test@test.com";
+                String testNumber = "1234";
+
+
+                when(testContact1.getEmail()).thenReturn(testEmail);
+                when(testContact1.getNumber()).thenReturn(testNumber);
+                when(testContact1.getName()).thenReturn(testName);
+
+                ArrayList<Contact> testList = new ArrayList<>();
+                testList.add(testContact1);
+
+
+                when(testBook.getContacts()).thenReturn(testList);
+                when(testBook.searchByName("Ginny")).thenReturn(testList);
+
+                // the following mockscanner should imitate a user doing the following:
+                // Check some abnormal inputs, select add contact, add Ginny, her number, her email, show all, show search by name, go into the mod menu,
+                //come out, enter cat, see the error message press enter, exit the program.
+                when(mockScanner.nextLine()).thenReturn( "","  ","A",testName, testNumber, testEmail,"y","2","3",testName,"4", "e","cat", "","e" );
+
+                //Act
+                testInterface.start(mockScanner);
+
+                //if the program can go through the code, it's a pass.
+                assertTrue(true);
+
+
+            }
+
 
 
         }
