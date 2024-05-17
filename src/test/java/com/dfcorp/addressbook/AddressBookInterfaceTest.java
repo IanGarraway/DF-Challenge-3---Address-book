@@ -209,6 +209,19 @@ public class AddressBookInterfaceTest {
 
             }
 
+            @Test
+            @DisplayName("Test of newNumber method normal entry")
+            public void testNewNumberMethodWorks(){
+                //Arrange
+                String testNumber = "1234";
+                when(mockScanner.nextLine()).thenReturn(testNumber);
+
+                //Act
+
+                //Assert
+                assertEquals(testNumber, testInterface.newNumber(mockScanner));
+            }
+
 
         }
 
