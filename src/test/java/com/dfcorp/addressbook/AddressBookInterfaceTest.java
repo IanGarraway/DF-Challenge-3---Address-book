@@ -614,14 +614,47 @@ public class AddressBookInterfaceTest {
                 when(testBook.getContacts()).thenReturn(testList);
 
                 // the following mockscanner should imitate a user doing the following:
-                // Check two abnormal inputs, select all contacts, two abnormal entries, try to go back through the list, iterate
-                //forward through the list till the end, go back one, delete the middle item, then exit from the methods.
+                // select all contacts, iterate forward through the list till the end, delete all three then exit from the methods.
                 when(mockScanner.nextLine()).thenReturn( "1","n", "N", "n","d","y","d","y","d", "y", "e" );
 
                 //Act
                 testInterface.modMenu(mockScanner);
 
                 assertEquals(0, testList.size());
+
+            }
+
+            @Test
+            @DisplayName("Mod Menu -> Contact Iterator test - by name, modify contact")
+            public void testofContactIteratorModification(){
+                //Arrange
+                Contact testContact2 = mock(Contact.class);
+                Contact testContact3 = mock(Contact.class);
+
+                String testName = "Ginny";
+                String testEmail ="test@test.com";
+                String testNumber = "1234";
+                String testReplacementName = "Guinny";
+
+                when(testContact1.getEmail()).thenReturn(testEmail);
+                when(testContact1.getNumber()).thenReturn(testNumber);
+                when(testContact1.getName()).thenReturn(testName);
+
+                ArrayList<Contact> testList = new ArrayList<>();
+                testList.add(testContact1);
+
+
+                when(testBook.searchByName("Ginny")).thenReturn(testList);
+
+                // the following mockscanner should imitate a user doing the following:
+                // Check an abnormal input, select search by name, search for Ginny, modify the name to 'Guinny',
+                //accept the original email and phone number, and then exit.
+                when(mockScanner.nextLine()).thenReturn( "cat","S",testName, "m", testReplacementName,"","","y","e","e" );
+
+                //Act
+                testInterface.modMenu(mockScanner);
+
+                assertEquals(testReplacementName, testList.get(0).getName());
 
             }
 
