@@ -465,6 +465,52 @@ public class AddressBookInterfaceTest {
                 assertTrue(testInterface.verifyContact(testContact1,"is this correct?",mockScanner));
             }
 
+            @Test
+            @DisplayName("Test of the getSearchName validation")
+            public void testGetSearchNameMethod(){
+                //Arrange
+                String testName = "Ginny";
+
+                when(mockScanner.nextLine()).thenReturn("", " ",testName);
+
+                //Act
+
+                //Assert
+                assertEquals(testName, testInterface.getSearchName(mockScanner));
+            }
+
+            @Test
+            @DisplayName("Test modifyContact returns original contact")
+            public void testGetModContactBuilder(){
+
+
+                //Arrange
+                String testName = "Ginny";
+                String testEmail ="test@test.com";
+                String testNumber = "1234";
+
+
+                when(testContact1.getEmail()).thenReturn(testEmail);
+                when(testContact1.getNumber()).thenReturn(testNumber);
+                when(testContact1.getName()).thenReturn(testName);
+
+                when(testBook.emailExists(testEmail)).thenReturn(true); //this is a simulated re-enter of the same data on a modification
+                when(testBook.numberExists(testNumber)).thenReturn(true); //Contact should exist in the addressbook. should make no difference
+                //though as the number and email should match the original.
+
+                when(mockScanner.nextLine()).thenReturn("","","","y" );
+
+                //Act
+
+                Contact builtContact = testInterface.modifyContact(testContact1, mockScanner);
+
+                //Assert
+                assertAll("modifyContact's returned contact: ",
+                        ()-> Assertions.assertEquals(testName, builtContact.getName()),
+                        ()-> Assertions.assertEquals(testEmail, builtContact.getEmail()),
+                        ()-> Assertions.assertEquals(testNumber, builtContact.getNumber()));
+            }
+
 
 
         }
