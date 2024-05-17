@@ -90,8 +90,8 @@ As a user, I don't want there to be duplicate email addresses, so that...I can't
 ### Interface Class
 
 - [x] creating a new contact won't accept email addresses already in the addressbook
-- [ ] editing a contact won't accept email addresses already in the addressbook
-- [ ] editing a contact will accept the same email addresses being re-entered
+- [x] editing a contact won't accept email addresses already in the addressbook
+- [x] editing a contact will accept the same email addresses being re-entered
 
 
 ## User Story 8

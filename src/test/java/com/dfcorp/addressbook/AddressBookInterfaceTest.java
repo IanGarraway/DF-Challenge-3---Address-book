@@ -163,10 +163,16 @@ public class AddressBookInterfaceTest {
             @DisplayName("Test of newName method")
             public void testNewNameMethod(){
                 //PowerMockito.mockStatic(System.class);
+
                 //Arrange
+                AddressBookInterface mockedInterface = Mockito.spy(testInterface);
                 String testWord = "Test";
-                Scanner asker = Mockito.mock(Scanner.class);
-                Mockito.when(asker.nextLine()).thenReturn(testWord);
+                Mockito.doReturn(testWord).when(mockedInterface).stringInput("Contacts name: ");
+
+
+
+                //Scanner asker = Mockito.mock(Scanner.class);
+                //Mockito.when(asker.nextLine()).thenReturn(testWord);
 
                 //Act
 
@@ -174,6 +180,8 @@ public class AddressBookInterfaceTest {
                 assertEquals(testWord, testInterface.newName());
 
             }
-        }*/
+        }
+        */
+         
     }
 }

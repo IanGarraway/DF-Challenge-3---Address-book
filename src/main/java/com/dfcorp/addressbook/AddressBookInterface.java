@@ -53,7 +53,7 @@ public class AddressBookInterface {
     }
 
 
-    private String stringInput(String requestMessage) {
+    public String stringInput(String requestMessage) {
         Scanner in = new Scanner(System.in);
         System.out.print(requestMessage);
 
@@ -167,10 +167,18 @@ public class AddressBookInterface {
         return userInput;
     }
 
+    public String uniqueModEmail(String originalEmail){
+        do{
+            String newEmail = modString(stringInput("Original name: "+originalEmail+" <enter new email or press enter to keep>"),originalEmail);
+            if(newEmail.equals(originalEmail)||!theBook.emailExists(newEmail)){return newEmail;}
+            System.out.println("Email address already exists on another contact");
+        }while(true);
+    }
+
     public Contact buildModContact(Contact originalContact){
         String modName = modString(stringInput("Original name: "+originalContact.getName()+" <enter new name or press enter to keep>"),originalContact.getName());
         String modNumber = modString(stringInput("Original number: "+originalContact.getNumber()+" <enter new number or press enter to keep>"),originalContact.getNumber());
-        String modEmail = modString(stringInput("Original name: "+originalContact.getEmail()+" <enter new email or press enter to keep>"),originalContact.getEmail());
+        String modEmail = uniqueModEmail(originalContact.getEmail());
         return new Contact(modName,modNumber, modEmail);
 
     }
