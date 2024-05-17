@@ -331,13 +331,30 @@ public class AddressBookInterfaceTest {
 
                 when(mockScanner.nextLine()).thenReturn(badNumber, testNumber);
                 when(testBook.numberExists(badNumber)).thenReturn(true);
-                when(testBook.numberExists(testNumber)).thenReturn(false);
+                when(testBook.numberExists(testNumber)).thenReturn(true);
 
                 //Act
 
                 //Assert
                 assertEquals(testNumber, testInterface.uniqueModNumber(testNumber, mockScanner));
 
+            }
+
+            @Test
+            @DisplayName("Test to ensure uniqueModEmail blocks existing emails")
+            public void testOfUniqueModEmailDoesNotAcceptExistingEmails(){
+                //Arrange
+                String originalEmail = "very@old.com";
+                String testEmail = "Test@Test.com";
+                String badEmail = "Testy@Test.com";
+
+                when(mockScanner.nextLine()).thenReturn(badEmail,testEmail);
+                when(testBook.emailExists(badEmail)).thenReturn(true);
+                when(testBook.emailExists(testEmail)).thenReturn(false);
+
+                //Act
+                //Assert
+                assertEquals(testEmail, testInterface.uniqueModEmail(originalEmail, mockScanner));
             }
 
 
