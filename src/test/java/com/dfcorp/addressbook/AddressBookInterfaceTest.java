@@ -420,6 +420,25 @@ public class AddressBookInterfaceTest {
                 assertFalse(testInterface.verifyContact(testContact1,"is this correct?",mockScanner));
             }
 
+            @Test
+            @DisplayName("Test verify contact's input handles capitals")
+            public void testOfVerifyContactHandlesCapitals(){
+                //Arrange
+                String testString1 = "Y";
+
+
+                when(testContact1.getEmail()).thenReturn("test@test.com");
+                when(testContact1.getNumber()).thenReturn("1234");
+                when(testContact1.getName()).thenReturn("test");
+
+                when(mockScanner.nextLine()).thenReturn(testString1);
+
+                //Act
+
+                //Assert
+                assertTrue(testInterface.verifyContact(testContact1,"is this correct?",mockScanner));
+            }
+
 
 
         }
