@@ -194,6 +194,22 @@ public class AddressBookInterfaceTest {
                 assertEquals(testWord, testInterface.newName(mockScanner));
 
             }
+
+            @Test
+            @DisplayName("Test of newName method")
+            public void testNewNameMethodFailFirst(){
+                //Arrange
+                String testWord = "Test";
+
+                when(mockScanner.nextLine()).thenReturn("  ", "", testWord);
+
+                //Act
+                //Assert
+                assertEquals(testWord, testInterface.newName(mockScanner));
+
+            }
+
+
         }
 
          
