@@ -7,6 +7,7 @@ import org.mockito.Mockito;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -215,11 +216,57 @@ public class AddressBookInterfaceTest {
                 //Arrange
                 String testNumber = "1234";
                 when(mockScanner.nextLine()).thenReturn(testNumber);
+                when(testBook.numberExists(any())).thenReturn(false);
 
                 //Act
 
                 //Assert
                 assertEquals(testNumber, testInterface.newNumber(mockScanner));
+            }
+
+            @Test
+            @DisplayName("Test of newName method")
+            public void testNewNumberMethodFailFirst(){
+                //Arrange
+                String testNumber = "1234";
+
+                when(mockScanner.nextLine()).thenReturn("  ", "", testNumber);
+                when(testBook.numberExists(any())).thenReturn(false);
+
+                //Act
+                //Assert
+                assertEquals(testNumber, testInterface.newNumber(mockScanner));
+
+            }
+
+            @Test
+            @DisplayName("Test of newName method")
+            public void testNewNumberMethodExistingNumberFailFirst(){
+                //Arrange
+                String testNumber = "1234";
+                String badNumber = "1235";
+
+                when(mockScanner.nextLine()).thenReturn(badNumber, testNumber);
+                when(testBook.numberExists(badNumber)).thenReturn(true);
+                when(testBook.numberExists(testNumber)).thenReturn(false);
+
+                //Act
+                //Assert
+                assertEquals(testNumber, testInterface.newNumber(mockScanner));
+
+            }
+
+            @Test
+            @DisplayName("Test of the newEmail method")
+            public void testNewEmailMethodFunctions(){
+                //Arrange
+                String testWord = "Test@Test.com";
+                when(mockScanner.nextLine()).thenReturn(testWord);
+
+                //Act
+
+                //Assert
+                assertEquals(testWord, testInterface.newEmail(mockScanner));
             }
 
 
