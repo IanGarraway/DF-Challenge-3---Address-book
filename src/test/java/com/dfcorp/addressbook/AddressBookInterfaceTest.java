@@ -1,9 +1,9 @@
 package com.dfcorp.addressbook;
 
 import org.junit.jupiter.api.*;
-import org.mockito.Mockito;
 
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -509,6 +509,120 @@ public class AddressBookInterfaceTest {
                         ()-> Assertions.assertEquals(testName, builtContact.getName()),
                         ()-> Assertions.assertEquals(testEmail, builtContact.getEmail()),
                         ()-> Assertions.assertEquals(testNumber, builtContact.getNumber()));
+            }
+
+            @Test
+            @DisplayName("Test modifyContact returns original contact, rejecting first userverification")
+            public void testGetModContactBuilderWithVerificationRejection(){
+
+
+                //Arrange
+                String testName = "Ginny";
+                String testEmail ="test@test.com";
+                String testNumber = "1234";
+
+
+                when(testContact1.getEmail()).thenReturn(testEmail);
+                when(testContact1.getNumber()).thenReturn(testNumber);
+                when(testContact1.getName()).thenReturn(testName);
+
+                when(testBook.emailExists(testEmail)).thenReturn(true); //this is a simulated re-enter of the same data on a modification
+                when(testBook.numberExists(testNumber)).thenReturn(true); //Contact should exist in the addressbook. should make no difference
+                //though as the number and email should match the original.
+
+                when(mockScanner.nextLine()).thenReturn("","","","n","","","","y" );
+
+                //Act
+
+                Contact builtContact = testInterface.modifyContact(testContact1, mockScanner);
+
+                //Assert
+                assertAll("modifyContact's returned contact: ",
+                        ()-> Assertions.assertEquals(testName, builtContact.getName()),
+                        ()-> Assertions.assertEquals(testEmail, builtContact.getEmail()),
+                        ()-> Assertions.assertEquals(testNumber, builtContact.getNumber()));
+            }
+
+            @Test
+            @DisplayName("Mod Menu -> Contact Iterator test - moveforward and backwards through the list, delete a contact")
+            public void testofContactIterator(){
+                //Arrange
+                Contact testContact2 = mock(Contact.class);
+                Contact testContact3 = mock(Contact.class);
+
+                String testName = "Ginny";
+                String testEmail ="test@test.com";
+                String testNumber = "1234";
+
+                when(testContact1.getEmail()).thenReturn(testEmail);
+                when(testContact1.getNumber()).thenReturn(testNumber);
+                when(testContact1.getName()).thenReturn(testName);
+
+                when(testContact2.getEmail()).thenReturn("Mike@John.com");
+                when(testContact2.getNumber()).thenReturn("1235");
+                when(testContact2.getName()).thenReturn("Mike");
+                when(testContact3.getEmail()).thenReturn("jj@Gh.com");
+                when(testContact3.getNumber()).thenReturn("1113");
+                when(testContact3.getName()).thenReturn("Winston");
+
+                ArrayList<Contact> testList = new ArrayList<>();
+                testList.add(testContact1);
+                testList.add(testContact2);
+                testList.add(testContact3);
+
+                when(testBook.getContacts()).thenReturn(testList);
+
+                // the following mockscanner should imitate a user doing the following:
+                // Check two abnormal inputs, select all contacts, two abnormal entries, try to go back through the list, iterate
+                //forward through the list till the end, go back one, delete the middle item, then exit from the methods.
+                when(mockScanner.nextLine()).thenReturn(""," ", "1","", " ", "p", "n", "N", "n","p","d","n","d","y","e", "e" );
+
+                //Act
+                testInterface.modMenu(mockScanner);
+
+                assertEquals(2, testList.size());
+
+            }
+
+            @Test
+            @DisplayName("Mod Menu -> Contact Iterator test - moveforward and backwards through the list, delete all contacts")
+            public void testofContactIteratorAllDelete(){
+                //Arrange
+                Contact testContact2 = mock(Contact.class);
+                Contact testContact3 = mock(Contact.class);
+
+                String testName = "Ginny";
+                String testEmail ="test@test.com";
+                String testNumber = "1234";
+
+                when(testContact1.getEmail()).thenReturn(testEmail);
+                when(testContact1.getNumber()).thenReturn(testNumber);
+                when(testContact1.getName()).thenReturn(testName);
+
+                when(testContact2.getEmail()).thenReturn("Mike@John.com");
+                when(testContact2.getNumber()).thenReturn("1235");
+                when(testContact2.getName()).thenReturn("Mike");
+                when(testContact3.getEmail()).thenReturn("jj@Gh.com");
+                when(testContact3.getNumber()).thenReturn("1113");
+                when(testContact3.getName()).thenReturn("Winston");
+
+                ArrayList<Contact> testList = new ArrayList<>();
+                testList.add(testContact1);
+                testList.add(testContact2);
+                testList.add(testContact3);
+
+                when(testBook.getContacts()).thenReturn(testList);
+
+                // the following mockscanner should imitate a user doing the following:
+                // Check two abnormal inputs, select all contacts, two abnormal entries, try to go back through the list, iterate
+                //forward through the list till the end, go back one, delete the middle item, then exit from the methods.
+                when(mockScanner.nextLine()).thenReturn( "1","n", "N", "n","d","y","d","y","d", "y", "e" );
+
+                //Act
+                testInterface.modMenu(mockScanner);
+
+                assertEquals(0, testList.size());
+
             }
 
 
