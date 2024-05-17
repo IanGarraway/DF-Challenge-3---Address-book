@@ -3,6 +3,7 @@ package com.dfcorp.addressbook;
 import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 
+
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -125,6 +126,16 @@ public class AddressBookInterfaceTest {
         @Nested
         @DisplayName("Tests of the Modification's string input method")
         public class modificationsInputString{
+            Scanner in;
+
+            @BeforeEach
+            public void setUp(){
+                in = new Scanner(System.in);
+            }
+            @AfterEach
+            public void cleanUP(){
+                in = null;
+            }
 
 
             @Test
@@ -134,7 +145,7 @@ public class AddressBookInterfaceTest {
 
                 //Act
                 //Assert
-                assertEquals("Test", testInterface.modString("","Test"));
+                assertEquals("Test", testInterface.modString("","Test", in));
 
 
             }
@@ -147,41 +158,44 @@ public class AddressBookInterfaceTest {
 
                 //Act
                 //Assert
-                assertEquals(testString, testInterface.modString(testString,originalString));
+                assertEquals(testString, testInterface.modString(testString,originalString, in));
 
 
             }
 
         }
 
-        /*
+
         @Nested
         @DisplayName("Input tests")
         public class InputTests{
+            Scanner mockScanner;
+            @BeforeEach
+            public void setUp(){
+                mockScanner = mock(Scanner.class);
+
+            }
+
+            @AfterEach
+            public void cleanUp(){
+                mockScanner = null;
+            }
 
             @Test
             @DisplayName("Test of newName method")
             public void testNewNameMethod(){
-                //PowerMockito.mockStatic(System.class);
-
                 //Arrange
-                AddressBookInterface mockedInterface = Mockito.spy(testInterface);
                 String testWord = "Test";
-                Mockito.doReturn(testWord).when(mockedInterface).stringInput("Contacts name: ");
-
-
-
-                //Scanner asker = Mockito.mock(Scanner.class);
-                //Mockito.when(asker.nextLine()).thenReturn(testWord);
+                when(mockScanner.nextLine()).thenReturn(testWord);
 
                 //Act
 
                 //Assert
-                assertEquals(testWord, testInterface.newName());
+                assertEquals(testWord, testInterface.newName(mockScanner));
 
             }
         }
-        */
+
          
     }
 }

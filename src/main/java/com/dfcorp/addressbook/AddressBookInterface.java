@@ -7,6 +7,8 @@ public class AddressBookInterface {
 
     AddressBook theBook;
 
+
+
     public AddressBookInterface(AddressBook newBook) {
         theBook = newBook;
     }
@@ -53,28 +55,28 @@ public class AddressBookInterface {
     }
 
 
-    public String stringInput(String requestMessage) {
-        Scanner in = new Scanner(System.in);
+    public String stringInput(String requestMessage, Scanner in) {
+
         System.out.print(requestMessage);
 
         return in.nextLine();
     }
 
-    public String newName() {
+    public String newName(Scanner in) {
 
         do {
             try {
-                return Verifyer.string(stringInput("Contacts name: "));
+                return Verifyer.string(stringInput("Contacts name: ",in));
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         } while (true);
     }
 
-    public String newNumber() {
+    public String newNumber(Scanner in) {
         do {
             try {
-                String number = Verifyer.string(stringInput("Contacts number: "));
+                String number = Verifyer.string(stringInput("Contacts number: ", in));
                 if(theBook.numberExists(number)) throw new IllegalArgumentException("Number already exists");
                 return number;
             } catch (IllegalArgumentException e) {
@@ -83,10 +85,10 @@ public class AddressBookInterface {
         } while (true);
     }
 
-    public String newEmail() {
+    public String newEmail(Scanner in) {
         do {
             try {
-                String email = Verifyer.email(stringInput("Contacts Email address:"));
+                String email = Verifyer.email(stringInput("Contacts Email address:", in));
                 if(theBook.emailExists(email)) throw new IllegalArgumentException("Email already exists");
                 return email;
 
@@ -96,11 +98,11 @@ public class AddressBookInterface {
         } while (true);
     }
 
-    public boolean verifyContact(Contact contactToVerify, String message) {
+    public boolean verifyContact(Contact contactToVerify, String message, Scanner in) {
         do {
             String userChoice = null;
             try {
-                userChoice = Verifyer.string(stringInput(displayContactStringBuilder(contactToVerify) + "\n "+message));
+                userChoice = Verifyer.string(stringInput(displayContactStringBuilder(contactToVerify) + "\n "+message, in));
             } catch (IllegalArgumentException e) {
                 System.out.println("Please enter either y or n");
                 userChoice = "bad";
@@ -117,10 +119,10 @@ public class AddressBookInterface {
     }
 
 
-    public Contact newContactBuilder() {
+    public Contact newContactBuilder(Scanner in) {
         do {
-            Contact newContact = new Contact(newName(), newNumber(), newEmail());
-            if (verifyContact(newContact, "is this correct? [y/n] :")) {
+            Contact newContact = new Contact(newName(in), newNumber(in), newEmail(in));
+            if (verifyContact(newContact, "is this correct? [y/n] :", in)) {
                 return newContact;
             }
 
@@ -128,8 +130,8 @@ public class AddressBookInterface {
 
     }
 
-    public void addContact() {
-        theBook.addContact(newContactBuilder());
+    public void addContact(Scanner in) {
+        theBook.addContact(newContactBuilder(in));
     }
 
     public void displayContacts(ArrayList<Contact> contacts) {
@@ -142,18 +144,18 @@ public class AddressBookInterface {
         displayContacts(theBook.getContacts());
     }
 
-    public String getSearchName(){
+    public String getSearchName(Scanner in){
         do {
             try {
-                return Verifyer.string(stringInput("Name to find: "));
+                return Verifyer.string(stringInput("Name to find: ", in));
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         } while (true);
     }
 
-    public void displayByName(){
-        displayContacts(theBook.searchByName(getSearchName()));
+    public void displayByName(Scanner in){
+        displayContacts(theBook.searchByName(getSearchName(in)));
     }
 
     public String modChoices(int position, int size){
@@ -162,45 +164,45 @@ public class AddressBookInterface {
         return ((position == 0)? "<":"<(p)revious,")+"(e)xit, (d)elete, (m)odify"+((position<(size-1)) ? ", (n)ext>":">");
     }
 
-    public String modString(String userInput, String originalString){
+    public String modString(String userInput, String originalString, Scanner in){
         if (userInput.trim().isEmpty())return originalString;
         return userInput;
     }
 
-    public String uniqueModNumber(String originalNumber){
+    public String uniqueModNumber(String originalNumber, Scanner in){
         do{
-            String newNumber = modString(stringInput("Original number: "+originalNumber+" <enter new number or press enter to keep>"),originalNumber);
+            String newNumber = modString(stringInput("Original number: "+originalNumber+" <enter new number or press enter to keep>", in),originalNumber, in);
             if(newNumber.equals(originalNumber)||!theBook.numberExists(newNumber)){return newNumber;}
             System.out.println("Telephone Number already exists on another contact");
         }while (true);
     }
 
-    public String uniqueModEmail(String originalEmail){
+    public String uniqueModEmail(String originalEmail, Scanner in){
         do{
-            String newEmail = modString(stringInput("Original name: "+originalEmail+" <enter new email or press enter to keep>"),originalEmail);
+            String newEmail = modString(stringInput("Original name: "+originalEmail+" <enter new email or press enter to keep>", in),originalEmail, in);
             if(newEmail.equals(originalEmail)||!theBook.emailExists(newEmail)){return newEmail;}
             System.out.println("Email Address already exists on another contact");
         }while(true);
     }
 
-    public Contact buildModContact(Contact originalContact){
-        String modName = modString(stringInput("Original name: "+originalContact.getName()+" <enter new name or press enter to keep>"),originalContact.getName());
-        String modNumber = uniqueModNumber(originalContact.getNumber());
-        String modEmail = uniqueModEmail(originalContact.getEmail());
+    public Contact buildModContact(Contact originalContact, Scanner in){
+        String modName = modString(stringInput("Original name: "+originalContact.getName()+" <enter new name or press enter to keep>", in),originalContact.getName(), in);
+        String modNumber = uniqueModNumber(originalContact.getNumber(), in);
+        String modEmail = uniqueModEmail(originalContact.getEmail(), in);
         return new Contact(modName,modNumber, modEmail);
 
     }
 
-    public Contact modifyContact(Contact originalContact){
+    public Contact modifyContact(Contact originalContact, Scanner in){
         do{
-            Contact modContact = buildModContact(originalContact);
-            if(verifyContact(modContact,"is this correct? [y/n]")) return modContact;
+            Contact modContact = buildModContact(originalContact, in);
+            if(verifyContact(modContact,"is this correct? [y/n]", in)) return modContact;
 
         }while(true);
 
     }
 
-    public void contactIterator(ArrayList<Contact> contacts){
+    public void contactIterator(ArrayList<Contact> contacts, Scanner in){
         int position = 0;
 
         modLoop:
@@ -208,7 +210,7 @@ public class AddressBookInterface {
             String userChoice;
             System.out.println(displayContactStringBuilder(contacts.get(position)));
             try{
-                userChoice = Verifyer.string(stringInput(modChoices(position,contacts.size())));
+                userChoice = Verifyer.string(stringInput(modChoices(position,contacts.size()), in));
 
             }catch (IllegalArgumentException e){
                 System.out.println(e.getMessage());
@@ -222,14 +224,14 @@ public class AddressBookInterface {
                 case "e":
                     break modLoop;
                 case "d":
-                    if(verifyContact(contacts.get(position),"are you sure you wish to remove this contact? [y/n]")){
+                    if(verifyContact(contacts.get(position),"are you sure you wish to remove this contact? [y/n]", in)){
                         theBook.removeContact(contacts.get(position));
                         contacts.remove(position);
                         if(position == contacts.size()) position--;
                     }
                     break;
                 case "m":
-                    Contact replacementContact = modifyContact(contacts.get(position));
+                    Contact replacementContact = modifyContact(contacts.get(position), in);
                     theBook.replaceContact(contacts.get(position),replacementContact);
                     contacts.set(position, replacementContact);
                     break;
@@ -241,12 +243,12 @@ public class AddressBookInterface {
         }
     }
 
-    public void modMenu(){
+    public void modMenu(Scanner in){
         modMenuLoop:
         do{
             String userChoice;
             try {
-                userChoice = Verifyer.string(stringInput(displayModMenu()));
+                userChoice = Verifyer.string(stringInput(displayModMenu(), in));
             }catch (IllegalArgumentException e){
                 userChoice = "bad";
                 System.out.println(e.getMessage());
@@ -254,11 +256,11 @@ public class AddressBookInterface {
             switch (userChoice.toLowerCase()){
                 case "1":
                 case "a":
-                    contactIterator(theBook.getContacts());
+                    contactIterator(theBook.getContacts(), in);
                     break;
                 case "2":
                 case "s":
-                    contactIterator(theBook.searchByName(getSearchName()));
+                    contactIterator(theBook.searchByName(getSearchName(in)), in);
                     break;
                 case "3":
                 case "e":
@@ -272,11 +274,11 @@ public class AddressBookInterface {
         }while(true);
     }
 
-    public void menuChoice(String userChoice) {
+    public void menuChoice(String userChoice, Scanner in) {
         switch (userChoice.toLowerCase()) {
             case "a":
             case "1":
-                addContact();
+                addContact(in);
                 break;
             case "d":
             case "2":
@@ -284,11 +286,11 @@ public class AddressBookInterface {
                 break;
             case "s":
             case "3":
-                displayByName();
+                displayByName(in);
                 break;
             case "m":
             case "4":
-                modMenu();
+                modMenu(in);
                 break;
             case "bad":
                 break;
@@ -296,23 +298,24 @@ public class AddressBookInterface {
             default:
                 System.out.println("default");
 
-                Scanner in = new Scanner(System.in);
+
                 in.nextLine();
         }
     }
 
     public void start() {
+        Scanner in = new Scanner(System.in);
         do {
             String userChoice;
 
 
             try {
-                userChoice = Verifyer.string(stringInput(displayMenu()));
+                userChoice = Verifyer.string(stringInput(displayMenu(), in));
             } catch (Exception e) {
                 userChoice = "bad";
                 System.out.println(e.getMessage());
                 System.out.println("press enter to continue");
-                Scanner in = new Scanner(System.in);
+
                 in.nextLine();
             }
 
@@ -320,7 +323,7 @@ public class AddressBookInterface {
                 break;
             }
 
-            menuChoice(userChoice);
+            menuChoice(userChoice, in);
 
         } while (true);
 
