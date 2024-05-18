@@ -67,6 +67,7 @@ public class AddressBookInterface {
     }
 
 
+    //Input handlers
     public String stringInput(String requestMessage, Scanner in) {
 
         System.out.print(requestMessage);
@@ -110,6 +111,7 @@ public class AddressBookInterface {
         } while (true);
     }
 
+    //Verification methods
     public boolean verifyDelete(String message, Scanner in){
         do {
             String userChoice;
@@ -151,15 +153,16 @@ public class AddressBookInterface {
         } while (true);
     }
 
+    //Add contact functions
     public Contact newContactBuilder(Scanner in) {
         do {
             Contact newContact = new Contact(newName(in), newNumber(in), newEmail(in));
+
             if (verifyContact(newContact, "is this correct? [y/n] :", in)) {
                 return newContact;
             }
 
         } while (true);
-
     }
 
     public void addContact(Scanner in) {
@@ -176,6 +179,10 @@ public class AddressBookInterface {
         displayContacts(theBook.getContacts());
     }
 
+    public void displayBySearch(Scanner in){
+        displayContacts(searchChoice(in));
+    }
+
     public String getSearchTerm(String message, Scanner in){
         do {
             try {
@@ -186,42 +193,7 @@ public class AddressBookInterface {
         } while (true);
     }
 
-    public ArrayList<Contact> searchChoice(Scanner in){
-        String userChoice;
-        do{
-            try{
-                userChoice = Verifyer.string(stringInput(displaySearchMenu(), in));
-            }catch (IllegalArgumentException e){
-                System.out.println(e.getMessage());
-                userChoice = "bad";
-            }
-
-            switch (userChoice.toLowerCase()){
-                case "1":
-                case "n":
-                    return theBook.searchByName(getSearchTerm("Name to find:-",in));
-                case "2":
-                case "t":
-                    return theBook.searchByNumber(getSearchTerm("Telephone number to find:-",in));
-                case "3":
-                case "e":
-                    return theBook.searchByEmail(getSearchTerm("Email to find :-",in));
-                case "4":
-                case "x":
-                    return new ArrayList<Contact>();
-                default:
-                    System.out.println("Invalid option. please select from the options shown.");
-            }
-
-        }while(true);
-
-
-    }
-
-
-    public void displayBySearch(Scanner in){
-        displayContacts(searchChoice(in));
-    }
+    //Functions for the modify Contact functionality
 
     public String modChoices(int position, int size){
         return ((position == 0)? "<":"<(p)revious,")+"(e)xit, (d)elete, (m)odify"+((position<(size-1)) ? ", (n)ext>":">");
@@ -263,6 +235,7 @@ public class AddressBookInterface {
         }while(true);
     }
 
+    //Contact iterator control function
     public void contactIterator(ArrayList<Contact> contacts, Scanner in){
         int position = 0;
 
@@ -301,6 +274,41 @@ public class AddressBookInterface {
                     break;
             }
         }
+    }
+
+    //Menu Functions
+
+
+    public ArrayList<Contact> searchChoice(Scanner in){
+        String userChoice;
+        do{
+            try{
+                userChoice = Verifyer.string(stringInput(displaySearchMenu(), in));
+            }catch (IllegalArgumentException e){
+                System.out.println(e.getMessage());
+                userChoice = "bad";
+            }
+
+            switch (userChoice.toLowerCase()){
+                case "1":
+                case "n":
+                    return theBook.searchByName(getSearchTerm("Name to find:-",in));
+                case "2":
+                case "t":
+                    return theBook.searchByNumber(getSearchTerm("Telephone number to find:-",in));
+                case "3":
+                case "e":
+                    return theBook.searchByEmail(getSearchTerm("Email to find :-",in));
+                case "4":
+                case "x":
+                    return new ArrayList<Contact>();
+                default:
+                    System.out.println("Invalid option. please select from the options shown.");
+            }
+
+        }while(true);
+
+
     }
 
     public void sortMenu(Scanner in){
@@ -404,8 +412,9 @@ public class AddressBookInterface {
         }
     }
 
+    //Main Program loop function
     public void start(Scanner in) {
-         //this to me feels wrong, but I can see no other way to mock the input for testing
+         //using a scanner object like this feels wrong to me feels wrong, but I can see no other way to mock the input for testing
         do {
             String userChoice;
 
