@@ -270,7 +270,6 @@ public class AddressBookTest {
 
             //Assert
             assertEquals(testNumber,testBook.searchByNumber(testNumber).get(0).getNumber());
-
         }
 
         @Test
@@ -293,7 +292,6 @@ public class AddressBookTest {
 
             //Assert
             assertEquals(testNumber,testBook.searchByNumber(partialTest).get(0).getNumber());
-
         }
 
         @Test
@@ -336,7 +334,6 @@ public class AddressBookTest {
             testBook.addContact(testContact2);
             testBook.addContact(testContact3);
 
-
             //Assert
             assertEquals(0,testBook.searchByNumber(partialTest).size());
         }
@@ -358,7 +355,6 @@ public class AddressBookTest {
             testBook.addContact(testContact1);
             testBook.addContact(testContact2);
             testBook.addContact(testContact3);
-
 
             //Assert
             assertEquals(testEmail,testBook.searchByEmail(testEmail).get(0).getEmail());
@@ -384,7 +380,6 @@ public class AddressBookTest {
 
             //Assert
             assertEquals(2,testBook.searchByEmail(partialTest).size());
-
         }
 
         @Test
@@ -407,7 +402,6 @@ public class AddressBookTest {
 
             //Assert
             assertEquals(0,testBook.searchByEmail(partialTest).size());
-
         }
 
         @Test
@@ -445,10 +439,8 @@ public class AddressBookTest {
         @DisplayName("test that sortByName can handle being ran on an empty string")
         public void testOfSortByNameOnEmptyList(){
             //Arrange
-
             //Act
             testBook.sortByName();
-
 
             //Assert
             assertEquals(0, testBook.getContacts().size());
@@ -493,7 +485,6 @@ public class AddressBookTest {
             //Act
             testBook.sortByNumber();
 
-
             //Assert
             assertEquals(0, testBook.getContacts().size());
         }
@@ -533,10 +524,8 @@ public class AddressBookTest {
         @DisplayName("test that sortByEmail can handle sorting an empty list")
         public void testOfSortByEmailAddressBookEmpty(){
             //Arrange
-
             //Act
             testBook.sortByEmail();
-
 
             //Assert
             assertEquals(0, testBook.getContacts().size());
@@ -551,14 +540,11 @@ public class AddressBookTest {
             testBook.addContact(testContact3);
             testBook.addContact(testContact4);
 
-
             //Act
             testBook.deleteAll();
 
             //Assert
             assertEquals(0, testBook.getContacts().size());
         }
-
-
     }
 }
