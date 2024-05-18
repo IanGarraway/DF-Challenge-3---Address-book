@@ -125,7 +125,7 @@ As a user, I want to search for a contact by email address so that I can find a 
 ### AddressBook class tests
 
 - [x] emailSearch returns a list of the contacts with that email
-- [ ] emailSearch returns partial match
+- [x] emailSearch returns partial match
 - [ ] emailSearch returns multiple matches
 - [ ] emailSearch returns an empty list if no matches found
 
