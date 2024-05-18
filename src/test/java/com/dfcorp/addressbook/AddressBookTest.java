@@ -256,10 +256,12 @@ public class AddressBookTest {
             when(testContact2.getNumber()).thenReturn(badNumber1);
             when(testContact3.getNumber()).thenReturn(testNumber);
 
+            //Act
             testBook.addContact(testContact1);
             testBook.addContact(testContact2);
             testBook.addContact(testContact3);
 
+            //Assert
             assertEquals(testNumber,testBook.searchByNumber(testNumber).get(0).getNumber());
 
         }
@@ -277,10 +279,12 @@ public class AddressBookTest {
             when(testContact2.getNumber()).thenReturn(badNumber1);
             when(testContact3.getNumber()).thenReturn(testNumber);
 
+            //Act
             testBook.addContact(testContact1);
             testBook.addContact(testContact2);
             testBook.addContact(testContact3);
 
+            //Assert
             assertEquals(testNumber,testBook.searchByNumber(partialTest).get(0).getNumber());
 
         }
@@ -298,13 +302,38 @@ public class AddressBookTest {
             when(testContact2.getNumber()).thenReturn(testNumber2);
             when(testContact3.getNumber()).thenReturn(testNumber);
 
+            //Act
             testBook.addContact(testContact1);
             testBook.addContact(testContact2);
             testBook.addContact(testContact3);
 
+            //Assert
             assertEquals(2,testBook.searchByNumber(partialTest).size());
-
         }
+
+        @Test
+        @DisplayName("test confirming searchByNumber will return a list containing no contacts when there is no matches")
+        public void testOfSearchByPartialNumberBasicFunctionZeroMatches(){
+            //Arrange
+            String testNumber = "2234";
+            String partialTest = "12";
+            String testNumber2 = "2235";
+            String badNumber2 = "2222";
+
+            when(testContact1.getNumber()).thenReturn(badNumber2);
+            when(testContact2.getNumber()).thenReturn(testNumber2);
+            when(testContact3.getNumber()).thenReturn(testNumber);
+
+            //Act
+            testBook.addContact(testContact1);
+            testBook.addContact(testContact2);
+            testBook.addContact(testContact3);
+
+
+            //Assert
+            assertEquals(0,testBook.searchByNumber(partialTest).size());
+        }
+
 
     }
 }

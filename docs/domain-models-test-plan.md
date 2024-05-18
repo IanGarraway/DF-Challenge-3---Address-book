@@ -108,7 +108,9 @@ As a user, I want to search for a contact by phone number so that I can find a c
 
 ### AddressBook class tests
 
-- [ ] numberSearch returns a list of the contacts with that number
+- [x] numberSearch returns a list of the contacts with that number
+- [x] numberSearch returns partial match
+- [x] numberSearch returns multiple matches
 - [ ] numberSearch returns an empty list if no matches found
 
 ### interface class tests
