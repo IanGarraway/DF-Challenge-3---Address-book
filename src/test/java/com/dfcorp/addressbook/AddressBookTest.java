@@ -380,6 +380,29 @@ public class AddressBookTest {
 
         }
 
+        @Test
+        @DisplayName("test confirming searchByEmail will return a list containing a contact whose has a partial match")
+        public void testOfSearchByEmailZeroMatchesFunction(){
+            //Arrange
+            String testEmail = "test@test.com";
+            String partialTest = "no@emailMatch.com";
+            String badEmail1 = "bad@test.com";
+            String badEmail2 = "nope@dfcorp.co.uk";
+
+            when(testContact1.getEmail()).thenReturn(badEmail2);
+            when(testContact2.getEmail()).thenReturn(badEmail1);
+            when(testContact3.getEmail()).thenReturn(testEmail);
+
+            //Act
+            testBook.addContact(testContact1);
+            testBook.addContact(testContact2);
+            testBook.addContact(testContact3);
+
+            //Assert
+            assertEquals(0,testBook.searchByEmail(partialTest).size());
+
+        }
+
 
     }
 }
