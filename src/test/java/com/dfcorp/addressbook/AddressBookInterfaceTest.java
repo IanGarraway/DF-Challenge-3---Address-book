@@ -719,6 +719,7 @@ public class AddressBookInterfaceTest {
         public class ExtensionFeaturesTests{
 
             ArrayList<Contact> testList;
+            Scanner mockScanner;
 
             @BeforeEach
             public void setUp(){
@@ -726,6 +727,8 @@ public class AddressBookInterfaceTest {
                 testInterface = new AddressBookInterface(testBook);
                 testContact1 = mock(Contact.class);
                 testList = new ArrayList<>();
+                mockScanner = mock(Scanner.class);
+
             }
 
             @AfterEach
@@ -733,6 +736,7 @@ public class AddressBookInterfaceTest {
                 testInterface = null;
                 testBook = null;
                 testContact1 = null;
+                mockScanner = null;
             }
 
             @Test
@@ -761,10 +765,14 @@ public class AddressBookInterfaceTest {
                 testList.add(testContact1);
 
                 when(testBook.searchByNumber(testSearchNumber)).thenReturn(testList);
+                when(mockScanner.nextLine()).thenReturn("", " ", "t", testSearchNumber);
 
                 //Act
 
+                testList = testInterface.searchChoice(mockScanner);
+
                 //Assert
+                assertEquals(1, testList.size());
 
 
 

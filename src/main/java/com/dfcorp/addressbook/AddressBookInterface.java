@@ -151,6 +151,16 @@ public class AddressBookInterface {
         } while (true);
     }
 
+    public String getSearchNumber(Scanner in){
+        do {
+            try {
+                return Verifyer.string(stringInput("Number to find: ", in));
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (true);
+    }
+
     public ArrayList<Contact> searchChoice(Scanner in){
         String userChoice;
         do{
@@ -165,6 +175,9 @@ public class AddressBookInterface {
                 case "1":
                 case "n":
                     return theBook.searchByName(getSearchName(in));
+                case "2":
+                case "t":
+                    return theBook.searchByNumber(getSearchNumber(in));
                 default:
                     System.out.println("Invalid option. please select from the options shown.");
             }
