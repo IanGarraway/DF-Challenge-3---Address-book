@@ -47,7 +47,7 @@ public class AddressBookInterfaceTest {
                 Please select from the following options:
                      1. (A)dd a contact
                      2. (D)isplay all contacts
-                     3. (S)earch for a contact by name
+                     3. (S)earch for a contact by name, phone number or email address
                      4. (M)odify or delete contacts
                      
                      or e to exit.
@@ -64,7 +64,7 @@ public class AddressBookInterfaceTest {
                     AddressBook Contact Review
                     Do you wish to see :
                         1. (A)ll contacts
-                        2. (S)earch by name
+                        2. (S)earch by name, phone number or email address
                         3. (E)xit to the main menu
                     """,testInterface.displayModMenu());
         }
@@ -693,6 +693,19 @@ public class AddressBookInterfaceTest {
 
             }
 
+
+
+        }
+
+        @Nested
+        @DisplayName("Extension Features Tests")
+        public class ExtensionFeaturesTests{
+
+            @Test
+            @DisplayName("Search by Telephone number")
+            public void testSearchByNumber(){
+
+            }
 
 
         }

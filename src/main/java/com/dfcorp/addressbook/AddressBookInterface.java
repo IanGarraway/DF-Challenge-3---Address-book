@@ -18,7 +18,7 @@ public class AddressBookInterface {
                 Please select from the following options:
                      1. (A)dd a contact
                      2. (D)isplay all contacts
-                     3. (S)earch for a contact by name
+                     3. (S)earch for a contact by name, phone number or email address
                      4. (M)odify or delete contacts
                 
                      or e to exit.
@@ -30,7 +30,7 @@ public class AddressBookInterface {
                     AddressBook Contact Review
                     Do you wish to see :
                         1. (A)ll contacts
-                        2. (S)earch by name
+                        2. (S)earch by name, phone number or email address
                         3. (E)xit to the main menu
                     """;
     }
