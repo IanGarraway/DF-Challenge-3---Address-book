@@ -542,6 +542,23 @@ public class AddressBookTest {
             assertEquals(0, testBook.getContacts().size());
         }
 
+        @Test
+        @DisplayName("Test that the deleteAll function empties out the addressbook")
+        public void testThatTheDeleteALlFunctionWorks(){
+            //Arrange
+            testBook.addContact(testContact1);
+            testBook.addContact(testContact2);
+            testBook.addContact(testContact3);
+            testBook.addContact(testContact4);
+
+
+            //Act
+            testBook.deleteAll();
+
+            //Assert
+            assertEquals(0, testBook.getContacts().size());
+        }
+
 
     }
 }

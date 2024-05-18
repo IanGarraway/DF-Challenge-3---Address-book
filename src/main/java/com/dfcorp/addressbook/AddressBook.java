@@ -27,6 +27,10 @@ public class AddressBook {
         contacts.set(contacts.indexOf(original),replacement);
     }
 
+    public void deleteAll(){
+        contacts = new ArrayList<Contact>();
+    }
+
     //return contacts functions
 
     public ArrayList<Contact> getContacts(){return new ArrayList<Contact>(contacts);}
