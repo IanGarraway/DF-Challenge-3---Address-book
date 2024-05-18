@@ -441,6 +441,19 @@ public class AddressBookTest {
                     ()-> Assertions.assertEquals(testName4, testList.get(3).getName()));
         }
 
+        @Test
+        @DisplayName("test that sortByName sorts the list by name")
+        public void testOfSortByNameOnEmptyList(){
+            //Arrange
+
+            //Act
+            testBook.sortByName();
+
+
+            //Assert
+            assertEquals(0, testBook.getContacts().size());
+        }
+
 
     }
 }
