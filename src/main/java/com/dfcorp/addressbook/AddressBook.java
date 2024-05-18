@@ -5,18 +5,19 @@ import java.util.ArrayList;
 public class AddressBook {
     private ArrayList<Contact> contacts = new ArrayList<>();
 
+    //Constructors
+
+    public AddressBook(){}
+
     /*// in case of a load mechanic
     public AddressBook(ArrayList<Contact> contacts) {
         this.contacts = contacts;
     }*/
 
-    public AddressBook(){}
-
     //Add remove and replace functions
 
     public void addContact(Contact newContact){
         contacts.add(newContact);
-
     }
 
     public void removeContact(Contact contact) {
@@ -30,8 +31,6 @@ public class AddressBook {
     public void deleteAll(){
         contacts = new ArrayList<Contact>();
     }
-
-    //return contacts functions
 
     public ArrayList<Contact> getContacts(){return new ArrayList<Contact>(contacts);}
 
@@ -56,6 +55,7 @@ public class AddressBook {
         }
         return returnList;
     }
+
     public ArrayList<Contact> searchByEmail(String searchEmail){
         ArrayList<Contact> returnList = new ArrayList<>();
 
@@ -71,19 +71,15 @@ public class AddressBook {
 
     public void sortByName(){
         contacts.sort((Contact c1, Contact c2) -> c1.getName().compareToIgnoreCase(c2.getName()));
-
     }
 
     public void sortByNumber(){
         contacts.sort((Contact c1, Contact c2) -> c1.getNumber().compareToIgnoreCase(c2.getNumber()));
-
     }
 
     public void sortByEmail(){
         contacts.sort((Contact c1, Contact c2) -> c1.getEmail().compareToIgnoreCase(c2.getEmail()));
     }
-
-
 
     //Verification functions
 
@@ -108,6 +104,4 @@ public class AddressBook {
         }
         return emailExists;
     }
-
-
 }
