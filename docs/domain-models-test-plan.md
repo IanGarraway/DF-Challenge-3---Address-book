@@ -111,7 +111,7 @@ As a user, I want to search for a contact by phone number so that I can find a c
 - [x] numberSearch returns a list of the contacts with that number
 - [x] numberSearch returns partial match
 - [x] numberSearch returns multiple matches
-- [ ] numberSearch returns an empty list if no matches found
+- [x] numberSearch returns an empty list if no matches found
 
 ### interface class tests
 
@@ -124,7 +124,9 @@ As a user, I want to search for a contact by email address so that I can find a 
 
 ### AddressBook class tests
 
-- [ ] emailSearch returns a list of the contacts with that number
+- [x] emailSearch returns a list of the contacts with that email
+- [ ] emailSearch returns partial match
+- [ ] emailSearch returns multiple matches
 - [ ] emailSearch returns an empty list if no matches found
 
 ### interface class tests

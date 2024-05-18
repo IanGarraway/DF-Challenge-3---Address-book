@@ -334,6 +334,29 @@ public class AddressBookTest {
             assertEquals(0,testBook.searchByNumber(partialTest).size());
         }
 
+        @Test
+        @DisplayName("test confirming searchByEmail will return a list containing a contact whose email matches")
+        public void testOfSearchByEmailBasicFunction(){
+            //Arrange
+            String testEmail = "test@test.com";
+
+            String badEmail1 = "bad@test.com";
+            String badEmail2 = "nope@dfcorp.co.uk";
+
+            when(testContact1.getEmail()).thenReturn(badEmail2);
+            when(testContact2.getEmail()).thenReturn(badEmail1);
+            when(testContact3.getEmail()).thenReturn(testEmail);
+
+            //Act
+            testBook.addContact(testContact1);
+            testBook.addContact(testContact2);
+            testBook.addContact(testContact3);
+
+
+            //Assert
+            assertEquals(testEmail,testBook.searchByEmail(testEmail).get(0).getEmail());
+        }
+
 
     }
 }
