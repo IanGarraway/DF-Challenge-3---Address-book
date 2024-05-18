@@ -139,9 +139,9 @@ As a user, I want to be able to sort my contacts by name, email or phone number 
 
 ### AddressBook class tests
 
-- [ ] sortByName sorts the list in order by name 
-- [ ] sortByNumber sorts the list in order by number
-- [ ] sortByEmail sorts the list in order by email address
+- [x] sortByName sorts the list in order by name 
+- [x] sortByNumber sorts the list in order by number
+- [x] sortByEmail sorts the list in order by email address
 
 ### Interface Class tests
 

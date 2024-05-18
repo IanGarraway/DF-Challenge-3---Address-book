@@ -486,7 +486,7 @@ public class AddressBookTest {
         }
 
         @Test
-        @DisplayName("test that sortByNumber sorts the list by number")
+        @DisplayName("test that sortByNumber can handle sorting an empty list")
         public void testOfSortByNumberAddressBookEmpty(){
             //Arrange
 
@@ -527,6 +527,19 @@ public class AddressBookTest {
                     ()-> Assertions.assertEquals(testName2, testList.get(1).getEmail()),
                     ()-> Assertions.assertEquals(testName3, testList.get(2).getEmail()),
                     ()-> Assertions.assertEquals(testName4, testList.get(3).getEmail()));
+        }
+
+        @Test
+        @DisplayName("test that sortByEmail can handle sorting an empty list")
+        public void testOfSortByEmailAddressBookEmpty(){
+            //Arrange
+
+            //Act
+            testBook.sortByEmail();
+
+
+            //Assert
+            assertEquals(0, testBook.getContacts().size());
         }
 
 
