@@ -34,7 +34,7 @@ public class AddressBook {
         ArrayList<Contact> returnList = new ArrayList<>();
 
         for (Contact contact : contacts) {
-            if (contact.getNumber().toLowerCase().startsWith(searchNumber.toLowerCase())) {
+            if (contact.getNumber().toLowerCase().contains(searchNumber.toLowerCase())) {
                 returnList.add(contact);
             }
         }
