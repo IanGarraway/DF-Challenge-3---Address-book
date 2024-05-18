@@ -485,6 +485,19 @@ public class AddressBookTest {
                     ()-> Assertions.assertEquals(testName4, testList.get(3).getNumber()));
         }
 
+        @Test
+        @DisplayName("test that sortByNumber sorts the list by number")
+        public void testOfSortByNumberAddressBookEmpty(){
+            //Arrange
+
+            //Act
+            testBook.sortByNumber();
+
+
+            //Assert
+            assertEquals(0, testBook.getContacts().size());
+        }
+
 
     }
 }
