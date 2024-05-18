@@ -285,5 +285,26 @@ public class AddressBookTest {
 
         }
 
+        @Test
+        @DisplayName("test confirming searchByNumber will return a list containing multiple contacts who have a partial match")
+        public void testOfSearchByPartialNumberBasicFunctionMultipleMatches(){
+            //Arrange
+            String testNumber = "1234";
+            String partialTest = "12";
+            String testNumber2 = "1235";
+            String badNumber2 = "2222";
+
+            when(testContact1.getNumber()).thenReturn(badNumber2);
+            when(testContact2.getNumber()).thenReturn(testNumber2);
+            when(testContact3.getNumber()).thenReturn(testNumber);
+
+            testBook.addContact(testContact1);
+            testBook.addContact(testContact2);
+            testBook.addContact(testContact3);
+
+            assertEquals(2,testBook.searchByNumber(partialTest).size());
+
+        }
+
     }
 }
