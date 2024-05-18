@@ -141,20 +141,10 @@ public class AddressBookInterface {
         displayContacts(theBook.getContacts());
     }
 
-    public String getSearchName(Scanner in){
+    public String getSearchTerm(String message, Scanner in){
         do {
             try {
-                return Verifyer.string(stringInput("Name to find: ", in));
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        } while (true);
-    }
-
-    public String getSearchNumber(Scanner in){
-        do {
-            try {
-                return Verifyer.string(stringInput("Number to find: ", in));
+                return Verifyer.string(stringInput(message, in));
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -174,10 +164,16 @@ public class AddressBookInterface {
             switch (userChoice.toLowerCase()){
                 case "1":
                 case "n":
-                    return theBook.searchByName(getSearchName(in));
+                    return theBook.searchByName(getSearchTerm("Name to find:-",in));
                 case "2":
                 case "t":
-                    return theBook.searchByNumber(getSearchNumber(in));
+                    return theBook.searchByNumber(getSearchTerm("Telephone number to find:-",in));
+                case "3":
+                case "e":
+                    return theBook.searchByEmail(getSearchTerm("Email to find :-",in));
+                case "4":
+                case "x":
+                    return new ArrayList<Contact>();
                 default:
                     System.out.println("Invalid option. please select from the options shown.");
             }

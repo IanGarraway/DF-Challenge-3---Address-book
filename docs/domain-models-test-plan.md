@@ -115,7 +115,7 @@ As a user, I want to search for a contact by phone number so that I can find a c
 
 ### interface class tests
 
-- [ ] interface can search by number and display the result on the screen
+- [x] interface can search by number and display the result on the screen
 
 
 ## User Story 10
@@ -131,7 +131,7 @@ As a user, I want to search for a contact by email address so that I can find a 
 
 ### interface class tests
 
-- [ ] interface can search by email and display the result on the screen
+- [x] interface can search by email and display the result on the screen
 
 ## User Story 11
 

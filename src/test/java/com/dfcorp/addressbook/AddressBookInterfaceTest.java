@@ -495,7 +495,7 @@ public class AddressBookInterfaceTest {
                 //Act
 
                 //Assert
-                assertEquals(testName, testInterface.getSearchName(mockScanner));
+                assertEquals(testName, testInterface.getSearchTerm("something", mockScanner));
             }
 
             @Test
@@ -771,14 +771,47 @@ public class AddressBookInterfaceTest {
                 when(mockScanner.nextLine()).thenReturn("", " ", "t", "", testSearchNumber);
 
                 //Act
-
                 testList = testInterface.searchChoice(mockScanner);
 
                 //Assert
                 assertEquals(1, testList.size());
+            }
 
+            @Test
+            @DisplayName("Search by Email")
+            public void testSearchByEmail(){
+                //Arrange
+                String testSearchEmail = "test@test.com";
 
+                testList.add(testContact1);
 
+                when(testBook.searchByEmail(testSearchEmail)).thenReturn(testList);
+
+                //the following mockscanner will simulate a user: hitting enter, hitting space and then enter, entering the option for
+                //telephone number search, hitting enter, hitting space then enter, before entering a valid email
+                when(mockScanner.nextLine()).thenReturn("", " ", "e", "", " ", testSearchEmail);
+
+                //Act
+                testList = testInterface.searchChoice(mockScanner);
+
+                //Assert
+                assertEquals(1, testList.size());
+            }
+
+            @Test
+            @DisplayName("Search by Email")
+            public void testExitSearch(){
+                //Arrange
+
+                //the following mockscanner will simulate a user: hitting enter, hitting space and then enter, entering the option for
+                //telephone number search, hitting enter, hitting space then enter, before entering a valid email
+                when(mockScanner.nextLine()).thenReturn("", " ", "x");
+
+                //Act
+                testList = testInterface.searchChoice(mockScanner);
+
+                //Assert
+                assertEquals(0, testList.size());
             }
 
 
