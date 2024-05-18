@@ -765,7 +765,10 @@ public class AddressBookInterfaceTest {
                 testList.add(testContact1);
 
                 when(testBook.searchByNumber(testSearchNumber)).thenReturn(testList);
-                when(mockScanner.nextLine()).thenReturn("", " ", "t", testSearchNumber);
+
+                //the following mockscanner will simulate a user: hitting enter, hitting space and then enter, entering the option for
+                //telephone number search, hitting enter, before entering a valid number
+                when(mockScanner.nextLine()).thenReturn("", " ", "t", "", testSearchNumber);
 
                 //Act
 
