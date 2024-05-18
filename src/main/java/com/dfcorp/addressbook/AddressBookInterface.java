@@ -7,18 +7,9 @@ public class AddressBookInterface {
 
     AddressBook theBook;
 
-
-
     public AddressBookInterface(AddressBook newBook) {
         theBook = newBook;
     }
-
-    /* doesn't seem to do anything
-    private void clearScreen(){
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
-     */
 
     public String displayMenu() {
 
@@ -43,7 +34,6 @@ public class AddressBookInterface {
                         3. (E)xit to the main menu
                     """;
     }
-
 
     public StringBuilder displayContactStringBuilder(Contact contact) {
         //decided this method should be on the interface class and not on the contact class because
@@ -117,7 +107,6 @@ public class AddressBookInterface {
             }
         } while (true);
     }
-
 
     public Contact newContactBuilder(Scanner in) {
         do {

@@ -5,7 +5,7 @@ keep the contacts of your friends and family? What happens if you lose your phon
 
 DFCorp's Digital Addressbook is designed to address this problem. This slim factor console program won't hog your resources like 
 other solutions, it will allow you to store your contacts and then search for a specific contact, or display them all 
-for your own use. It's editing features will allow you to add contact, delete contacts and edit those details as you 
+for your own use. It's editing features will allow you to add contacts, delete contacts and edit those details as you 
 require. 
 
 This digital address book will make keeping your contacts managed a lot easier and save a fortune in post-its.

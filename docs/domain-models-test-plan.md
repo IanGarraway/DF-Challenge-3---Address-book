@@ -80,8 +80,8 @@ As a user, I don't want there to be two people with the same phone number, so th
 ### Interface Class
 
 - [x] creating a new contact won't accept telephone numbers already in the addressbook
-- [ ] editing a contact won't accept telephone numbers already in the addressbook
-- [ ] editing a contact will accept the same number being re-entered
+- [x] editing a contact won't accept telephone numbers already in the addressbook
+- [x] editing a contact will accept the same number being re-entered
 
 ## User Story 7
 
