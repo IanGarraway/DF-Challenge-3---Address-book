@@ -21,6 +21,7 @@ public class AddressBookInterface {
                      3. (S)earch for a contact by name, phone number or email address
                      4. (M)odify or delete contacts
                      5. (O)rder your contacts
+                     6. (R)emove All contacts
                 
                      or e to exit.
                 :-""");
@@ -109,13 +110,34 @@ public class AddressBookInterface {
         } while (true);
     }
 
+    public boolean verifyDelete(String message, Scanner in){
+        do {
+            String userChoice;
+            try {
+                userChoice = Verifyer.string(stringInput(message, in));
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+                userChoice = "bad";
+            }
+            switch (userChoice.toLowerCase()) {
+                case "y":
+                case "yes":
+                    return true;
+                case "bad":
+                    break;
+                default:
+                    return false;
+            }
+        } while (true);
+    }
+
     public boolean verifyContact(Contact contactToVerify, String message, Scanner in) {
         do {
             String userChoice = null;
             try {
                 userChoice = Verifyer.string(stringInput(displayContactStringBuilder(contactToVerify) + "\n "+message, in));
             } catch (IllegalArgumentException e) {
-                System.out.println("Please enter either y or n");
+                System.out.println(e.getMessage());
                 userChoice = "bad";
             }
             switch (userChoice.toLowerCase()) {
@@ -123,6 +145,8 @@ public class AddressBookInterface {
                     return true;
                 case "n":
                     return false;
+                default:
+                    System.out.println("Please enter either y or n");
             }
         } while (true);
     }
@@ -365,6 +389,10 @@ public class AddressBookInterface {
             case "o":
             case "5":
                 sortMenu(in);
+                break;
+            case "6":
+            case "r":
+                if(verifyDelete("Delete all contacts? [y to confirm]",in)&&verifyDelete("This is permanent. are you sure? [y to delete all]",in)) {theBook.deleteAll();}
                 break;
             case "bad":
                 break;

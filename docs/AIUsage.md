@@ -478,3 +478,351 @@ public class AddressBook {
     - This approach uses `Comparator.comparing` with a method reference to `Contact::getName` and specifies `String.CASE_INSENSITIVE_ORDER` for case-insensitive comparison. It's more concise and leverages built-in comparator utilities.
 
 Both approaches achieve the same result, sorting the contacts alphabetically by name in a case-insensitive manner, similar to the C# example you provided. The choice between them can be based on your preference for lambda expressions or method references for readability and conciseness.
+
+## Prompt:
+
+when using mockito i'm getting this error: reason: no instance(s) of type variable(s) T exist so that void conforms to T
+
+## Response: 
+
+The error you're encountering, "no instance(s) of type variable(s) T exist so that void conforms to T," typically occurs when you are trying to use Mockito to mock or stub a method that has a generic return type. This often happens because of how generics and type inference work in Java.
+
+Here are a few potential causes and solutions to this issue:
+
+### 1. Mocking a Generic Method
+
+If you are trying to mock a method that returns a generic type, you need to specify the generic type explicitly. For example:
+
+```java
+public class MyClass {
+    public <T> T doSomething() {
+        // Implementation here
+        return null;
+    }
+}
+```
+
+When mocking such a method, you should provide a concrete type for the generic return type:
+
+```java
+MyClass myClassMock = mock(MyClass.class);
+when(myClassMock.<String>doSomething()).thenReturn("Hello");
+```
+
+### 2. Using `ArgumentCaptor` with Generics
+
+If you are using `ArgumentCaptor` with generics, you need to specify the type correctly. For instance:
+
+```java
+ArgumentCaptor<List<String>> captor = ArgumentCaptor.forClass((Class) List.class);
+verify(myClassMock).someMethod(captor.capture());
+List<String> capturedArgument = captor.getValue();
+```
+
+### 3. Ensuring Type Safety with `any()`
+
+When using matchers like `any()`, make sure you specify the type explicitly to avoid type safety issues:
+
+```java
+when(myClassMock.doSomething(any(String.class))).thenReturn("Hello");
+```
+
+### Example Code
+
+Let's consider an example where you might be seeing this error:
+
+```java
+public class MyService {
+    public <T> T process(T input) {
+        // Implementation here
+        return input;
+    }
+}
+
+// In your test
+MyService myServiceMock = mock(MyService.class);
+when(myServiceMock.process(any())).thenReturn("Processed");
+```
+
+This would result in the error you mentioned. To fix it, you need to provide type information:
+
+```java
+when(myServiceMock.<String>process(any(String.class))).thenReturn("Processed");
+```
+
+### Complete Example
+
+Here's a complete example to illustrate how to avoid this issue:
+
+```java
+import static org.mockito.Mockito.*;
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+public class MyServiceTest {
+
+    public class MyService {
+        public <T> T process(T input) {
+            return input;
+        }
+    }
+
+    @Test
+    public void testProcess() {
+        MyService myServiceMock = mock(MyService.class);
+
+        // Specify the generic type explicitly
+        when(myServiceMock.<String>process(any(String.class))).thenReturn("Processed");
+
+        String result = myServiceMock.process("Input");
+        assertEquals("Processed", result);
+    }
+}
+```
+
+By explicitly specifying the type parameter, you help the compiler understand how to handle the generics, thus avoiding the type inference issue.
+
+### Summary
+
+The key to resolving this issue is ensuring that you provide the necessary type information when mocking or stubbing generic methods. By specifying the type explicitly, you can guide the compiler to correctly infer the types and avoid the mentioned error.
+
+## Prompt: 
+
+I want to record if a void method has been called, what is the best way to do this using mockito?
+
+Yes, you can combine `assertAll` with `verify` when using JUnit and Mockito. The `assertAll` method, which is part of JUnit 5, allows you to group multiple assertions together so that all assertions are executed, and any failures are reported collectively.
+
+Here's an example to illustrate how you can use `assertAll` in combination with Mockito's `verify` to perform multiple verifications in a single test case.
+
+### Example
+
+#### MyClass.java
+
+```java
+public class MyClass {
+    public void method1() {
+        // Method implementation
+    }
+
+    public void method2() {
+        // Method implementation
+    }
+
+    public void method3() {
+        // Method implementation
+    }
+}
+```
+
+#### MyClassTest.java
+
+```java
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
+
+public class MyClassTest {
+
+    @Test
+    public void testMultipleMethodCalls() {
+        MyClass myClassMock = mock(MyClass.class);
+
+        // Call the methods on the mock
+        myClassMock.method1();
+        myClassMock.method2();
+        myClassMock.method3();
+
+        // Combine assertAll with verify
+        assertAll(
+            new Executable() {
+                @Override
+                public void execute() throws Throwable {
+                    verify(myClassMock).method1();
+                }
+            },
+            new Executable() {
+                @Override
+                public void execute() throws Throwable {
+                    verify(myClassMock).method2();
+                }
+            },
+            new Executable() {
+                @Override
+                public void execute() throws Throwable {
+                    verify(myClassMock).method3();
+                }
+            }
+        );
+    }
+}
+```
+
+### Explanation
+
+1. **Mock Creation**: Create a mock instance of `MyClass`.
+2. **Method Calls**: Invoke the methods on the mock instance.
+3. **Assertions with `assertAll`**:
+    - Use `assertAll` to group multiple assertions together.
+    - Each `Executable` in `assertAll` verifies that a specific method was called on the mock instance.
+    - If any of the verifications fail, all failures will be reported together at the end of the test.
+
+This approach ensures that you can perform multiple verifications in a single test method and see all verification failures collectively, which can be helpful for debugging.
+
+### Simplified Lambda Syntax
+
+For a more concise and modern approach, you can use lambda expressions with `assertAll`:
+
+```java
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+public class MyClassTest {
+
+    @Test
+    public void testMultipleMethodCalls() {
+        MyClass myClassMock = mock(MyClass.class);
+
+        // Call the methods on the mock
+        myClassMock.method1();
+        myClassMock.method2();
+        myClassMock.method3();
+
+        // Combine assertAll with verify using lambdas
+        assertAll(
+            () -> verify(myClassMock).method1(),
+            () -> verify(myClassMock).method2(),
+            () -> verify(myClassMock).method3()
+        );
+    }
+}
+```
+
+Using lambda expressions simplifies the syntax and makes the test more readable. Each lambda expression in `assertAll` performs a `verify` call to check that the corresponding method was invoked on the mock object.
+
+
+## Prompt:
+
+uing mockito in java, I want to create a spy object of a class
+
+## Response:
+
+Creating a spy object in Mockito allows you to create a partial mock, which means you can mock certain methods of the object while allowing others to behave as they normally would. This can be useful when you want to mock part of the behavior while still using the real implementation of other methods.
+
+Here's a step-by-step guide to creating and using a spy object in Mockito:
+
+### Step 1: Add Mockito to Your Project
+
+First, ensure you have Mockito included in your project. If you're using Maven, add the following dependency to your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>org.mockito</groupId>
+    <artifactId>mockito-core</artifactId>
+    <version>3.9.0</version>
+    <scope>test</scope>
+</dependency>
+```
+
+If you're using Gradle, add the following to your `build.gradle`:
+
+```gradle
+testImplementation 'org.mockito:mockito-core:3.9.0'
+```
+
+### Step 2: Create a Spy Object
+
+To create a spy object, you use the `spy` method provided by Mockito. Here’s an example:
+
+#### MyClass.java
+
+```java
+public class MyClass {
+    public String method1() {
+        return "Real Method1";
+    }
+
+    public String method2() {
+        return "Real Method2";
+    }
+}
+```
+
+#### MyClassTest.java
+
+```java
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+public class MyClassTest {
+
+    @Test
+    public void testSpy() {
+        // Create an instance of the real object
+        MyClass myClass = new MyClass();
+
+        // Create a spy object
+        MyClass spyMyClass = spy(myClass);
+
+        // Stub the method2() to return a different value
+        when(spyMyClass.method2()).thenReturn("Mocked Method2");
+
+        // Verify that method1() returns the real value
+        assertEquals("Real Method1", spyMyClass.method1());
+
+        // Verify that method2() returns the mocked value
+        assertEquals("Mocked Method2", spyMyClass.method2());
+
+        // Verify that method1() was called
+        verify(spyMyClass).method1();
+
+        // Verify that method2() was called
+        verify(spyMyClass).method2();
+    }
+}
+```
+
+### Explanation
+
+1. **Create an Instance of the Real Object**: First, create an instance of the real object that you want to spy on.
+
+    ```java
+    MyClass myClass = new MyClass();
+    ```
+
+2. **Create a Spy Object**: Use the `spy` method to create a spy object of the real instance.
+
+    ```java
+    MyClass spyMyClass = spy(myClass);
+    ```
+
+3. **Stub a Method**: Stub the method you want to mock. In this example, we stub `method2` to return "Mocked Method2".
+
+    ```java
+    when(spyMyClass.method2()).thenReturn("Mocked Method2");
+    ```
+
+4. **Call Methods and Verify Behavior**:
+    - Call `method1` on the spy object and verify that it returns the real implementation's value.
+    - Call `method2` on the spy object and verify that it returns the mocked value.
+    - Use `verify` to check that the methods were called.
+
+    ```java
+    assertEquals("Real Method1", spyMyClass.method1());
+    assertEquals("Mocked Method2", spyMyClass.method2());
+    verify(spyMyClass).method1();
+    verify(spyMyClass).method2();
+    ```
+
+### Important Considerations
+
+- **Partial Mocking**: Spies are meant for partial mocking. Use them when you want to mock some methods but not others.
+- **Real Method Invocation**: By default, a spy will call the real methods unless they are stubbed.
+- **Avoid Overusing Spies**: Overusing spies can lead to fragile tests that are closely tied to the implementation details of the class under test. Use spies judiciously.
+
+By following this guide, you can effectively create and use spy objects in Mockito to test your Java code.

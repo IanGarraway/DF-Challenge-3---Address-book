@@ -48,16 +48,17 @@ public class AddressBookInterfaceTest {
 
                 //Assert
                 assertEquals("""
-                    Welcome to the DF Corp AddressBook
-                    Please select from the following options:
-                         1. (A)dd a contact
-                         2. (D)isplay all contacts
-                         3. (S)earch for a contact by name, phone number or email address
-                         4. (M)odify or delete contacts
-                         5. (O)rder your contacts
-                    
-                         or e to exit.
-                    :-""", testInterface.displayMenu());
+                Welcome to the DF Corp AddressBook
+                Please select from the following options:
+                     1. (A)dd a contact
+                     2. (D)isplay all contacts
+                     3. (S)earch for a contact by name, phone number or email address
+                     4. (M)odify or delete contacts
+                     5. (O)rder your contacts
+                     6. (R)emove All contacts
+                
+                     or e to exit.
+                :-""", testInterface.displayMenu());
             }
 
             @Test
@@ -857,6 +858,22 @@ public class AddressBookInterfaceTest {
                         ()->verify(testBook).sortByName(),
                         ()->verify(testBook).sortByNumber()
                 );
+            }
+
+            @Test
+            @DisplayName("Test that interface will confirm with the user before deleting all contacts")
+            public void testOfDeleteAllContacts(){
+                //Arrange
+                testBook.addContact(testContact1);
+
+                when(mockScanner.nextLine()).thenReturn("r", "", " ", "n", "r", "y", "n", "r", "y", "y", "e");
+
+                //Act
+                testInterface.start(mockScanner);
+
+                //Assert
+                verify(testBook, times(1)).deleteAll();
+
             }
 
 
