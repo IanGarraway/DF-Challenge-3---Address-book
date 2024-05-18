@@ -718,11 +718,14 @@ public class AddressBookInterfaceTest {
         @DisplayName("Extension Features Tests")
         public class ExtensionFeaturesTests{
 
+            ArrayList<Contact> testList;
+
             @BeforeEach
             public void setUp(){
                 testBook = mock(AddressBook.class);
                 testInterface = new AddressBookInterface(testBook);
                 testContact1 = mock(Contact.class);
+                testList = new ArrayList<>();
             }
 
             @AfterEach
@@ -751,6 +754,18 @@ public class AddressBookInterfaceTest {
             @Test
             @DisplayName("Search by Telephone number")
             public void testSearchByNumber(){
+                //Arrange
+                String testSearchNumber = "1234";
+
+                testList.add(testContact1);
+
+                when(testBook.searchByNumber(testSearchNumber)).thenReturn(testList);
+
+                //Act
+
+                //Assert
+
+
 
             }
 

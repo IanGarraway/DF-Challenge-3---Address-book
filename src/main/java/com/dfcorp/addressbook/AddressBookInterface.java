@@ -150,8 +150,13 @@ public class AddressBookInterface {
         } while (true);
     }
 
-    public void displayByName(Scanner in){
-        displayContacts(theBook.searchByName(getSearchName(in)));
+    public ArrayList<Contact> searchChoice(Scanner in){
+        return theBook.searchByName(getSearchName(in));
+    }
+
+
+    public void displayBySearch(Scanner in){
+        displayContacts(searchChoice(in));
     }
 
     public String modChoices(int position, int size){
@@ -276,7 +281,7 @@ public class AddressBookInterface {
                 break;
             case "s":
             case "3":
-                displayByName(in);
+                displayBySearch(in);
                 break;
             case "m":
             case "4":
