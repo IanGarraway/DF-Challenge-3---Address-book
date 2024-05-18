@@ -54,6 +54,7 @@ public class AddressBookInterfaceTest {
                          2. (D)isplay all contacts
                          3. (S)earch for a contact by name, phone number or email address
                          4. (M)odify or delete contacts
+                         5. (O)rder your contacts
                     
                          or e to exit.
                     :-""", testInterface.displayMenu());
