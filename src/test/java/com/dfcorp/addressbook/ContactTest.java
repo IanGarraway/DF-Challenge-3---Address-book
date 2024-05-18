@@ -46,9 +46,8 @@ public class ContactTest {
             //Act
             testContact.setName(newName);
 
-
             //Assert
-            Assertions.assertEquals(testContact.getName(), newName);
+            assertEquals(testContact.getName(), newName);
         }
 
         @Test
@@ -65,9 +64,8 @@ public class ContactTest {
             //Act
             testContact.setNumber(newNumber);
 
-
             //Assert
-            Assertions.assertEquals(testContact.getNumber(), newNumber);
+            assertEquals(testContact.getNumber(), newNumber);
         }
 
         @Test
@@ -84,11 +82,8 @@ public class ContactTest {
             //Act
             testContact.setEmail(newEmail);
 
-
             //Assert
-            Assertions.assertEquals(testContact.getEmail(), newEmail);
+            assertEquals(testContact.getEmail(), newEmail);
         }
-
-
     }
 }
