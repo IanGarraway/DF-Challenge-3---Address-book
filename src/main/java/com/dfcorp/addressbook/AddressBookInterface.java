@@ -20,7 +20,7 @@ public class AddressBookInterface {
                      2. (D)isplay all contacts
                      3. (S)earch for a contact by name
                      4. (M)odify or delete contacts
-                     
+                
                      or e to exit.
                 :-""");
     }
@@ -97,13 +97,11 @@ public class AddressBookInterface {
                 System.out.println("Please enter either y or n");
                 userChoice = "bad";
             }
-
             switch (userChoice.toLowerCase()) {
                 case "y":
                     return true;
                 case "n":
                     return false;
-
             }
         } while (true);
     }
@@ -148,8 +146,6 @@ public class AddressBookInterface {
     }
 
     public String modChoices(int position, int size){
-
-
         return ((position == 0)? "<":"<(p)revious,")+"(e)xit, (d)elete, (m)odify"+((position<(size-1)) ? ", (n)ext>":">");
     }
 
@@ -186,9 +182,7 @@ public class AddressBookInterface {
         do{
             Contact modContact = buildModContact(originalContact, in);
             if(verifyContact(modContact,"is this correct? [y/n]", in)) return modContact;
-
         }while(true);
-
     }
 
     public void contactIterator(ArrayList<Contact> contacts, Scanner in){
@@ -227,7 +221,6 @@ public class AddressBookInterface {
                 case "n":
                     if(position<contacts.size()-1) position++;
                     break;
-
             }
         }
     }
@@ -259,7 +252,6 @@ public class AddressBookInterface {
                 default:
                     System.out.println("Invalid option, please try again");
             }
-
         }while(true);
     }
 
@@ -287,17 +279,14 @@ public class AddressBookInterface {
             default:
                 System.out.println("default");
 
-
                 in.nextLine();
         }
     }
 
     public void start(Scanner in) {
          //this to me feels wrong, but I can see no other way to mock the input for testing
-
         do {
             String userChoice;
-
 
             try {
                 userChoice = Verifyer.string(stringInput(displayMenu(), in));
@@ -312,11 +301,8 @@ public class AddressBookInterface {
             if (userChoice.equalsIgnoreCase("e")) {
                 break;
             }
-
             menuChoice(userChoice, in);
-
         } while (true);
-
     }
 }
 
