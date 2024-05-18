@@ -48,11 +48,12 @@ public class AddressBookInterface {
 
     public String displaySortMenu(){
         return """
-                        Do you wish to sort your contact by:
-                            1. (N)ame
-                            2. (E)mail
-                            3. (P)hone
-                            4. e(X)it back to main menu""";
+                Do you wish to sort your contact by:
+                    1. (N)ame
+                    2. (E)mail
+                    3. (P)hone number
+                    4. e(X)it back to main menu
+                :-""";
     }
 
     public StringBuilder displayContactStringBuilder(Contact contact) {
@@ -278,6 +279,41 @@ public class AddressBookInterface {
         }
     }
 
+    public void sortMenu(Scanner in){
+        sortMenuLoop:
+        do{
+            String userChoice;
+            try{
+                userChoice = Verifyer.string(stringInput(displaySortMenu(), in));
+            } catch (IllegalArgumentException e){
+                userChoice = "bad";
+                System.out.println(e.getMessage());
+            }
+
+            switch (userChoice.toLowerCase()){
+                case "1":
+                case "n":
+                    theBook.sortByName();
+                    break sortMenuLoop;
+                case "2":
+                case "e":
+                    theBook.sortByEmail();
+                    break sortMenuLoop;
+                case "3":
+                case "p":
+                    theBook.sortByNumber();
+                    break sortMenuLoop;
+                case "4":
+                case "x":
+                    break sortMenuLoop;
+                default:
+                    System.out.println("please select an option from the menu");
+                    break;
+            }
+
+        }while(true);
+    }
+
     public void modMenu(Scanner in){
         modMenuLoop:
         do{
@@ -325,6 +361,10 @@ public class AddressBookInterface {
             case "m":
             case "4":
                 modMenu(in);
+                break;
+            case "o":
+            case "5":
+                sortMenu(in);
                 break;
             case "bad":
                 break;

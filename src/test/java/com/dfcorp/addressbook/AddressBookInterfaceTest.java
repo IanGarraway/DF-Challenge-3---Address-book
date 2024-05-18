@@ -825,8 +825,38 @@ public class AddressBookInterfaceTest {
                         Do you wish to sort your contact by:
                             1. (N)ame
                             2. (E)mail
-                            3. (P)hone
-                            4. e(X)it back to main menu""", testInterface.displaySortMenu());
+                            3. (P)hone number
+                            4. e(X)it back to main menu
+                        :-""", testInterface.displaySortMenu());
+            }
+
+            @Test
+            @DisplayName("Test of sort menu calls addressbooks sort methods")
+            public void testSortMenuCallsSortMethods(){
+                //Arrange
+
+                when(mockScanner.nextLine()).thenReturn("o", //access the order menu
+                        "", " ", //two erronius inputs to check error handling
+                        "n", //sort by name method
+                        "o", //access the order menu
+                        "cat", //check it can handle incorrect option
+                        "e", //check it sorts by email
+                        "o", //re-access the sort menu
+                        "p", //check it calls the phone sort method
+                        "o",
+                        "x", // confirm it can exit from that menu
+                        "e"); //exit
+
+
+                //Act
+                testInterface.start(mockScanner);
+
+                //Assert
+                assertAll(
+                        ()->verify(testBook).sortByEmail(),
+                        ()->verify(testBook).sortByName(),
+                        ()->verify(testBook).sortByNumber()
+                );
             }
 
 

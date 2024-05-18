@@ -145,14 +145,14 @@ As a user, I want to be able to sort my contacts by name, email or phone number 
 
 ### Interface Class tests
 
-- [ ] sort menu which will allow you to call the sort functions
+- [x] sort menu which will allow you to call the sort functions
 
 ## User Story 12
 
 As a user, I want to delete all contacts at once so that I can clear my address book quickly.
 
 ### AddressBook class tests
-- [ ] deleteAll deletes all contacts
+- [x] deleteAll deletes all contacts
 
 ### Interface class tests
 
