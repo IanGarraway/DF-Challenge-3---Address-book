@@ -11,6 +11,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 public class AddressBookInterfaceTest {
+
     private AddressBookInterface testInterface;
     private AddressBook testBook;
     private Contact testContact1;
@@ -19,108 +20,113 @@ public class AddressBookInterfaceTest {
     @DisplayName("AddressBook Interface Tests")
     public class InterfaceTests{
 
-        @BeforeEach
-        public void setUp(){
-            testBook = mock(AddressBook.class);
-            testInterface = new AddressBookInterface(testBook);
-            testContact1 = mock(Contact.class);
-        }
+        @Nested
+        @DisplayName("Output string constructor tests")
+        public class OutputStringContructorTests{
 
-        @AfterEach
-        public void cleanUp(){
-            testInterface = null;
-            testBook = null;
-        }
+            @BeforeEach
+            public void setUp(){
+                testBook = mock(AddressBook.class);
+                testInterface = new AddressBookInterface(testBook);
+                testContact1 = mock(Contact.class);
+            }
 
-
-
-        @Test
-        @DisplayName("Test to see if DisplayMenu returns the right list")
-        public void displayMenuFunctionTest(){
-            //Arrange
-
-            //Act
-
-            //Assert
-            assertEquals("""
-                Welcome to the DF Corp AddressBook
-                Please select from the following options:
-                     1. (A)dd a contact
-                     2. (D)isplay all contacts
-                     3. (S)earch for a contact by name, phone number or email address
-                     4. (M)odify or delete contacts
-                     
-                     or e to exit.
-                :-""", testInterface.displayMenu());
-        }
-
-        @Test
-        @DisplayName("Test to see if modify choices returns correctly")
-        public void modifyContactsChoiceOptionsDisplayCorrectlyTest(){
-            //Arraange
-            //Act
-            //Assert
-            assertEquals("""
-                    AddressBook Contact Review
-                    Do you wish to see :
-                        1. (A)ll contacts
-                        2. (S)earch by name, phone number or email address
-                        3. (E)xit to the main menu
-                    """,testInterface.displayModMenu());
-        }
-
-        @Test
-        @DisplayName("Test to see if the contact string display builder, outputs the right string")
-        public void contactStringBuilderFunctionTest(){
-            //Arrange
-            when(testContact1.getName()).thenReturn("Sara");
-            when(testContact1.getNumber()).thenReturn("12345");
-            when(testContact1.getEmail()).thenReturn("Sara@test.com");
-            //Act
-            //Assert
-            assertEquals("""
-                    Name: Sara
-                    Phone: 12345
-                    Email: Sara@test.com
-                    """, testInterface.displayContactStringBuilder(testContact1).toString());
+            @AfterEach
+            public void cleanUp(){
+                testInterface = null;
+                testBook = null;
+                testContact1 = null;
+            }
 
 
-        }
+            @Test
+            @DisplayName("Test to see if DisplayMenu returns the right list")
+            public void displayMenuFunctionTest(){
+                //Arrange
 
-        @Test
-        @DisplayName("Edit choices are displayed correctly, one contact")
-        public void editChoicesDisplayTest(){
-            //Arrange
-            //Act
-            //Assert
-            assertEquals("<(e)xit, (d)elete, (m)odify>", testInterface.modChoices(0,1));
-        }
+                //Act
 
-        @Test
-        @DisplayName("Edit choices are displayed correctly, one contact")
-        public void editChoicesDisplayTestStartOfMultipleList(){
-            //Arrange
-            //Act
-            //Assert
-            assertEquals("<(e)xit, (d)elete, (m)odify, (n)ext>", testInterface.modChoices(0,5));
-        }
+                //Assert
+                assertEquals("""
+                    Welcome to the DF Corp AddressBook
+                    Please select from the following options:
+                         1. (A)dd a contact
+                         2. (D)isplay all contacts
+                         3. (S)earch for a contact by name, phone number or email address
+                         4. (M)odify or delete contacts
+                    
+                         or e to exit.
+                    :-""", testInterface.displayMenu());
+            }
 
-        @Test
-        @DisplayName("Edit choices are displayed correctly, mid contact")
-        public void editChoicesDisplayTestMidOfMultipleList(){
-            //Arrange
-            //Act
-            //Assert
-            assertEquals("<(p)revious,(e)xit, (d)elete, (m)odify, (n)ext>", testInterface.modChoices(2,5));
-        }
+            @Test
+            @DisplayName("Test to see if modify choices returns correctly")
+            public void modifyContactsChoiceOptionsDisplayCorrectlyTest(){
+                //Arraange
+                //Act
+                //Assert
+                assertEquals("""
+                        AddressBook Contact Review
+                        Do you wish to see :
+                            1. (A)ll contacts
+                            2. (S)earch by name, phone number or email address
+                            3. (E)xit to the main menu
+                        """,testInterface.displayModMenu());
+            }
 
-        @Test
-        @DisplayName("Edit choices are displayed correctly, end contact")
-        public void editChoicesDisplayTestEndOfMultipleList(){
-            //Arrange
-            //Act
-            //Assert
-            assertEquals("<(p)revious,(e)xit, (d)elete, (m)odify>", testInterface.modChoices(4,5));
+            @Test
+            @DisplayName("Test to see if the contact string display builder, outputs the right string")
+            public void contactStringBuilderFunctionTest(){
+                //Arrange
+                when(testContact1.getName()).thenReturn("Sara");
+                when(testContact1.getNumber()).thenReturn("12345");
+                when(testContact1.getEmail()).thenReturn("Sara@test.com");
+                //Act
+                //Assert
+                assertEquals("""
+                        Name: Sara
+                        Phone: 12345
+                        Email: Sara@test.com
+                        """, testInterface.displayContactStringBuilder(testContact1).toString());
+
+
+            }
+
+            @Test
+            @DisplayName("Edit choices are displayed correctly, one contact")
+            public void editChoicesDisplayTest(){
+                //Arrange
+                //Act
+                //Assert
+                assertEquals("<(e)xit, (d)elete, (m)odify>", testInterface.modChoices(0,1));
+            }
+
+            @Test
+            @DisplayName("Edit choices are displayed correctly, one contact")
+            public void editChoicesDisplayTestStartOfMultipleList(){
+                //Arrange
+                //Act
+                //Assert
+                assertEquals("<(e)xit, (d)elete, (m)odify, (n)ext>", testInterface.modChoices(0,5));
+            }
+
+            @Test
+            @DisplayName("Edit choices are displayed correctly, mid contact")
+            public void editChoicesDisplayTestMidOfMultipleList(){
+                //Arrange
+                //Act
+                //Assert
+                assertEquals("<(p)revious,(e)xit, (d)elete, (m)odify, (n)ext>", testInterface.modChoices(2,5));
+            }
+
+            @Test
+            @DisplayName("Edit choices are displayed correctly, end contact")
+            public void editChoicesDisplayTestEndOfMultipleList(){
+                //Arrange
+                //Act
+                //Assert
+                assertEquals("<(p)revious,(e)xit, (d)elete, (m)odify>", testInterface.modChoices(4,5));
+            }
         }
 
         @Nested
@@ -131,10 +137,16 @@ public class AddressBookInterfaceTest {
             @BeforeEach
             public void setUp(){
                 in = new Scanner(System.in);
+                testBook = mock(AddressBook.class);
+                testInterface = new AddressBookInterface(testBook);
+                testContact1 = mock(Contact.class);
             }
             @AfterEach
             public void cleanUP(){
                 in = null;
+                testBook = null;
+                testInterface = null;
+                testContact1 = null;
             }
 
 
@@ -165,20 +177,27 @@ public class AddressBookInterfaceTest {
 
         }
 
-
         @Nested
         @DisplayName("Input tests")
         public class InputTests{
             Scanner mockScanner;
+
+
+
             @BeforeEach
             public void setUp(){
                 mockScanner = mock(Scanner.class);
+                testBook = mock(AddressBook.class);
+                testInterface = new AddressBookInterface(testBook);
+                testContact1 = mock(Contact.class);
 
             }
 
             @AfterEach
             public void cleanUp(){
                 mockScanner = null;
+                testInterface = null;
+                testBook = null;
             }
 
             @Test
@@ -574,7 +593,7 @@ public class AddressBookInterfaceTest {
 
                 // the following mockscanner should imitate a user doing the following:
                 // Check two abnormal inputs, select all contacts, two abnormal entries, try to go back through the list, iterate
-                //forward through the list till the end, go back one, delete the middle item, then exit from the methods.
+                //forward through the list till the end, go back one, delete the middle item, then exit of the methods.
                 when(mockScanner.nextLine()).thenReturn(""," ", "1","", " ", "p", "n", "N", "n","p","d","n","d","y","e", "e" );
 
                 //Act
@@ -614,7 +633,7 @@ public class AddressBookInterfaceTest {
                 when(testBook.getContacts()).thenReturn(testList);
 
                 // the following mockscanner should imitate a user doing the following:
-                // select all contacts, iterate forward through the list till the end, delete all three then exit from the methods.
+                // select all contacts, iterate forward through the list till the end, delete all three then exit of the methods.
                 when(mockScanner.nextLine()).thenReturn( "1","n", "N", "n","d","y","d","y","d", "y", "e" );
 
                 //Act
@@ -628,8 +647,6 @@ public class AddressBookInterfaceTest {
             @DisplayName("Mod Menu -> Contact Iterator test - by name, modify contact")
             public void testofContactIteratorModification(){
                 //Arrange
-                Contact testContact2 = mock(Contact.class);
-                Contact testContact3 = mock(Contact.class);
 
                 String testName = "Ginny";
                 String testEmail ="test@test.com";
