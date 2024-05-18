@@ -666,7 +666,7 @@ public class AddressBookInterfaceTest {
                 // the following mockscanner should imitate a user doing the following:
                 // Check an abnormal input, select search by name, search for Ginny, modify the name to 'Guinny',
                 //accept the original email and phone number, and then exit.
-                when(mockScanner.nextLine()).thenReturn( "cat","S",testName, "m", testReplacementName,"","","y","e","e" );
+                when(mockScanner.nextLine()).thenReturn( "cat","S", "n", testName, "m", testReplacementName,"","","y","e","e" );
 
                 //Act
                 testInterface.modMenu(mockScanner);
@@ -699,7 +699,7 @@ public class AddressBookInterfaceTest {
                 // the following mockscanner should imitate a user doing the following:
                 // Check some abnormal inputs, select add contact, add Ginny, her number, her email, show all, show search by name, go into the mod menu,
                 //come out, enter cat, see the error message press enter, exit the program.
-                when(mockScanner.nextLine()).thenReturn( "","  ","A",testName, testNumber, testEmail,"y","2","3",testName,"4", "e","cat", "","e" );
+                when(mockScanner.nextLine()).thenReturn( "","  ","A",testName, testNumber, testEmail,"y","2","3", "1",testName,"4", "e","cat", "","e" );
 
                 //Act
                 testInterface.start(mockScanner);
@@ -748,7 +748,8 @@ public class AddressBookInterfaceTest {
                                 1. (N)ame
                                 2. (E)mail
                                 3. (T)elephone number
-                                4. e(X)it""", testInterface.displaySearchMenu());
+                                4. e(X)it
+                                :-""", testInterface.displaySearchMenu());
             }
 
             @Test

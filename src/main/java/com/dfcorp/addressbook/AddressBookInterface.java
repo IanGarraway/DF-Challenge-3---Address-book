@@ -41,7 +41,8 @@ public class AddressBookInterface {
             1. (N)ame
             2. (E)mail
             3. (T)elephone number
-            4. e(X)it""";
+            4. e(X)it
+            :-""";
     }
 
     public StringBuilder displayContactStringBuilder(Contact contact) {
@@ -151,7 +152,26 @@ public class AddressBookInterface {
     }
 
     public ArrayList<Contact> searchChoice(Scanner in){
-        return theBook.searchByName(getSearchName(in));
+        String userChoice;
+        do{
+            try{
+                userChoice = Verifyer.string(stringInput(displaySearchMenu(), in));
+            }catch (IllegalArgumentException e){
+                System.out.println(e.getMessage());
+                userChoice = "bad";
+            }
+
+            switch (userChoice.toLowerCase()){
+                case "1":
+                case "n":
+                    return theBook.searchByName(getSearchName(in));
+                default:
+                    System.out.println("Invalid option. please select from the options shown.");
+            }
+
+        }while(true);
+
+
     }
 
 
@@ -256,7 +276,7 @@ public class AddressBookInterface {
                     break;
                 case "2":
                 case "s":
-                    contactIterator(theBook.searchByName(getSearchName(in)), in);
+                    contactIterator(searchChoice(in), in);
                     break;
                 case "3":
                 case "e":
