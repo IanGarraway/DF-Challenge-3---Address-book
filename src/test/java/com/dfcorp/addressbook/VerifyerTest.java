@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class VerifyerTest {
-    //Verifyer testVerifyer;
+
 
     @Nested
     @DisplayName("Verification Tests")
@@ -16,7 +16,6 @@ public class VerifyerTest {
         @DisplayName("String Verification")
         public class StringVerificationTests {
 
-
             @Test
             @DisplayName("Test of string validation method")
             public void stringValidationTest() {
@@ -24,7 +23,6 @@ public class VerifyerTest {
                 String testWord = "word";
 
                 //Act
-
                 //Assert
                 assertEquals(testWord, Verifyer.string(testWord));
             }
@@ -36,7 +34,6 @@ public class VerifyerTest {
                 String testWord = "";
 
                 //Act
-
                 //Assert
                 assertThrows(IllegalArgumentException.class, () -> Verifyer.string(testWord));
             }
@@ -48,7 +45,6 @@ public class VerifyerTest {
                 String testWord = "   ";
 
                 //Act
-
                 //Assert
                 assertThrows(IllegalArgumentException.class, () -> Verifyer.string(testWord));
             }
@@ -58,7 +54,6 @@ public class VerifyerTest {
         @DisplayName("Email verification tests")
         public class emailVerificationTests{
 
-
             @Test
             @DisplayName("Invalid email format check")
             public void invalidEmailFormatingCheck(){
@@ -66,10 +61,8 @@ public class VerifyerTest {
                 String testEmail = "bob@";
 
                 //Act
-
                 //Assert
                 assertThrows(IllegalArgumentException.class, ()->Verifyer.email(testEmail));
-
             }
 
             @Test
@@ -79,10 +72,8 @@ public class VerifyerTest {
                 String testEmail = "Bob@company.com";
 
                 //Act
-
                 //Assert
                 assertEquals(testEmail, Verifyer.email(testEmail));
-
             }
 
             @Test
@@ -92,11 +83,10 @@ public class VerifyerTest {
                 String testEmail = "Bob.Smith@company.co.uk";
 
                 //Act
-
                 //Assert
                 assertEquals(testEmail, Verifyer.email(testEmail));
-
             }
+
             @Test
             @DisplayName("Blank string input email format check")
             public void blankStringInvalidFormatingCheck(){
@@ -104,13 +94,9 @@ public class VerifyerTest {
                 String testEmail = "";
 
                 //Act
-
                 //Assert
                 assertThrows(IllegalArgumentException.class, ()->Verifyer.email(testEmail));
-
             }
         }
-
     }
-
 }
