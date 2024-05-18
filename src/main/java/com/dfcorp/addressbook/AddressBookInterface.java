@@ -35,6 +35,15 @@ public class AddressBookInterface {
                     """;
     }
 
+    public String displaySearchMenu(){
+        return """
+        Search by:
+            1. (N)ame
+            2. (E)mail
+            3. (T)elephone number
+            4. e(X)it""";
+    }
+
     public StringBuilder displayContactStringBuilder(Contact contact) {
         //decided this method should be on the interface class and not on the contact class because
         //a different implementation of the interface might not need it.

@@ -718,6 +718,36 @@ public class AddressBookInterfaceTest {
         @DisplayName("Extension Features Tests")
         public class ExtensionFeaturesTests{
 
+            @BeforeEach
+            public void setUp(){
+                testBook = mock(AddressBook.class);
+                testInterface = new AddressBookInterface(testBook);
+                testContact1 = mock(Contact.class);
+            }
+
+            @AfterEach
+            public void cleanUp(){
+                testInterface = null;
+                testBook = null;
+                testContact1 = null;
+            }
+
+            @Test
+            @DisplayName("Search option menu is returned correctly")
+            public void testSearchOptionMenuString(){
+                //Arrange
+
+                //Act
+
+                //Assert
+                assertEquals("""
+                            Search by:
+                                1. (N)ame
+                                2. (E)mail
+                                3. (T)elephone number
+                                4. e(X)it""", testInterface.displaySearchMenu());
+            }
+
             @Test
             @DisplayName("Search by Telephone number")
             public void testSearchByNumber(){
