@@ -70,6 +70,11 @@ public class AddressBook {
 
     }
 
+    public void sortByNumber(){
+        contacts.sort((Contact c1, Contact c2) -> c1.getNumber().compareToIgnoreCase(c2.getNumber()));
+
+    }
+
 
 
     //Verification functions

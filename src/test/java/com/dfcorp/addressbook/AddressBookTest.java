@@ -442,7 +442,7 @@ public class AddressBookTest {
         }
 
         @Test
-        @DisplayName("test that sortByName sorts the list by name")
+        @DisplayName("test that sortByName can handle being ran on an empty string")
         public void testOfSortByNameOnEmptyList(){
             //Arrange
 
@@ -452,6 +452,37 @@ public class AddressBookTest {
 
             //Assert
             assertEquals(0, testBook.getContacts().size());
+        }
+
+        @Test
+        @DisplayName("test that sortByNumber sorts the list by number")
+        public void testOfSortByNumberAddressBookMethod(){
+            //Arrange
+            String testName1 = "0001";
+            String testName2 = "0002";
+            String testName3 = "0003";
+            String testName4 = "0004";
+
+            when(testContact1.getNumber()).thenReturn(testName3);
+            when(testContact2.getNumber()).thenReturn(testName1);
+            when(testContact3.getNumber()).thenReturn(testName4);
+            when(testContact4.getNumber()).thenReturn(testName2);
+
+            testBook.addContact(testContact1);
+            testBook.addContact(testContact2);
+            testBook.addContact(testContact3);
+            testBook.addContact(testContact4);
+
+            //Act
+            testBook.sortByNumber();
+            testList = testBook.getContacts();
+
+            //Assert
+            assertAll("returned list in correct order: ",
+                    ()-> Assertions.assertEquals(testName1, testList.get(0).getNumber()),
+                    ()-> Assertions.assertEquals(testName2, testList.get(1).getNumber()),
+                    ()-> Assertions.assertEquals(testName3, testList.get(2).getNumber()),
+                    ()-> Assertions.assertEquals(testName4, testList.get(3).getNumber()));
         }
 
 
