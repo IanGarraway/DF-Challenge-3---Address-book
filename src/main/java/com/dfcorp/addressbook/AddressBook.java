@@ -12,12 +12,24 @@ public class AddressBook {
 
     public AddressBook(){}
 
-    public ArrayList<Contact> getContacts(){return new ArrayList<Contact>(contacts);}
+    //Add remove and replace functions
 
     public void addContact(Contact newContact){
         contacts.add(newContact);
 
     }
+
+    public void removeContact(Contact contact) {
+        contacts.remove(contact);
+    }
+
+    public void replaceContact(Contact original, Contact replacement){
+        contacts.set(contacts.indexOf(original),replacement);
+    }
+
+    //return contacts functions
+
+    public ArrayList<Contact> getContacts(){return new ArrayList<Contact>(contacts);}
 
     public ArrayList<Contact> searchByName(String searchName){
         ArrayList<Contact> returnList = new ArrayList<>();
@@ -51,13 +63,16 @@ public class AddressBook {
         return returnList;
     }
 
-    public void removeContact(Contact contact) {
-        contacts.remove(contact);
+    //Sort functions
+
+    public void sortByName(){
+        contacts.sort((Contact c1, Contact c2) -> c1.getName().compareToIgnoreCase(c2.getName()));
+
     }
 
-    public void replaceContact(Contact original, Contact replacement){
-        contacts.set(contacts.indexOf(original),replacement);
-    }
+
+
+    //Verification functions
 
     public boolean numberExists(String number){
         boolean numberExists = false;

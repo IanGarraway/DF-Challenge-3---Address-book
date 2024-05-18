@@ -2,6 +2,9 @@ package com.dfcorp.addressbook;
 
 import org.junit.jupiter.api.*;
 
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -225,7 +228,8 @@ public class AddressBookTest {
     @DisplayName("AddressBook Class Additional function Tests:")
     public class addressBookClassAdditionalFunctionTests {
         private AddressBook testBook;
-        private Contact testContact1, testContact2, testContact3;
+        private Contact testContact1, testContact2, testContact3, testContact4;
+        private ArrayList<Contact> testList;
 
         @BeforeEach
         public void setUp(){
@@ -234,6 +238,7 @@ public class AddressBookTest {
             testContact1 = mock(Contact.class);
             testContact2 = mock(Contact.class);
             testContact3 = mock(Contact.class);
+            testContact4 = mock(Contact.class);
         }
 
         @AfterEach
@@ -242,6 +247,8 @@ public class AddressBookTest {
             testContact1 = null;
             testContact2 = null;
             testContact3 = null;
+            testContact4 = null;
+            testList = null;
         }
 
         @Test
@@ -401,6 +408,37 @@ public class AddressBookTest {
             //Assert
             assertEquals(0,testBook.searchByEmail(partialTest).size());
 
+        }
+
+        @Test
+        @DisplayName("test that sortByName sorts the list by name")
+        public void testOfSortByNameAddressBookMethod(){
+            //Arrange
+            String testName1 = "Abby";
+            String testName2 = "Barry";
+            String testName3 = "Charlene";
+            String testName4 = "Dave";
+
+            when(testContact1.getName()).thenReturn(testName3);
+            when(testContact2.getName()).thenReturn(testName1);
+            when(testContact3.getName()).thenReturn(testName4);
+            when(testContact4.getName()).thenReturn(testName2);
+
+            testBook.addContact(testContact1);
+            testBook.addContact(testContact2);
+            testBook.addContact(testContact3);
+            testBook.addContact(testContact4);
+
+            //Act
+            testBook.sortByName();
+            testList = testBook.getContacts();
+
+            //Assert
+            assertAll("returned list in correct order: ",
+                    ()-> Assertions.assertEquals(testName1, testList.get(0).getName()),
+                    ()-> Assertions.assertEquals(testName2, testList.get(1).getName()),
+                    ()-> Assertions.assertEquals(testName3, testList.get(2).getName()),
+                    ()-> Assertions.assertEquals(testName4, testList.get(3).getName()));
         }
 
 
