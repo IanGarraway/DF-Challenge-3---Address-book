@@ -30,6 +30,17 @@ public class AddressBook {
         return returnList;
     }
 
+    public ArrayList<Contact> searchByNumber(String searchNumber){
+        ArrayList<Contact> returnList = new ArrayList<>();
+
+        for (Contact contact : contacts) {
+            if (contact.getNumber().toLowerCase().startsWith(searchNumber.toLowerCase())) {
+                returnList.add(contact);
+            }
+        }
+        return returnList;
+    }
+
     public void removeContact(Contact contact) {
         contacts.remove(contact);
     }
@@ -59,4 +70,6 @@ public class AddressBook {
         }
         return emailExists;
     }
+
+
 }

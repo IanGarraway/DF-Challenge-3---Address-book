@@ -2,13 +2,14 @@ package com.dfcorp.addressbook;
 
 import org.junit.jupiter.api.*;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class AddressBookTest {
     @Nested
-    @DisplayName("com.dfcorp.addressbook.AddressBook Class Tests:")
-    public class addressBookClassTests {
+    @DisplayName("AddressBook Class Core function Tests:")
+    public class addressBookClassCoreFunctionTests {
 
         private AddressBook testBook;
         private Contact testContact1, testContact2, testContact3;
@@ -31,15 +32,15 @@ public class AddressBookTest {
         }
 
         @Test
-        @DisplayName("com.dfcorp.addressbook.AddressBook can be instantiated and return an empty list")
+        @DisplayName("AddressBook can be instantiated and return an empty list")
         public void testOfAddressBookInstantiationAndAllContactReturn(){
             //Arrange
 
             //Act
-            //com.dfcorp.addressbook.AddressBook testBook = new com.dfcorp.addressbook.AddressBook();
+
 
             //Assert
-            Assertions.assertEquals(testBook.getContacts().size(), 0);
+            assertEquals(testBook.getContacts().size(), 0);
         }
 
         @Test
@@ -51,7 +52,7 @@ public class AddressBookTest {
             testBook.addContact(testContact1);
 
             //Assert
-            Assertions.assertEquals(1, testBook.getContacts().size());
+            assertEquals(1, testBook.getContacts().size());
         }
 
         @Test
@@ -65,7 +66,7 @@ public class AddressBookTest {
             testBook.addContact(testContact2);
 
             //Assert
-            Assertions.assertEquals(2, testBook.getContacts().size());
+            assertEquals(2, testBook.getContacts().size());
         }
 
         @Test
@@ -84,7 +85,7 @@ public class AddressBookTest {
             testBook.addContact(testContact3);
 
             //Assert
-            Assertions.assertEquals(1, testBook.searchByName(testName).size());
+            assertEquals(1, testBook.searchByName(testName).size());
         }
 
         @Test
@@ -103,7 +104,7 @@ public class AddressBookTest {
             testBook.addContact(testContact3);
 
             //Assert
-            Assertions.assertEquals(2, testBook.searchByName(testName).size());
+            assertEquals(2, testBook.searchByName(testName).size());
         }
 
         @Test
@@ -122,7 +123,7 @@ public class AddressBookTest {
             testBook.addContact(testContact3);
 
             //Assert
-            Assertions.assertEquals(2, testBook.searchByName(testName).size());
+            assertEquals(2, testBook.searchByName(testName).size());
         }
 
         @Test
@@ -137,7 +138,7 @@ public class AddressBookTest {
             testBook.removeContact(testContact2);
 
             //Assert
-            Assertions.assertEquals(2, testBook.getContacts().size());
+            assertEquals(2, testBook.getContacts().size());
         }
 
         @Test
@@ -153,7 +154,7 @@ public class AddressBookTest {
             testBook.replaceContact(testContact1, testContact2);
 
             //Assert
-            Assertions.assertEquals(testBook.getContacts().get(0).getName(), testName);
+            assertEquals(testBook.getContacts().get(0).getName(), testName);
 
         }
 
@@ -217,6 +218,50 @@ public class AddressBookTest {
 
             //Assert
             Assertions.assertFalse(testBook.emailExists(testEmail));
+        }
+
+    }
+    @Nested
+    @DisplayName("AddressBook Class Additional function Tests:")
+    public class addressBookClassAdditionalFunctionTests {
+        private AddressBook testBook;
+        private Contact testContact1, testContact2, testContact3;
+
+        @BeforeEach
+        public void setUp(){
+            //try(MockedStatic<StringUtils> mockedStringUtils = Mockito.mockStatic(StringUtils.class)){}
+            testBook = new AddressBook();
+            testContact1 = mock(Contact.class);
+            testContact2 = mock(Contact.class);
+            testContact3 = mock(Contact.class);
+        }
+
+        @AfterEach
+        public void tearDown(){
+            testBook = null;
+            testContact1 = null;
+            testContact2 = null;
+            testContact3 = null;
+        }
+
+        @Test
+        @DisplayName("test confirming searchByNumber will return a list containing a contact whose number matches")
+        public void testOfSearchByNumberBasicFunction(){
+            //Arrange
+            String testNumber = "1234";
+            String badNumber1 = "1111";
+            String badNumber2 = "2222";
+
+            when(testContact1.getNumber()).thenReturn(badNumber2);
+            when(testContact2.getNumber()).thenReturn(badNumber1);
+            when(testContact3.getNumber()).thenReturn(testNumber);
+
+            testBook.addContact(testContact1);
+            testBook.addContact(testContact2);
+            testBook.addContact(testContact3);
+
+            assertEquals(testNumber,testBook.searchByNumber(testNumber).get(0).getNumber());
+
         }
 
     }
