@@ -43,9 +43,7 @@ public class AddressBookInterfaceTest {
             @DisplayName("Test to see if DisplayMenu returns the right list")
             public void displayMenuFunctionTest(){
                 //Arrange
-
                 //Act
-
                 //Assert
                 assertEquals("""
                 Welcome to the DF Corp AddressBook
@@ -90,8 +88,6 @@ public class AddressBookInterfaceTest {
                         Phone: 12345
                         Email: Sara@test.com
                         """, testInterface.displayContactStringBuilder(testContact1).toString());
-
-
             }
 
             @Test
@@ -156,13 +152,11 @@ public class AddressBookInterfaceTest {
             @DisplayName("Modify Contact String with option to use previous string method - empty user input")
             public void stringBlankReturnsOriginalStringTest(){
                 //Arrange
-
                 //Act
                 //Assert
                 assertEquals("Test", testInterface.modString("","Test", in));
-
-
             }
+
             @Test
             @DisplayName("Modify Contact String with option to use previous string method - different user input")
             public void stringUserChangeStringTest(){
@@ -173,18 +167,13 @@ public class AddressBookInterfaceTest {
                 //Act
                 //Assert
                 assertEquals(testString, testInterface.modString(testString,originalString, in));
-
-
             }
-
         }
 
         @Nested
         @DisplayName("Input tests")
         public class InputTests{
             Scanner mockScanner;
-
-
 
             @BeforeEach
             public void setUp(){
@@ -213,7 +202,6 @@ public class AddressBookInterfaceTest {
 
                 //Assert
                 assertEquals(testWord, testInterface.newName(mockScanner));
-
             }
 
             @Test
@@ -227,7 +215,6 @@ public class AddressBookInterfaceTest {
                 //Act
                 //Assert
                 assertEquals(testWord, testInterface.newName(mockScanner));
-
             }
 
             @Test
@@ -256,7 +243,6 @@ public class AddressBookInterfaceTest {
                 //Act
                 //Assert
                 assertEquals(testNumber, testInterface.newNumber(mockScanner));
-
             }
 
             @Test
@@ -273,7 +259,6 @@ public class AddressBookInterfaceTest {
                 //Act
                 //Assert
                 assertEquals(testNumber, testInterface.newNumber(mockScanner));
-
             }
 
             @Test
@@ -338,7 +323,6 @@ public class AddressBookInterfaceTest {
 
                 //Assert
                 assertEquals(testNumber, testInterface.uniqueModNumber(testOriginalNumber, mockScanner));
-
             }
 
             @Test
@@ -348,7 +332,6 @@ public class AddressBookInterfaceTest {
                 String testNumber = "1234";
                 String badNumber = "1235";
 
-
                 when(mockScanner.nextLine()).thenReturn(badNumber, testNumber);
                 when(testBook.numberExists(badNumber)).thenReturn(true);
                 when(testBook.numberExists(testNumber)).thenReturn(true);
@@ -357,7 +340,6 @@ public class AddressBookInterfaceTest {
 
                 //Assert
                 assertEquals(testNumber, testInterface.uniqueModNumber(testNumber, mockScanner));
-
             }
 
             @Test
@@ -410,14 +392,11 @@ public class AddressBookInterfaceTest {
 
                 when(mockScanner.nextLine()).thenReturn(testName,testNumber,testEmail,testVerify);
 
-
                 //Act
                 testInterface.addContact(mockScanner);
 
                 //Verify
-
                 assertEquals(1, spyBook.getContacts().size());
-
             }
             @Test
             @DisplayName("Test add contact builds a contact and adds it to the addressbook, with n answered to the first verify question")
@@ -436,14 +415,12 @@ public class AddressBookInterfaceTest {
 
                 when(mockScanner.nextLine()).thenReturn(testName,testNumber,testEmail,testVerify1, testName,testNumber,testEmail,testVerify2);
 
-
                 //Act
                 testInterface.addContact(mockScanner);
 
                 //Verify
 
                 assertEquals(1, spyBook.getContacts().size());
-
             }
 
             @Test
@@ -472,7 +449,6 @@ public class AddressBookInterfaceTest {
             public void testOfVerifyContactHandlesCapitals(){
                 //Arrange
                 String testString1 = "Y";
-
 
                 when(testContact1.getEmail()).thenReturn("test@test.com");
                 when(testContact1.getNumber()).thenReturn("1234");
@@ -503,13 +479,10 @@ public class AddressBookInterfaceTest {
             @Test
             @DisplayName("Test modifyContact returns original contact")
             public void testGetModContactBuilder(){
-
-
                 //Arrange
                 String testName = "Ginny";
                 String testEmail ="test@test.com";
                 String testNumber = "1234";
-
 
                 when(testContact1.getEmail()).thenReturn(testEmail);
                 when(testContact1.getNumber()).thenReturn(testNumber);
@@ -535,13 +508,10 @@ public class AddressBookInterfaceTest {
             @Test
             @DisplayName("Test modifyContact returns original contact, rejecting first userverification")
             public void testGetModContactBuilderWithVerificationRejection(){
-
-
                 //Arrange
                 String testName = "Ginny";
                 String testEmail ="test@test.com";
                 String testNumber = "1234";
-
 
                 when(testContact1.getEmail()).thenReturn(testEmail);
                 when(testContact1.getNumber()).thenReturn(testNumber);
@@ -602,7 +572,6 @@ public class AddressBookInterfaceTest {
                 testInterface.modMenu(mockScanner);
 
                 assertEquals(2, testList.size());
-
             }
 
             @Test
@@ -642,7 +611,6 @@ public class AddressBookInterfaceTest {
                 testInterface.modMenu(mockScanner);
 
                 assertEquals(0, testList.size());
-
             }
 
             @Test
@@ -662,7 +630,6 @@ public class AddressBookInterfaceTest {
                 ArrayList<Contact> testList = new ArrayList<>();
                 testList.add(testContact1);
 
-
                 when(testBook.searchByName("Ginny")).thenReturn(testList);
 
                 // the following mockscanner should imitate a user doing the following:
@@ -674,7 +641,6 @@ public class AddressBookInterfaceTest {
                 testInterface.modMenu(mockScanner);
 
                 assertEquals(testReplacementName, testList.get(0).getName());
-
             }
 
             @Test
@@ -685,7 +651,6 @@ public class AddressBookInterfaceTest {
                 String testName = "Ginny";
                 String testEmail ="test@test.com";
                 String testNumber = "1234";
-
 
                 when(testContact1.getEmail()).thenReturn(testEmail);
                 when(testContact1.getNumber()).thenReturn(testNumber);
@@ -708,12 +673,7 @@ public class AddressBookInterfaceTest {
 
                 //if the program can go through the code, it's a pass.
                 assertTrue(true);
-
-
             }
-
-
-
         }
 
         @Nested
@@ -805,8 +765,7 @@ public class AddressBookInterfaceTest {
             public void testExitSearch(){
                 //Arrange
 
-                //the following mockscanner will simulate a user: hitting enter, hitting space and then enter, entering the option for
-                //telephone number search, hitting enter, hitting space then enter, before entering a valid email
+                //the following mockscanner will simulate a user: failing to input, twice, and then choosing exit
                 when(mockScanner.nextLine()).thenReturn("", " ", "x");
 
                 //Act
@@ -836,6 +795,7 @@ public class AddressBookInterfaceTest {
             public void testSortMenuCallsSortMethods(){
                 //Arrange
 
+                //mock scanner to simulate a user doing the following:
                 when(mockScanner.nextLine()).thenReturn("o", //access the order menu
                         "", " ", //two erronius inputs to check error handling
                         "n", //sort by name method
@@ -866,19 +826,25 @@ public class AddressBookInterfaceTest {
                 //Arrange
                 testBook.addContact(testContact1);
 
-                when(mockScanner.nextLine()).thenReturn("r", "", " ", "n", "r", "y", "n", "r", "y", "y", "e");
+                //mock scanner to simulate a user doing the following:
+                when(mockScanner.nextLine()).thenReturn("r", //access the removeAllContacts
+                        "", //check bad input handling
+                        " ", //check alternative bad input handling
+                        "n", //reject confirmation
+                        "r", //access the removeAllContacts
+                        "y", //pass the 1st verification step
+                        "n", //reject the 2nd verification step
+                        "r", //access the removeAllContacts
+                        "y", //pass the 1st verification step
+                        "y", //pass the 2nd verification step
+                        "e"); //Exit the program
 
                 //Act
                 testInterface.start(mockScanner);
 
                 //Assert
                 verify(testBook, times(1)).deleteAll();
-
             }
-
-
         }
-
-         
     }
 }
