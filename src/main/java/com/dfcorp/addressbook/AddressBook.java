@@ -75,6 +75,10 @@ public class AddressBook {
 
     }
 
+    public void sortByEmail(){
+        contacts.sort((Contact c1, Contact c2) -> c1.getEmail().compareToIgnoreCase(c2.getEmail()));
+    }
+
 
 
     //Verification functions

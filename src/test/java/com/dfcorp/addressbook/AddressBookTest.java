@@ -498,6 +498,37 @@ public class AddressBookTest {
             assertEquals(0, testBook.getContacts().size());
         }
 
+        @Test
+        @DisplayName("test that sortByEmail sorts the list alphabetically by Email address")
+        public void testOfSortByEmailAddressBookMethod(){
+            //Arrange
+            String testName1 = "Abby@Test.com";
+            String testName2 = "Bernice@Test.com";
+            String testName3 = "Catherine@Test.com";
+            String testName4 = "Danni@Test.com";
+
+            when(testContact1.getEmail()).thenReturn(testName3);
+            when(testContact2.getEmail()).thenReturn(testName1);
+            when(testContact3.getEmail()).thenReturn(testName4);
+            when(testContact4.getEmail()).thenReturn(testName2);
+
+            testBook.addContact(testContact1);
+            testBook.addContact(testContact2);
+            testBook.addContact(testContact3);
+            testBook.addContact(testContact4);
+
+            //Act
+            testBook.sortByEmail();
+            testList = testBook.getContacts();
+
+            //Assert
+            assertAll("returned list in correct order: ",
+                    ()-> Assertions.assertEquals(testName1, testList.get(0).getEmail()),
+                    ()-> Assertions.assertEquals(testName2, testList.get(1).getEmail()),
+                    ()-> Assertions.assertEquals(testName3, testList.get(2).getEmail()),
+                    ()-> Assertions.assertEquals(testName4, testList.get(3).getEmail()));
+        }
+
 
     }
 }
