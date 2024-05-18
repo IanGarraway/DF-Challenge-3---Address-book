@@ -46,6 +46,15 @@ public class AddressBookInterface {
             :-""";
     }
 
+    public String displaySortMenu(){
+        return """
+                        Do you wish to sort your contact by:
+                            1. (N)ame
+                            2. (E)mail
+                            3. (P)hone
+                            4. e(X)it back to main menu""";
+    }
+
     public StringBuilder displayContactStringBuilder(Contact contact) {
         //decided this method should be on the interface class and not on the contact class because
         //a different implementation of the interface might not need it.

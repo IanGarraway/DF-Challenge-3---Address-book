@@ -815,6 +815,20 @@ public class AddressBookInterfaceTest {
                 assertEquals(0, testList.size());
             }
 
+            @Test
+            @DisplayName("Test of the order menu display string builder")
+            public void testOfTheOrderMenuStringBuilder(){
+                //Arrange
+                //Act
+                //Assert
+                assertEquals("""
+                        Do you wish to sort your contact by:
+                            1. (N)ame
+                            2. (E)mail
+                            3. (P)hone
+                            4. e(X)it back to main menu""", testInterface.displaySortMenu());
+            }
+
 
         }
 
