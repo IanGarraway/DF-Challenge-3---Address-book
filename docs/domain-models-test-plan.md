@@ -126,7 +126,7 @@ As a user, I want to search for a contact by email address so that I can find a 
 
 - [x] emailSearch returns a list of the contacts with that email
 - [x] emailSearch returns partial match
-- [ ] emailSearch returns multiple matches
+- [x] emailSearch returns multiple matches
 - [ ] emailSearch returns an empty list if no matches found
 
 ### interface class tests

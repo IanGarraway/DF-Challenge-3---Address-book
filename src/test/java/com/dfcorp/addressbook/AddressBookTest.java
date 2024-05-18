@@ -362,7 +362,7 @@ public class AddressBookTest {
         public void testOfSearchByPartialEmailBasicFunction(){
             //Arrange
             String testEmail = "test@test.com";
-            String partialTest = "test@";
+            String partialTest = "@test";
             String badEmail1 = "bad@test.com";
             String badEmail2 = "nope@dfcorp.co.uk";
 
@@ -376,7 +376,7 @@ public class AddressBookTest {
             testBook.addContact(testContact3);
 
             //Assert
-            assertEquals(testEmail,testBook.searchByEmail(partialTest).get(0).getEmail());
+            assertEquals(2,testBook.searchByEmail(partialTest).size());
 
         }
 
