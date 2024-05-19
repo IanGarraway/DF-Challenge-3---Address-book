@@ -361,6 +361,7 @@ public class AddressBookInterface {
                     break;
                 case "3":
                 case "e":
+                case "x":
                     break modMenuLoop;
                 case "bad":
                     break;
@@ -414,7 +415,7 @@ public class AddressBookInterface {
 
             userChoice = userChoiceInput(displayMenu(), in);
 
-            if (userChoice.equalsIgnoreCase("e")) {
+            if (userChoice.equalsIgnoreCase("e")||userChoice.equalsIgnoreCase("x")) {
                 break;
             }
             menuChoice(userChoice, in);
