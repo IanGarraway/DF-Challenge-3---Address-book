@@ -826,3 +826,51 @@ public class MyClassTest {
 - **Avoid Overusing Spies**: Overusing spies can lead to fragile tests that are closely tied to the implementation details of the class under test. Use spies judiciously.
 
 By following this guide, you can effectively create and use spy objects in Mockito to test your Java code.
+
+## Prompt
+
+please generate 5 people to use for demonstration purposes, they should have unique names, unique email address and unique telephone numbers
+
+## Response
+
+Sure! Here are five unique individuals for demonstration purposes, complete with names, email addresses, and telephone numbers:
+
+1. **Name:** Lilyana Carter
+    - **Email:** lilyana.carter@examplemail.com
+    - **Telephone:** +1-555-234-5678
+
+2. **Name:** Kian Delgado
+    - **Email:** kian.delgado@samplemail.com
+    - **Telephone:** +1-555-876-5432
+
+3. **Name:** Amara Bennett
+    - **Email:** amara.bennett@demomail.com
+    - **Telephone:** +1-555-345-6789
+
+4. **Name:** Elias Navarro
+    - **Email:** elias.navarro@mockmail.com
+    - **Telephone:** +1-555-987-6543
+
+5. **Name:** Zara Hayes
+    - **Email:** zara.hayes@fakemail.com
+    - **Telephone:** +1-555-456-7890
+
+These details are entirely fictional and created solely for demonstration purposes.
+
+## prompt
+
+could you write them in the format of : 
+```java
+new Contact("<name>", "<telephone number>", "<email address>"));
+```
+## response
+
+Certainly! Here are the contacts in the specified format:
+
+```java
+new Contact("Lilyana Carter", "+1-555-234-5678", "lilyana.carter@examplemail.com");
+new Contact("Kian Delgado", "+1-555-876-5432", "kian.delgado@samplemail.com");
+new Contact("Amara Bennett", "+1-555-345-6789", "amara.bennett@demomail.com");
+new Contact("Elias Navarro", "+1-555-987-6543", "elias.navarro@mockmail.com");
+new Contact("Zara Hayes", "+1-555-456-7890", "zara.hayes@fakemail.com");
+```
