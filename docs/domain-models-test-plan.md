@@ -102,6 +102,8 @@ As a user, I want the interface to be a console one.
 
 -[x] interface is entirely console driven.
 
+# Additional Features
+![UML class diagram v2.](classdiagramFunctionalComplete.png)
 ## User Story 9
 
 As a user, I want to search for a contact by phone number so that I can find a contact even if I only have their phone number.
@@ -156,6 +158,6 @@ As a user, I want to delete all contacts at once so that I can clear my address 
 
 ### Interface class tests
 
-- [ ] user prompted with confirmation
-- [ ] only entering the full confirmation will delete the contacts
+- [x] user prompted with confirmation
+- [x] only entering the full confirmation will delete the contacts
 - 

@@ -837,7 +837,7 @@ public class AddressBookInterfaceTest {
                         "r", //access the removeAllContacts
                         "y", //pass the 1st verification step
                         "y", //pass the 2nd verification step
-                        "e"); //Exit the program
+                        "x"); //Exit the program
 
                 //Act
                 testInterface.start(mockScanner);
