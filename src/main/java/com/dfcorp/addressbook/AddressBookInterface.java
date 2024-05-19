@@ -235,6 +235,17 @@ public class AddressBookInterface {
         }while(true);
     }
 
+    private String userChoiceInput(String message, Scanner in){
+
+        try{
+            return Verifyer.string(stringInput(message, in));
+
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage()+"\n");
+            return "bad";
+        }
+    }
+
     //Contact iterator control function
     public void contactIterator(ArrayList<Contact> contacts, Scanner in){
         int position = 0;
@@ -242,14 +253,9 @@ public class AddressBookInterface {
         modLoop:
         while (!contacts.isEmpty()){
             String userChoice;
-            System.out.println(displayContactStringBuilder(contacts.get(position)));
-            try{
-                userChoice = Verifyer.string(stringInput(modChoices(position,contacts.size()), in));
 
-            }catch (IllegalArgumentException e){
-                System.out.println(e.getMessage());
-                userChoice ="bad";
-            }
+            System.out.println(displayContactStringBuilder(contacts.get(position)));
+            userChoice = userChoiceInput(modChoices(position,contacts.size()), in);
 
             switch (userChoice.toLowerCase()){
                 case "p":
@@ -282,12 +288,7 @@ public class AddressBookInterface {
     public ArrayList<Contact> searchChoice(Scanner in){
         String userChoice;
         do{
-            try{
-                userChoice = Verifyer.string(stringInput(displaySearchMenu(), in));
-            }catch (IllegalArgumentException e){
-                System.out.println(e.getMessage());
-                userChoice = "bad";
-            }
+            userChoice = userChoiceInput(displaySearchMenu(), in);
 
             switch (userChoice.toLowerCase()){
                 case "1":
@@ -315,12 +316,8 @@ public class AddressBookInterface {
         sortMenuLoop:
         do{
             String userChoice;
-            try{
-                userChoice = Verifyer.string(stringInput(displaySortMenu(), in));
-            } catch (IllegalArgumentException e){
-                userChoice = "bad";
-                System.out.println(e.getMessage());
-            }
+
+            userChoice = userChoiceInput(displaySortMenu(), in);
 
             switch (userChoice.toLowerCase()){
                 case "1":
@@ -350,12 +347,9 @@ public class AddressBookInterface {
         modMenuLoop:
         do{
             String userChoice;
-            try {
-                userChoice = Verifyer.string(stringInput(displayModMenu(), in));
-            }catch (IllegalArgumentException e){
-                userChoice = "bad";
-                System.out.println(e.getMessage());
-            }
+
+            userChoice = userChoiceInput(displayModMenu(), in);
+
             switch (userChoice.toLowerCase()){
                 case "1":
                 case "a":
@@ -371,7 +365,7 @@ public class AddressBookInterface {
                 case "bad":
                     break;
                 default:
-                    System.out.println("Invalid option, please try again");
+                    System.out.println("Invalid option, please try again. \n");
             }
         }while(true);
     }
@@ -418,15 +412,7 @@ public class AddressBookInterface {
         do {
             String userChoice;
 
-            try {
-                userChoice = Verifyer.string(stringInput(displayMenu(), in));
-            } catch (Exception e) {
-                userChoice = "bad";
-                System.out.println(e.getMessage());
-                System.out.println("press enter to continue");
-
-                in.nextLine();
-            }
+            userChoice = userChoiceInput(displayMenu(), in);
 
             if (userChoice.equalsIgnoreCase("e")) {
                 break;
