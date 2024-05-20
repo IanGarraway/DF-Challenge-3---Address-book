@@ -103,7 +103,11 @@ As a user, I want the interface to be a console one.
 -[x] interface is entirely console driven.
 
 # Additional Features
+
 ![UML class diagram v2.](classdiagramFunctionalComplete.png)
+
+user stories generated with the help of ChatGPT
+
 ## User Story 9
 
 As a user, I want to search for a contact by phone number so that I can find a contact even if I only have their phone number.

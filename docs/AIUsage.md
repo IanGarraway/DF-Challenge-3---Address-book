@@ -11,9 +11,10 @@ Used to confirm there wasn't a better way to clear the screen then System.out.pr
 System.out.flush();
 
 
-
+## Prompt:
 me: if i passed an ArrayList into another class, is there any way to stop that class being able to change the data of that arraylist?
 
+## Response:
 chatgpt:     Pass an Unmodifiable List: Instead of passing the original ArrayList, you can pass an unmodifiable view of the list using Collections.unmodifiableList() method. This prevents the other class from modifying the list.
 
 java
